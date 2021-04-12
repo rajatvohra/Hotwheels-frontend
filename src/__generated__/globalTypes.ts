@@ -59,6 +59,10 @@ export interface CreateStoreInput {
   categoryName: string;
 }
 
+export interface DeleteStoreInput {
+  storeId: number;
+}
+
 export interface EditOrderInput {
   id: number;
   status: OrderStatus;

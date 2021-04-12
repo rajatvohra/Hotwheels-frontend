@@ -23,6 +23,7 @@ import {
 import { useMe } from '../../hooks/useMe';
 import { myStore, myStoreVariables } from '../../__generated__/myStore';
 import { pendingOrders } from '../../__generated__/pendingOrders';
+import { deleteStore, deleteStoreVariables } from '../../__generated__/deleteStore';
 
 export const MY_STORE_QUERY = gql`
 	query myStore($input: MyStoreInput!) {
@@ -44,6 +45,14 @@ export const MY_STORE_QUERY = gql`
 	${PRODUCT_FRAGMENT}
 	${ORDERS_FRAGMENT}
 `;
+const DELETE_STORE_MUTATION=gql`
+	mutation deleteStore($deletestoreinput: DeleteStoreInput!){
+		deleteStore(input: $deletestoreinput) {
+			ok
+			error
+		}
+	}
+`
 const PENDING_ORDERS_SUBSCRIPTION = gql`
 	subscription pendingOrders {
 		pendingOrders {
@@ -77,6 +86,18 @@ export const MyStore = () => {
 			history.push(`/orders/${subscriptionData.pendingOrders.id}`);
 		}
 	}, [subscriptionData]);
+	const[DeleteStore,{data:DeleteStoredata,loading}]=useMutation<deleteStore,deleteStoreVariables>(DELETE_STORE_MUTATION)
+	const ondelete=()=>{
+		DeleteStore(
+			{variables: {
+				deletestoreinput: {
+					storeId: +id,
+				},
+			},
+		});
+		history.push('/');
+		window.location.reload();
+	}
 
 	return (
 		<div>
@@ -100,9 +121,9 @@ export const MyStore = () => {
 				>
 					Add Product &rarr;
 				</Link>
-				<span className=" cursor-pointer text-white bg-lime-700 py-3 px-10">
-					Buy Promotion &rarr;
-				</span>
+				<button onClick={ondelete} className=" ml-8 text-white bg-red-500 py-3 px-10 justify-self-end">
+					Delete This Store
+				</button>
 				<div className="mt-10">
 					{data?.myStore.store?.menu.length === 0 ? (
 						<h4 className="text-xl mb-5">Please upload a product!</h4>

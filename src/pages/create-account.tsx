@@ -124,7 +124,7 @@ export const CreateAccount=()=>{
                 ref={
                     register(
                         {
-                               required:"location is required",
+                            required:"location is required",
 
                         })}
                 type="input"

@@ -1,0 +1,8 @@
+Owner-Stores
+1)add option tro create more than 1 store
+2)delete store option
+3)orders get queued in store
+
+owner_Store 
+4)delete dish option
+5)remove dish extras
