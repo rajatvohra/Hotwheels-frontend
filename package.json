@@ -1,0 +1,69 @@
+{
+  "name": "nuber-eats-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@apollo/client": "^3.2.7",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.2.2",
+    "@types/google-map-react": "^2.1.0",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.19.6",
+    "@types/react": "^16.14.1",
+    "@types/react-dom": "^16.9.10",
+    "@types/react-helmet": "^6.1.0",
+    "@types/react-router-dom": "^5.1.6",
+    "apollo": "^2.31.1",
+    "autoprefixer": "^10.0.2",
+    "dotenv": "^8.2.0",
+    "google-map-react": "^2.1.9",
+    "graphql": "^15.4.0",
+    "ngrok": "^4.0.1",
+    "postcss": "^8.1.9",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "react-hook-form": "^6.11.4",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.0-next.98",
+    "rimraf": "^3.0.2",
+    "subscriptions-transport-ws": "^0.9.18",
+    "tailwindcss": "^2.0.1",
+    "typescript": "^4.1.2",
+    "victory": "^35.5.0",
+    "web-vitals": "^0.2.4"
+  },
+  "scripts": {
+    "tailwind:build": "tailwind build ./src/styles/tailwind.css -o ./src/styles/styles.css",
+    "start": "set PORT=3001 && npm run apollo:codegen & npm run tailwind:build & react-scripts start",
+    "apollo:codegen": " rimraf src/__generated__ && apollo client:codegen src/__generated__ --target=typescript --outputFlat",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/googlemaps": "^3.43.3"
+  }
+}

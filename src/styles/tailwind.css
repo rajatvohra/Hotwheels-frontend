@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+
+.input {
+  @apply p-3 border-transparent text-lg
+  ring-2 ring-green-500 ring-opacity-50 rounded-lg
+  focus:ring-2 focus:ring-green-500 focus:ring-opacity-50;
+}
+
+.container {
+  @apply max-w-screen-2xl mx-auto;
+}
+
+.link {
+  @apply text-lime-600 hover:underline;
+}
+
+.btn {
+  @apply bg-lime-600 text-lg font-medium focus:outline-none text-black py-4  transition-colors bg-lime-600 hover:bg-lime-700 hover:text-white rounded-lg;
+}
+
+@tailwind utilities;
