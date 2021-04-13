@@ -1,5 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
@@ -8,7 +8,6 @@ import {
 	createProduct,
 	createProductVariables,
 } from '../../__generated__/createProduct';
-import { MY_STORE_QUERY } from './my_store';
 
 const CREATE_PRODUCT_MUTATION = gql`
 	mutation createProduct($input: CreateProductInput!) {
@@ -36,6 +35,10 @@ export const AddProduct = () => {
 	const history = useHistory();
 	const [imageUrl, setImageUrl] = useState('');
 	const [uploading, setUploading] = useState(false);
+
+
+
+	var notclicked=true;
 	const onCompleted = (data: createProduct) => {
 		const {
 			createProduct: { ok },
@@ -43,7 +46,8 @@ export const AddProduct = () => {
 		if (ok) {
 			setUploading(false);
 
-			history.push('/');
+			history.push(`/stores/${storeId}`);
+
 		}
 	};
 	const [createProductMutation, { data,loading }] = useMutation<
@@ -62,6 +66,7 @@ export const AddProduct = () => {
 		mode: 'onChange',
 	});
 	const onSubmit = async () => {
+		notclicked=false;
 		try {
 			const { file, name,price,categoryName,description,...rest} = getValues();
 			const optionObjects = optionsNumber.map((theId) => ({
@@ -97,6 +102,7 @@ export const AddProduct = () => {
 					},
 				},
 			});
+
 		}
 		catch (e) {
 			console.log(e);
@@ -196,10 +202,12 @@ export const AddProduct = () => {
 				</div>
 				<Button
 					loading={loading}
-					canClick={formState.isValid}
+					canClick={formState.isValid && notclicked}
+
 					actionText="Create Product"
 				/>
 			</form>
 		</div>
 	);
 };
+

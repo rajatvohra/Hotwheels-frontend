@@ -78,7 +78,7 @@ export const OTP=()=>{
                 placeholder="OTP"
                 className=" input text-black ring border-red-800  focus:ring-offset-black focus:ring-indigo-900 focus:ring-inset focus:outline-none"/>
 
-                <Button canClick={true} loading={false} actionText={"Verify"}/>
+                <Button canClick={true} loading={false}  actionText={"Verify"}/>
 
             </form>
 
@@ -91,6 +91,10 @@ function handleSubmit(onSubmit: any): React.FormEventHandler<HTMLFormElement> | 
 }
 
 function register(arg0: { required: string; }): React.LegacyRef<HTMLInputElement> | undefined {
+  throw new Error("Function not implemented.");
+}
+
+function useState(arg0: boolean): [any, any] {
   throw new Error("Function not implemented.");
 }
 

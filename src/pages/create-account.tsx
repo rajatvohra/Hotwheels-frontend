@@ -1,6 +1,6 @@
 import {  useMutation } from "@apollo/client";
 import gql from "graphql-tag";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormError } from "../components/form-error";
 import logo from "../images//logo.svg";
@@ -64,6 +64,8 @@ export const CreateAccount=()=>{
     const password = useRef({});
     password.current = watch("password", "");
     console.log(password.current);
+
+
     return <div className="h-screen flex items-center justify-center bg-cyan-900    ">
         <Helmet>
             <title>Create An Account</title>
@@ -141,7 +143,7 @@ export const CreateAccount=()=>{
                 <option key={index}>{role}</option>
                 ))}
             </select>
-                <Button canClick={formState.isValid} loading={loading} actionText={"Create an Account"}/>
+                <Button canClick={formState.isValid}  loading={loading} actionText={"Create an Account"}/>
             {CreateAccountMutationResult?.createAccount.error &&<FormError errorMessage={CreateAccountMutationResult?.createAccount.error}/>}
             </form>
             <div className="text-lg text-black py-3">

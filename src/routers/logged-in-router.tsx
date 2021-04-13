@@ -17,11 +17,12 @@ import { ConfirmEmail } from '../user/confirm-email';
 import { EditProfile } from '../user/edit-profile';
 import { Store } from '../pages/client/store';
 import { OTP } from '../pages/otp';
+import { Products } from '../pages/client/products';
 
 const clientRoutes = [
 	{
 		path: '/',
-		component: <Stores />,
+		component: <Products />,
 	},
 	{
 		path: '/search',

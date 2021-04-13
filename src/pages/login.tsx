@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormError } from "../components/form-error";
 import { Helmet } from "react-helmet";
@@ -32,6 +32,8 @@ interface ILoginForm {
 
 export const Login = () => {
   const history=useHistory();
+  
+	
   const { register, getValues, errors, handleSubmit,formState } = useForm<ILoginForm>({mode:'onChange'});
   const onCompleted = (data: loginMutation) => {
     const {
@@ -100,7 +102,7 @@ export const Login = () => {
           {
               errors.password?.type==="minLength" && (<FormError errorMessage="Atleast 10 char are required" />)
           }
-          <Button canClick={formState.isValid} loading={loading} actionText={"Login"}/>
+          <Button canClick={formState.isValid}  loading={loading} actionText={"Login"}/>
           {loginMutationResult?.login.error
               && (<FormError errorMessage ={loginMutationResult?.login.error}/>) }
       </form>

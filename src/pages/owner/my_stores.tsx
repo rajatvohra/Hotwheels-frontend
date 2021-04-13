@@ -1,5 +1,5 @@
-import { gql, useQuery } from '@apollo/client';
-import React from 'react';
+import { gql, useApolloClient, useQuery } from '@apollo/client';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { Store } from '../../components/store';
@@ -20,7 +20,11 @@ export const MY_STORES_QUERY = gql`
 `;
 
 export const MyStores = () => {
-	const { data } = useQuery<myStores>(MY_STORES_QUERY);
+	const { data ,refetch} = useQuery<myStores>(MY_STORES_QUERY);
+	const client = useApolloClient();
+
+
+
 	return (
 		<div>
 			<Helmet>
@@ -57,3 +61,7 @@ export const MyStores = () => {
 		</div>
 	);
 };
+function callQuery(arg0: { variables: { input: {}; }; }) {
+	throw new Error('Function not implemented.');
+}
+

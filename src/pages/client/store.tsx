@@ -205,18 +205,19 @@ export const Store = () => {
 				)}
 
 				<div className="w-full grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
-					{data?.store.store?.menu.map((product, index) => (
+					{data?.store.store?.menu.map((product) => (
 						<Product
+							key={product.id}
 							isSelected={isSelected(product.id)}
 							id={product.id}
 							orderStarted={orderStarted}
 							Categoryname={product.category?.name}
 							photo={product.photo}
-							key={index}
+
 							name={product.name}
 							description={product.description}
 							price={product.price}
-							isCustomer={true}
+							isCustomer={false}
 							options={product.options}
 							addItemToOrder={addItemToOrder}
 							removeFromOrder={removeFromOrder}

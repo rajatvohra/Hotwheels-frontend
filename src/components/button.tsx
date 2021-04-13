@@ -10,7 +10,8 @@ export const Button : React.FC<IbuttonProps> =({
     loading,
     actionText,
 }) => (
-    <button className={ `btn ${canClick?"" :" cursor-not-allowed"}` }>
+    <button   className={ `btn ${canClick?"" :" cursor-not-allowed"}` }>
         {loading ?"loading":actionText}
+
         </button>
         );

@@ -60,6 +60,10 @@ export interface CreateStoreInput {
   address: string;
 }
 
+export interface DeleteProductInput {
+  productId: number;
+}
+
 export interface DeleteStoreInput {
   storeId: number;
 }
@@ -111,6 +115,10 @@ export interface ProductOptionInputType {
   name: string;
   choices?: ProductChoiceInputType[] | null;
   extra?: number | null;
+}
+
+export interface ProductsInput {
+  page?: number | null;
 }
 
 export interface SearchProductInput {

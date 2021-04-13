@@ -1,5 +1,5 @@
 import { gql, useApolloClient, useMutation } from '@apollo/client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { Button } from '../../components/button';
@@ -32,6 +32,8 @@ export const AddStore = () => {
 	const client = useApolloClient();
 	const history = useHistory();
 	const [imageUrl, setImageUrl] = useState('');
+	
+	var notclicked=true;
 	const onCompleted = (data: createStore) => {
 		const {
 			createStore: { ok, storeId },
@@ -71,9 +73,12 @@ export const AddStore = () => {
 	const { register, getValues, formState, handleSubmit } = useForm<IFormProps>({
 		mode: 'onChange',
 	});
+
 	const [uploading, setUploading] = useState(false);
 	const onSubmit = async () => {
+		notclicked=false;
 		try {
+
 			setUploading(true);
 			const { file, name, address } = getValues();
 			const actualFile = file[0];
@@ -131,7 +136,8 @@ export const AddStore = () => {
 				</div>
 				<Button
 					loading={uploading}
-					canClick={formState.isValid}
+					canClick={formState.isValid }
+					
 					actionText="Create Store"
 				/>
 				{data?.createStore?.error && (
