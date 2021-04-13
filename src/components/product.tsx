@@ -4,7 +4,9 @@ import { store_store_store_menu_options } from '../__generated__/store';
 interface IProductProps {
 	id?: number;
 	description: string;
+	photo:string | null;
 	name: string;
+	Categoryname: string | undefined;
 	price: number;
 	isCustomer?: boolean;
 	orderStarted?: boolean;
@@ -17,11 +19,13 @@ interface IProductProps {
 export const Product: React.FC<IProductProps> = ({
 	id = 0,
 	description,
+	Categoryname,
 	name,
 	price,
 	isCustomer = false,
 	orderStarted = false,
 	options,
+	photo,
 	isSelected,
 	addItemToOrder,
 	removeFromOrder,
@@ -44,6 +48,10 @@ export const Product: React.FC<IProductProps> = ({
 			}`}
 		>
 			<div className="mb-5">
+				<div
+					style={{ backgroundImage: `url(${photo})` }}
+					className="bg-cover bg-center mb-3 py-28"
+				></div>
 				<h3 className="text-lg font-medium flex object-right ">
 					{name}{' '}
 					{orderStarted && (

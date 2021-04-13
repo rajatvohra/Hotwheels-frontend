@@ -21,6 +21,9 @@ const STORE_QUERY = gql`
 				...StoreParts
 				menu {
 					...ProductParts
+					category{
+						name
+					}
 				}
 			}
 		}
@@ -177,9 +180,7 @@ export const Store = () => {
 			>
 				<div className="bg-white w-3/12 py-8 pl-48">
 					<h4 className="text-4xl mb-3">{data?.store.store?.name}</h4>
-					<h5 className="text-sm font-light mb-2">
-						{data?.store.store?.category?.name}
-					</h5>
+
 					<h6 className="text-sm font-light">{data?.store.store?.address}</h6>
 				</div>
 			</div>
@@ -209,6 +210,8 @@ export const Store = () => {
 							isSelected={isSelected(product.id)}
 							id={product.id}
 							orderStarted={orderStarted}
+							Categoryname={product.category?.name}
+							photo={product.photo}
 							key={index}
 							name={product.name}
 							description={product.description}

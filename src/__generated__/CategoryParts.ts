@@ -13,5 +13,5 @@ export interface CategoryParts {
   name: string;
   coverImg: string | null;
   slug: string;
-  storeCount: number;
+  productCount: number;
 }

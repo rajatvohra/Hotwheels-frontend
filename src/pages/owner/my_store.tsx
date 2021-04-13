@@ -135,6 +135,8 @@ export const MyStore = () => {
 									name={product.name}
 									description={product.description}
 									price={product.price}
+									photo={product.photo}
+									Categoryname={product.category?.name}
 								/>
 							))}
 						</div>

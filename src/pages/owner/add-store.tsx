@@ -24,7 +24,7 @@ const CREATE_STORE_MUTATION = gql`
 interface IFormProps {
 	name: string;
 	address: string;
-	categoryName: string;
+
 	file: FileList;
 }
 
@@ -37,7 +37,7 @@ export const AddStore = () => {
 			createStore: { ok, storeId },
 		} = data;
 		if (ok) {
-			const { name, categoryName, address } = getValues();
+			const { name,  address } = getValues();
 			setUploading(false);
 			const queryResult = client.readQuery({ query: MY_STORES_QUERY });
 			client.writeQuery({
@@ -48,10 +48,6 @@ export const AddStore = () => {
 						stores: [
 							{
 								address,
-								category: {
-									name: categoryName,
-									__typename: 'Category',
-								},
 								coverImg: imageUrl,
 								id: storeId,
 								isPromoted: false,
@@ -79,7 +75,7 @@ export const AddStore = () => {
 	const onSubmit = async () => {
 		try {
 			setUploading(true);
-			const { file, name, categoryName, address } = getValues();
+			const { file, name, address } = getValues();
 			const actualFile = file[0];
 			const formBody = new FormData();
 			formBody.append('file', actualFile);
@@ -94,7 +90,6 @@ export const AddStore = () => {
 				variables: {
 					input: {
 						name,
-						categoryName,
 						address,
 						coverImg,
 					},
@@ -125,13 +120,6 @@ export const AddStore = () => {
 					name="address"
 					placeholder="Address"
 					ref={register({ required: 'Address is required.' })}
-				/>
-				<input
-					className="input"
-					type="text"
-					name="categoryName"
-					placeholder="Category Name"
-					ref={register({ required: 'Category Name is required.' })}
 				/>
 				<div>
 					<input

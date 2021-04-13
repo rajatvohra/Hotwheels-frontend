@@ -28,25 +28,29 @@ interface IForm {
 	price: string;
 	description: string;
 	[key: string]: string;
+	categoryName:string;
 }
 
 export const AddProduct = () => {
 	const { storeId } = useParams<IParams>();
 	const history = useHistory();
-	const [createProductMutation, { loading }] = useMutation<
+	const [imageUrl, setImageUrl] = useState('');
+	const [uploading, setUploading] = useState(false);
+	const onCompleted = (data: createProduct) => {
+		const {
+			createProduct: { ok },
+		} = data;
+		if (ok) {
+			setUploading(false);
+
+			history.push('/');
+		}
+	};
+	const [createProductMutation, { data,loading }] = useMutation<
 		createProduct,
 		createProductVariables
 	>(CREATE_PRODUCT_MUTATION, {
-		refetchQueries: [
-			{
-				query: MY_STORE_QUERY,
-				variables: {
-					input: {
-						id: +storeId,
-					},
-				},
-			},
-		],
+		onCompleted,
 	});
 	const {
 		register,
@@ -57,24 +61,47 @@ export const AddProduct = () => {
 	} = useForm<IForm>({
 		mode: 'onChange',
 	});
-	const onSubmit = () => {
-		const { name, price, description, ...rest } = getValues();
-		const optionObjects = optionsNumber.map((theId) => ({
-			name: rest[`${theId}-optionName`],
-			extra: +rest[`${theId}-optionExtra`],
-		}));
-		createProductMutation({
-			variables: {
-				input: {
-					name,
-					price: +price,
-					description,
-					storeId: +storeId,
-					options: optionObjects,
+	const onSubmit = async () => {
+		try {
+			const { file, name,price,categoryName,description,...rest} = getValues();
+			const optionObjects = optionsNumber.map((theId) => ({
+				name: rest[`${theId}-optionName`],
+				extra: +rest[`${theId}-optionExtra`],
+			}));
+			setUploading(true);
+			const actualFile = file[0];
+			const formBody = new FormData();
+			formBody.append('file', actualFile);
+			const { url: photo } = await (
+				await fetch('http://localhost:3000/uploads/', {
+					method: 'POST',
+					body: formBody,
+				})
+			).json();
+			setImageUrl(photo);
+			console.log(name,
+				price,
+				photo,
+				description,storeId,
+				categoryName);
+			createProductMutation({
+				variables: {
+					input: {
+						name,
+                        price:+price,
+                        photo,
+                        description,
+                        options:optionObjects,
+                        storeId:+storeId,
+                        categoryName,
+					},
 				},
-			},
-		});
-		history.goBack();
+			});
+		}
+		catch (e) {
+			console.log(e);
+		}
+
 	};
 	const [optionsNumber, setOptionsNumber] = useState<number[]>([]);
 	const onAddOptionClick = () => {
@@ -113,10 +140,25 @@ export const AddProduct = () => {
 				<input
 					className="input"
 					type="text"
+					name="categoryName"
+					placeholder="Category"
+					ref={register({ required: 'category is required.' })}
+				/>
+				<input
+					className="input"
+					type="text"
 					name="description"
 					placeholder="Description"
 					ref={register({ required: 'Description is required.' })}
 				/>
+				<div>
+					<input
+						type="file"
+						name="file"
+						accept="image/*"
+						ref={register({ required: true })}
+					/>
+				</div>
 				<div className="my-10">
 					<h4 className="font-medium  mb-3 text-lg">Product Options</h4>
 					<span

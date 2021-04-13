@@ -1,35 +1,36 @@
 import { gql, useLazyQuery } from '@apollo/client';
 import React, { useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Store } from '../../components/store';
-import { STORE_FRAGMENT } from '../../fragments';
-import {
-	searchStore,
-	searchStoreVariables,
-} from '../../__generated__/searchStore';
+import { Product } from '../../components/product';
+import { PRODUCT_FRAGMENT } from '../../fragments';
+import { searchProduct, searchProductVariables } from '../../__generated__/searchProduct';
 
-const SEARCH_STORE = gql`
-	query searchStore($input: SearchStoreInput!) {
-		searchStore(input: $input) {
+const SEARCH_PRODUCT = gql`
+	query searchProduct($input: SearchProductInput!) {
+		searchProduct(input: $input) {
 			ok
 			error
 			totalPages
 			totalResults
-			stores {
-				...StoreParts
+			products {
+				category{
+					name
+				}
+				...ProductParts
+
 			}
 		}
 	}
-	${STORE_FRAGMENT}
+	${PRODUCT_FRAGMENT}
 `;
 
 export const Search = () => {
 	const location = useLocation();
 	const history = useHistory();
 	const [callQuery, { loading, data, called }] = useLazyQuery<
-		searchStore,
-		searchStoreVariables
-	>(SEARCH_STORE);
+		searchProduct,
+		searchProductVariables
+	>(SEARCH_PRODUCT);
 	useEffect(() => {
 		const [_, query] = location.search.split('?term=');
 		if (!query) {
@@ -55,14 +56,18 @@ export const Search = () => {
 						</h1>
 					</div>
 					<div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
-						{data?.searchStore.stores?.map((store) => (
-							<Store
-								key={store.id}
-								id={store.id + ''}
-								coverImg={store.coverImg}
-								name={store.name}
-								categoryName={store.category?.name}
+					{data?.searchProduct.products?.map((products) => (
+							<Product
+								key={products.id}
+								id={products.id }
+								photo={products.photo}
+								name={products.name}
+								price={products.price}
+								Categoryname={products.category?.name}
+
+								description={products.description}
 							/>
+
 						))}
 					</div>
 				</div>

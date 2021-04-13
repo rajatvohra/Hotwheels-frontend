@@ -9,11 +9,6 @@ import { MyStoreInput } from "./globalTypes";
 // GraphQL query operation: myStore
 // ====================================================
 
-export interface myStore_myStore_store_category {
-  __typename: "Category";
-  name: string;
-}
-
 export interface myStore_myStore_store_menu_options_choices {
   __typename: "ProductChoice";
   name: string;
@@ -27,6 +22,11 @@ export interface myStore_myStore_store_menu_options {
   choices: myStore_myStore_store_menu_options_choices[] | null;
 }
 
+export interface myStore_myStore_store_menu_category {
+  __typename: "Category";
+  name: string;
+}
+
 export interface myStore_myStore_store_menu {
   __typename: "Product";
   id: number;
@@ -35,6 +35,7 @@ export interface myStore_myStore_store_menu {
   photo: string | null;
   description: string;
   options: myStore_myStore_store_menu_options[] | null;
+  category: myStore_myStore_store_menu_category | null;
 }
 
 export interface myStore_myStore_store_orders {
@@ -49,7 +50,6 @@ export interface myStore_myStore_store {
   id: number;
   name: string;
   coverImg: string;
-  category: myStore_myStore_store_category | null;
   address: string;
   menu: myStore_myStore_store_menu[];
   orders: myStore_myStore_store_orders[];

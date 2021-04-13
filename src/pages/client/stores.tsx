@@ -1,24 +1,14 @@
 import { gql, useQuery } from '@apollo/client';
 import React, { useState } from 'react';
-import {
-	storesPageQuery,
-	storesPageQueryVariables,
-} from '../../__generated__/storesPageQuery';
 import { Store } from '../../components/store';
 import { CATEGORY_FRAGMENT, STORE_FRAGMENT } from '../../fragments';
 import { useForm } from 'react-hook-form';
-import { Link, useHistory } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { stores, storesVariables } from '../../__generated__/stores';
 
 const STORES_QUERY = gql`
-	query storesPageQuery($input: StoresInput!) {
-		allCategories {
-			ok
-			error
-			categories {
-				...CategoryParts
-			}
-		}
+	query stores($input: StoresInput!) {
 		stores(input: $input) {
 			ok
 			error
@@ -30,7 +20,6 @@ const STORES_QUERY = gql`
 		}
 	}
 	${STORE_FRAGMENT}
-	${CATEGORY_FRAGMENT}
 `;
 
 interface IFormProps {
@@ -39,7 +28,7 @@ interface IFormProps {
 
 export const Stores = () => {
 	const [page, setPage] = useState(1);
-	const { data, loading } = useQuery<storesPageQuery, storesPageQueryVariables>(
+	const { data, loading } = useQuery<stores, storesVariables>(
 		STORES_QUERY,
 		{
 			variables: {
@@ -74,26 +63,12 @@ export const Stores = () => {
 					name="searchTerm"
 					type="Search"
 					className="input rounded-md border-0 w-3/4 md:w-3/12"
-					placeholder="Search stores..."
+					placeholder="Search products..."
 				/>
 			</form>
 			{!loading && (
 				<div className="max-w-screen-2xl pb-20 mx-auto mt-8">
-					<div className="flex justify-around max-w-sm mx-auto ">
-						{data?.allCategories.categories?.map((category) => (
-							<Link key={category.id} to={`/category/${category.slug}`}>
-								<div className="flex flex-col group items-center cursor-pointer">
-									<div
-										className=" w-16 h-16 bg-cover group-hover:bg-gray-100 rounded-full"
-										style={{ backgroundImage: `url(${category.coverImg})` }}
-									></div>
-									<span className="mt-1 text-sm text-center font-medium">
-										{category.name}
-									</span>
-								</div>
-							</Link>
-						))}
-					</div>
+
 					<div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
 						{data?.stores.results?.map((store) => (
 							<Store
@@ -101,7 +76,6 @@ export const Stores = () => {
 								id={store.id + ''}
 								coverImg={store.coverImg}
 								name={store.name}
-								categoryName={store.category?.name}
 							/>
 						))}
 					</div>

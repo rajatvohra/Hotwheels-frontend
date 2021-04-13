@@ -47,16 +47,17 @@ export interface CreateOrderItemInput {
 export interface CreateProductInput {
   name: string;
   price: number;
+  photo?: string | null;
   description: string;
   options?: ProductOptionInputType[] | null;
   storeId: number;
+  categoryName: string;
 }
 
 export interface CreateStoreInput {
   name: string;
   coverImg: string;
   address: string;
-  categoryName: string;
 }
 
 export interface DeleteStoreInput {
@@ -112,7 +113,7 @@ export interface ProductOptionInputType {
   extra?: number | null;
 }
 
-export interface SearchStoreInput {
+export interface SearchProductInput {
   page?: number | null;
   query: string;
 }

@@ -5,9 +5,6 @@ export const STORE_FRAGMENT = gql`
 		id
 		name
 		coverImg
-		category {
-			name
-		}
 		address
 	}
 `;
@@ -18,7 +15,7 @@ export const CATEGORY_FRAGMENT = gql`
 		name
 		coverImg
 		slug
-		storeCount
+		productCount
 	}
 `;
 
@@ -36,6 +33,9 @@ export const PRODUCT_FRAGMENT = gql`
 				name
 				extra
 			}
+		}
+		category{
+			name
 		}
 	}
 `;

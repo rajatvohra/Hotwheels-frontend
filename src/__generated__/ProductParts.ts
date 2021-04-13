@@ -20,6 +20,11 @@ export interface ProductParts_options {
   choices: ProductParts_options_choices[] | null;
 }
 
+export interface ProductParts_category {
+  __typename: "Category";
+  name: string;
+}
+
 export interface ProductParts {
   __typename: "Product";
   id: number;
@@ -28,4 +33,5 @@ export interface ProductParts {
   photo: string | null;
   description: string;
   options: ProductParts_options[] | null;
+  category: ProductParts_category | null;
 }

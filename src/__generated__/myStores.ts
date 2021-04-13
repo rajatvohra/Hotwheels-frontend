@@ -7,17 +7,11 @@
 // GraphQL query operation: myStores
 // ====================================================
 
-export interface myStores_myStores_stores_category {
-  __typename: "Category";
-  name: string;
-}
-
 export interface myStores_myStores_stores {
   __typename: "Store";
   id: number;
   name: string;
   coverImg: string;
-  category: myStores_myStores_stores_category | null;
   address: string;
 }
 

@@ -47,7 +47,6 @@ export const MyStores = () => {
 								id={store.id + ''}
 								coverImg={store.coverImg}
 								name={store.name}
-								categoryName={store.category?.name}
 							/>
 						))}
 

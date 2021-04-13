@@ -9,18 +9,33 @@ import { CategoryInput } from "./globalTypes";
 // GraphQL query operation: category
 // ====================================================
 
-export interface category_category_stores_category {
+export interface category_category_products_category {
   __typename: "Category";
   name: string;
 }
 
-export interface category_category_stores {
-  __typename: "Store";
+export interface category_category_products_options_choices {
+  __typename: "ProductChoice";
+  name: string;
+  extra: number | null;
+}
+
+export interface category_category_products_options {
+  __typename: "ProductOption";
+  name: string;
+  extra: number | null;
+  choices: category_category_products_options_choices[] | null;
+}
+
+export interface category_category_products {
+  __typename: "Product";
+  category: category_category_products_category | null;
   id: number;
   name: string;
-  coverImg: string;
-  category: category_category_stores_category | null;
-  address: string;
+  price: number;
+  photo: string | null;
+  description: string;
+  options: category_category_products_options[] | null;
 }
 
 export interface category_category_category {
@@ -29,7 +44,7 @@ export interface category_category_category {
   name: string;
   coverImg: string | null;
   slug: string;
-  storeCount: number;
+  productCount: number;
 }
 
 export interface category_category {
@@ -38,7 +53,7 @@ export interface category_category {
   error: string | null;
   totalPages: number | null;
   totalResults: number | null;
-  stores: category_category_stores[] | null;
+  products: category_category_products[] | null;
   category: category_category_category | null;
 }
 
