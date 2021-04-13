@@ -131,7 +131,7 @@ export const MyStore = () => {
 						<div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
 							{data?.myStore.store?.menu.map((product, index) => (
 								<Product
-									id={index}
+									id={product.id}
 									name={product.name}
 									description={product.description}
 									price={product.price}

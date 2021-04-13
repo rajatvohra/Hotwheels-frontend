@@ -34,16 +34,6 @@ export interface CreateAccountInput {
   role: UserRole;
 }
 
-export interface CreateOrderInput {
-  storeId: number;
-  items: CreateOrderItemInput[];
-}
-
-export interface CreateOrderItemInput {
-  productId: number;
-  options?: OrderItemOptionInputType[] | null;
-}
-
 export interface CreateProductInput {
   name: string;
   price: number;
@@ -95,11 +85,6 @@ export interface MyStoreInput {
 export interface OTPInput {
   id: number;
   otp: number;
-}
-
-export interface OrderItemOptionInputType {
-  name: string;
-  choice?: string | null;
 }
 
 export interface OrderUpdatesInput {
