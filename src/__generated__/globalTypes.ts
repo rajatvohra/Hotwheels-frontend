@@ -96,6 +96,10 @@ export interface ProductChoiceInputType {
   extra?: number | null;
 }
 
+export interface ProductInput {
+  productId: number;
+}
+
 export interface ProductOptionInputType {
   name: string;
   choices?: ProductChoiceInputType[] | null;

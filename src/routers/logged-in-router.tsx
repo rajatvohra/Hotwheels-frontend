@@ -18,11 +18,16 @@ import { EditProfile } from '../user/edit-profile';
 import { Store } from '../pages/client/store';
 import { OTP } from '../pages/otp';
 import { Products } from '../pages/client/products';
+import { ProductPage } from '../pages/client/product-page';
 
 const clientRoutes = [
 	{
 		path: '/',
 		component: <Products />,
+	},
+	{
+		path: '/product/:id',
+		component: <ProductPage />,
 	},
 	{
 		path: '/search',

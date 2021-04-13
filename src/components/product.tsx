@@ -1,6 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useMe } from '../hooks/useMe';
 import { deleteProduct, deleteProductVariables } from '../__generated__/deleteProduct';
 import { UserRole } from '../__generated__/globalTypes';
@@ -66,11 +66,11 @@ export const Product: React.FC<IProductProps> = ({
 			},
 		});
 		console.log(id);
-		// history.goBack();
-		// window.location.reload();
+		window.location.reload();
 	}
 	const { data:UserData } = useMe();
 	return (
+		<Link to={`/product/${id}`}>
 		<div
 			className={` px-8 py-4 border cursor-pointer  transition-all ${
 				isSelected ? 'border-gray-800' : ' hover:border-gray-800'
@@ -110,5 +110,6 @@ export const Product: React.FC<IProductProps> = ({
 				</div>
 			)}
 		</div>
+		</Link>
 	);
 };
