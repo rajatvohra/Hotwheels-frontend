@@ -76,6 +76,7 @@ export const Stores = () => {
 								id={store.id + ''}
 								coverImg={store.coverImg}
 								name={store.name}
+								widthFull={true}
 							/>
 						))}
 					</div>

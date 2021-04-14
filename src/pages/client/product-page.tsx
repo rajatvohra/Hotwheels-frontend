@@ -67,15 +67,21 @@ export const ProductPage = () => {
 					<h2 className="mt-4 text-xl text-black text-left font-bold">
 						{data?.product.product?.description}
 					</h2>
-					<h3 className="mr-6 mt-72 text-xl text-black text-right font-semibold">
-						Rs {data?.product.product?.price}
-					</h3>
-					<Store
-					id={data?.product.product?.store.id+""}
-					name={data?.product.product?.store.name+" "}
-					coverImg={data?.product.product?.store.coverImg+" "}>
+					<div className="mt-4 text-xl text-black text-left font-bold">
+						<button className="mr-6 mt-56 text-xl text-black float-right font-semibold">
+							Rs {data?.product.product?.price}
+						</button>
+						<h6>
+							Check out other products from this store.
+						</h6>
+						<Store
+						id={data?.product.product?.store.id+""}
+						name={data?.product.product?.store.name+" "}
+						coverImg={data?.product.product?.store.coverImg+" "}
+						widthFull={false}>
 
-					</Store>
+						</Store>
+					</div>
 
 
 

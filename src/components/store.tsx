@@ -6,18 +6,20 @@ interface IStoreProps {
 	coverImg?: string;
 	name: string;
 	categoryName?: string;
+	widthFull:Boolean
 }
 
 export const Store: React.FC<IStoreProps> = ({
 	id,
 	coverImg,
 	name,
+	widthFull,
 }) => (
 	<Link to={`/stores/${id}`}>
 		<div className="flex flex-col">
 			<div
 				style={{ backgroundImage: `url(${coverImg})` }}
-				className="bg-cover bg-center mb-3 w-1/4 py-28"
+				className={`${widthFull?"bg-cover bg-center mb-3 py-28":"bg-cover bg-center w-1/4  mb-3 py-28"}`}
 			></div>
 			<h3 className="text-xl">{name}</h3>
 		</div>

@@ -51,6 +51,7 @@ export const MyStores = () => {
 								id={store.id + ''}
 								coverImg={store.coverImg}
 								name={store.name}
+								widthFull={true}
 							/>
 						))}
 

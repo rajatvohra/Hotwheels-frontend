@@ -5,7 +5,6 @@ import { CATEGORY_FRAGMENT, PRODUCT_FRAGMENT, STORE_FRAGMENT } from '../../fragm
 import { useForm } from 'react-hook-form';
 import {  useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { stores, storesVariables } from '../../__generated__/stores';
 import { products, productsVariables } from '../../__generated__/products';
 import { Product } from '../../components/product';
 
