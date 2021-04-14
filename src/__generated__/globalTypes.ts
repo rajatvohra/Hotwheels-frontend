@@ -34,6 +34,15 @@ export interface CreateAccountInput {
   role: UserRole;
 }
 
+export interface CreateOrderInput {
+  storeId: number;
+  items: CreateOrderItemInput[];
+}
+
+export interface CreateOrderItemInput {
+  productId: number;
+}
+
 export interface CreateProductInput {
   name: string;
   price: number;

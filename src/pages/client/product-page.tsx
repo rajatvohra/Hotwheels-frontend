@@ -1,10 +1,12 @@
-import { gql, useQuery } from '@apollo/client';
-import React from 'react';
+import { gql, useMutation, useQuery } from '@apollo/client';
+import React, { useState } from 'react';
 import {  PRODUCT_FRAGMENT, STORE_FRAGMENT } from '../../fragments';
-import {  Link, useParams } from 'react-router-dom';
+import {   useHistory, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { product, productVariables } from '../../__generated__/product';
 import { Store } from '../../components/store';
+import { CreateOrderItemInput } from '../../__generated__/globalTypes';
+import { createOrder, createOrderVariables } from '../../__generated__/createOrder';
+import { product, productVariables } from '../../__generated__/product';
 
 const PRODUCT_QUERY = gql`
 	query product($input: ProductInput!) {
@@ -23,40 +25,84 @@ const PRODUCT_QUERY = gql`
     ${STORE_FRAGMENT}
 `;
 
+const CREATE_ORDER_MUTATION = gql`
+  mutation createOrder($input: CreateOrderInput!) {
+    createOrder(input: $input) {
+      ok
+      error
+      orderId
+    }
+  }
+`;
+
 interface IParams {
 	id: string;
 }
 
 export const ProductPage = () => {
     const params=useParams<IParams>();
-	console.log(params.id);
-	const { data, loading } = useQuery<product,productVariables>(
+	const history=useHistory();
+	const productid=+params.id;
+	const { data:Productdata, loading } = useQuery<product,productVariables>(
 		PRODUCT_QUERY,
 		{
 			variables: {
 				input: {
-					productId:+params.id,
+					productId:productid,
 				},
 			},
 		}
 	);
 
+
+
+
+	const onCompleted=(data: createOrder)=>{
+		const {
+			createOrder: { ok, orderId },
+		  } = data;
+		console.log("added to cart");
+
+	}
+	  const [createOrderMutation, { loading:loadingtocart }] = useMutation<
+		createOrder,
+		createOrderVariables
+	  >(CREATE_ORDER_MUTATION, {
+		onCompleted,
+	  });
+	  const triggerAddtoCart=()=>{
+
+
+		  if(Productdata?.product?.product?.store?.id)
+			{createOrderMutation({
+				variables: {
+				input: {
+					storeId: +Productdata?.product?.product?.store?.id,
+					items: [{productId: productid}],
+				},
+				},
+			});}
+
+	  }
+
+
+
 	return (
 		<div>
 			<Helmet>
-				<title>{data?.product.product?.name||''} | Nuber Eats</title>
+				<title>{Productdata?.product.product?.name||''} | Nuber Eats</title>
 			</Helmet>
 
 			{!loading && (
 
 				<div className="max-w-screen-2xl pb-20 mx-auto mt-8 ">
 						<h1 className="mb-10 text-2xl text-blue-800 text-left font-bold">
-					{data?.product.product?.name}
+					{Productdata?.product.product?.name}
 				</h1>
 					<div
-					className=" bg-gray-800 bg-center bg-cover p-20 px-20	"
+					className=" bg-gray-800 bg-center p-56 "
 					style={{
-						backgroundImage: `url(${data?.product.product?.photo})`,
+						backgroundImage: `url(${Productdata?.product.product?.photo})`,
 					}}
 					>
 
@@ -65,23 +111,29 @@ export const ProductPage = () => {
 						Description:
 					</h2>
 					<h2 className="mt-4 text-xl text-black text-left font-bold">
-						{data?.product.product?.description}
+						{Productdata?.product.product?.description}
 					</h2>
-					<div className="mt-4 text-xl text-black text-left font-bold">
+					(<div className="mt-4 text-xl text-black text-left font-bold">
 						<button className="mr-6 mt-56 text-xl text-black float-right font-semibold">
-							Rs {data?.product.product?.price}
+							Rs {Productdata?.product.product?.price}
 						</button>
+					</div>)
+					<div className="grid gap-3 w-1/3 text-xl text-black text-left font-bold">
 						<h6>
 							Check out other products from this store.
 						</h6>
 						<Store
-						id={data?.product.product?.store.id+""}
-						name={data?.product.product?.store.name+" "}
-						coverImg={data?.product.product?.store.coverImg+" "}
-						widthFull={false}>
+						id={Productdata?.product.product?.store.id+""}
+						name={Productdata?.product.product?.store.name+" "}
+						coverImg={Productdata?.product.product?.store.coverImg+" "}
+						widthFull={true}>
 
 						</Store>
 					</div>
+					<button onClick={triggerAddtoCart} className="btn px-10 float-right">
+						BUY NOW
+					</button>
+
 
 
 
