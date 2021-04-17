@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { ProductInput } from "./globalTypes";
+import { ProductInput, UserRole } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: product
@@ -27,9 +27,15 @@ export interface product_product_product_category {
   name: string;
 }
 
+export interface product_product_product_store_owner {
+  __typename: "User";
+  role: UserRole;
+}
+
 export interface product_product_product_store {
   __typename: "Store";
   id: number;
+  owner: product_product_product_store_owner;
   name: string;
   coverImg: string;
   address: string;

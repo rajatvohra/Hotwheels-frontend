@@ -61,6 +61,46 @@ const OwnerRoutes = [
 	{ path: '/stores/:storeId/add-product', component: <AddProduct /> },
 ];
 
+const RetailerRoutes = [
+	{
+		path: '/',
+		component: <Products />,
+	},
+	{
+		path: '/product/:id',
+		component: <ProductPage />,
+	},
+	{
+		path: '/search',
+		component: <Search />,
+	},
+	{
+		path: '/category/:slug',
+		component: <Category />,
+	},
+	{
+		path: '/stores/:id',
+		component: <Store />,
+	},
+	//retailer as a store owner
+	{
+		path: '/add-store',
+		component: <AddStore />
+	},
+	{
+		path: '/my-stores',
+		component: <MyStores />,
+	},
+	{
+		path: '/my-stores/:id',
+		component: <MyStore />,
+	},
+	{
+		path: '/my-stores/:storeId/add-product',
+		component: <AddProduct />,
+	},
+];
+
 const driverRoutes = [{ path: '/', component: <Dashboard /> }];
 
 export const LoggedInRouter = () => {
@@ -89,6 +129,12 @@ export const LoggedInRouter = () => {
 			<Switch>
 				{data.me.role === UserRole.Client &&
 					clientRoutes.map((route) => (
+						<Route exact key={route.path} path={route.path}>
+							{route.component}
+						</Route>
+					))}
+					{data.me.role === UserRole.Retailer &&
+					RetailerRoutes.map((route) => (
 						<Route exact key={route.path} path={route.path}>
 							{route.component}
 						</Route>

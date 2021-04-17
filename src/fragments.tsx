@@ -37,6 +37,13 @@ export const PRODUCT_FRAGMENT = gql`
 		category{
 			name
 		}
+		store{
+			id
+			owner{
+				role
+			}
+		}
+
 	}
 `;
 

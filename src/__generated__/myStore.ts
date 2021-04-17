@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { MyStoreInput } from "./globalTypes";
+import { MyStoreInput, UserRole } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: myStore
@@ -27,6 +27,16 @@ export interface myStore_myStore_store_menu_category {
   name: string;
 }
 
+export interface myStore_myStore_store_menu_store_owner {
+  __typename: "User";
+  role: UserRole;
+}
+
+export interface myStore_myStore_store_menu_store {
+  __typename: "Store";
+  owner: myStore_myStore_store_menu_store_owner;
+}
+
 export interface myStore_myStore_store_menu {
   __typename: "Product";
   id: number;
@@ -36,6 +46,7 @@ export interface myStore_myStore_store_menu {
   description: string;
   options: myStore_myStore_store_menu_options[] | null;
   category: myStore_myStore_store_menu_category | null;
+  store: myStore_myStore_store_menu_store;
 }
 
 export interface myStore_myStore_store_orders {

@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { UserRole } from "./globalTypes";
+
 // ====================================================
 // GraphQL fragment: ProductParts
 // ====================================================
@@ -25,6 +27,17 @@ export interface ProductParts_category {
   name: string;
 }
 
+export interface ProductParts_store_owner {
+  __typename: "User";
+  role: UserRole;
+}
+
+export interface ProductParts_store {
+  __typename: "Store";
+  id: number;
+  owner: ProductParts_store_owner;
+}
+
 export interface ProductParts {
   __typename: "Product";
   id: number;
@@ -34,4 +47,5 @@ export interface ProductParts {
   description: string;
   options: ProductParts_options[] | null;
   category: ProductParts_category | null;
+  store: ProductParts_store;
 }

@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { SearchProductInput } from "./globalTypes";
+import { SearchProductInput, UserRole } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: searchProduct
@@ -27,6 +27,17 @@ export interface searchProduct_searchProduct_products_options {
   choices: searchProduct_searchProduct_products_options_choices[] | null;
 }
 
+export interface searchProduct_searchProduct_products_store_owner {
+  __typename: "User";
+  role: UserRole;
+}
+
+export interface searchProduct_searchProduct_products_store {
+  __typename: "Store";
+  id: number;
+  owner: searchProduct_searchProduct_products_store_owner;
+}
+
 export interface searchProduct_searchProduct_products {
   __typename: "Product";
   category: searchProduct_searchProduct_products_category | null;
@@ -36,6 +47,7 @@ export interface searchProduct_searchProduct_products {
   photo: string | null;
   description: string;
   options: searchProduct_searchProduct_products_options[] | null;
+  store: searchProduct_searchProduct_products_store;
 }
 
 export interface searchProduct_searchProduct {

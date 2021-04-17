@@ -32,7 +32,7 @@ export const AddStore = () => {
 	const client = useApolloClient();
 	const history = useHistory();
 	const [imageUrl, setImageUrl] = useState('');
-	
+
 	var notclicked=true;
 	const onCompleted = (data: createStore) => {
 		const {
@@ -61,7 +61,7 @@ export const AddStore = () => {
 					},
 				},
 			});
-			history.push('/');
+			history.goBack();
 		}
 	};
 	const [createStoreMutation, { data }] = useMutation<
@@ -137,7 +137,7 @@ export const AddStore = () => {
 				<Button
 					loading={uploading}
 					canClick={formState.isValid }
-					
+
 					actionText="Create Store"
 				/>
 				{data?.createStore?.error && (

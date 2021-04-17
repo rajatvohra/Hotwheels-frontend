@@ -24,6 +24,7 @@ import { useMe } from '../../hooks/useMe';
 import { myStore, myStoreVariables } from '../../__generated__/myStore';
 import { pendingOrders } from '../../__generated__/pendingOrders';
 import { deleteStore, deleteStoreVariables } from '../../__generated__/deleteStore';
+import { UserRole } from '../../__generated__/globalTypes';
 
 export const MY_STORE_QUERY = gql`
 	query myStore($input: MyStoreInput!) {
@@ -33,7 +34,27 @@ export const MY_STORE_QUERY = gql`
 			store {
 				...StoreParts
 				menu {
-					...ProductParts
+					id
+					name
+					price
+					photo
+					description
+					options {
+						name
+						extra
+						choices {
+							name
+							extra
+						}
+					}
+					category{
+						name
+					}
+					store{
+						owner{
+							role
+						}
+					}
 				}
 				orders {
 					...OrderParts
@@ -42,7 +63,6 @@ export const MY_STORE_QUERY = gql`
 		}
 	}
 	${STORE_FRAGMENT}
-	${PRODUCT_FRAGMENT}
 	${ORDERS_FRAGMENT}
 `;
 const DELETE_STORE_MUTATION=gql`
@@ -68,6 +88,8 @@ interface IParams {
 
 export const MyStore = () => {
 	const { id } = useParams<IParams>();
+	console.log("id=",id);
+	const {data:userData}=useMe();
 	const { data } = useQuery<myStore, myStoreVariables>(MY_STORE_QUERY, {
 		variables: {
 			input: {
@@ -75,13 +97,13 @@ export const MyStore = () => {
 			},
 		},
 	});
+	console.log(data);
 
 	const { data: subscriptionData } = useSubscription<pendingOrders>(
 		PENDING_ORDERS_SUBSCRIPTION
 	);
 	const history = useHistory();
 	useEffect(() => {
-		console.log('new order');
 		if (subscriptionData?.pendingOrders.id) {
 			history.push(`/orders/${subscriptionData.pendingOrders.id}`);
 		}
@@ -115,12 +137,18 @@ export const MyStore = () => {
 				<h2 className="text-4xl font-medium mb-10">
 					{data?.myStore.store?.name || 'Loading...'}
 				</h2>
-				<Link
+				{userData?.me.role===UserRole.Retailer ?(<Link
+					to={`/my-stores/${id}/add-product`}
+					className=" mr-8 text-white bg-gray-800 py-3 px-10"
+				>
+					Add Product &rarr;
+				</Link>):(<Link
 					to={`/stores/${id}/add-product`}
 					className=" mr-8 text-white bg-gray-800 py-3 px-10"
 				>
 					Add Product &rarr;
-				</Link>
+				</Link>)}
+
 				<button onClick={ondelete} className=" ml-8 text-white bg-red-500 py-3 px-10 justify-self-end">
 					Delete This Store
 				</button>
