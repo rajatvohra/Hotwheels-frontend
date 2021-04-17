@@ -50,9 +50,13 @@ const commonRoutes = [
 	{ path: '/orders/:id', component: <Order /> },
 ];
 
-const storeRoutes = [
+const OwnerRoutes = [
 	{ path: '/', component: <MyStores /> },
 	{ path: '/add-store', component: <AddStore /> },
+	{
+		path: '/product/:id',
+		component: <ProductPage />,
+	},
 	{ path: '/stores/:id', component: <MyStore /> },
 	{ path: '/stores/:storeId/add-product', component: <AddProduct /> },
 ];
@@ -90,7 +94,7 @@ export const LoggedInRouter = () => {
 						</Route>
 					))}
 				{data.me.role === UserRole.Owner &&
-					storeRoutes.map((route) => (
+					OwnerRoutes.map((route) => (
 						<Route exact key={route.path} path={route.path}>
 							{route.component}
 						</Route>

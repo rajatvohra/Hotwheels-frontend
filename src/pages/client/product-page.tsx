@@ -4,9 +4,10 @@ import {  PRODUCT_FRAGMENT, STORE_FRAGMENT } from '../../fragments';
 import {   useHistory, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Store } from '../../components/store';
-import { CreateOrderItemInput } from '../../__generated__/globalTypes';
+import { CreateOrderItemInput, UserRole } from '../../__generated__/globalTypes';
 import { createOrder, createOrderVariables } from '../../__generated__/createOrder';
 import { product, productVariables } from '../../__generated__/product';
+import { useMe } from '../../hooks/useMe';
 
 const PRODUCT_QUERY = gql`
 	query product($input: ProductInput!) {
@@ -43,6 +44,7 @@ export const ProductPage = () => {
     const params=useParams<IParams>();
 	const history=useHistory();
 	const productid=+params.id;
+	const {data:Userdata}=useMe();
 	const { data:Productdata, loading } = useQuery<product,productVariables>(
 		PRODUCT_QUERY,
 		{
@@ -84,6 +86,7 @@ export const ProductPage = () => {
 			});}
 
 	  }
+	  const photo=Productdata?.product?.product?.photo+""
 
 
 
@@ -99,14 +102,12 @@ export const ProductPage = () => {
 						<h1 className="mb-10 text-2xl text-blue-800 text-left font-bold">
 					{Productdata?.product.product?.name}
 				</h1>
-					<div
-					className=" bg-gray-800 bg-center p-56 "
-					style={{
-						backgroundImage: `url(${Productdata?.product.product?.photo})`,
-					}}
-					>
+					<div>
+					<img src={photo}>
 
+					</img>
 					</div>
+
 					<h2 className="mt-10 text-2xl text-black text-left font-bold">
 						Description:
 					</h2>
@@ -130,9 +131,11 @@ export const ProductPage = () => {
 
 						</Store>
 					</div>
-					<button onClick={triggerAddtoCart} className="btn px-10 float-right">
+					{Userdata?.me.role===UserRole.Client &&
+					(<button onClick={triggerAddtoCart} className="btn px-10 float-right">
 						BUY NOW
-					</button>
+					</button>)
+					}
 
 
 
