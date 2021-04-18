@@ -11,7 +11,6 @@ import { UserRole } from '../../__generated__/globalTypes';
 import { useMe } from '../../hooks/useMe';
 import { category } from '../../__generated__/category';
 import { allCategories } from '../../__generated__/allCategories';
-import { index } from '../../algolia/index_algolia';
 
 
 const PRODUCTS_QUERY = gql`
@@ -63,9 +62,6 @@ export const Products = () => {
 		ALL_CATEGORTIES_QUERY,
 
 	);
-	index.search('Owner').then(({ hits }) => {
-		console.log(typeof(hits),"type");
-	});
 
 	const onNextPageClick = () => setPage((current) => current + 1);
 	const onPrevPageClick = () => setPage((current) => current - 1);

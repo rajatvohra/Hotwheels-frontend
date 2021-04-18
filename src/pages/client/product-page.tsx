@@ -8,7 +8,6 @@ import { CreateOrderItemInput, UserRole } from '../../__generated__/globalTypes'
 import { createOrder, createOrderVariables } from '../../__generated__/createOrder';
 import { product, productVariables } from '../../__generated__/product';
 import { useMe } from '../../hooks/useMe';
-import { index } from '../../algolia/index_algolia';
 
 
 const PRODUCT_QUERY = gql`
@@ -48,17 +47,6 @@ export const  ProductPage =  () => {
 	const history=useHistory();
 	const productid=+params.id;
 	const {data:Userdata}=useMe();
-	const [obj,setobj]=useState({});
-	
-
-	const temp = index.search('Owner').then(({ hits }) => {
-		return hits;
-	});
-	let ownerprod=Promise.resolve(temp);
-	ownerprod.then((_)=>{
-		console.log(_);
-	})
-	console.log(temp,"type");
 
 
 	const { data:Productdata, loading } = useQuery<product,productVariables>(
@@ -105,7 +93,7 @@ export const  ProductPage =  () => {
 
 	  }
 	  const photo=Productdata?.product?.product?.photo+"";
-	  
+
 
 
 

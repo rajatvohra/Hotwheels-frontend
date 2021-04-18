@@ -31,6 +31,7 @@ export interface CreateAccountInput {
   email: string;
   password: string;
   location: string;
+  _geoloc?: lntLngUserType | null;
   role: UserRole;
 }
 
@@ -91,6 +92,7 @@ export interface EditProfileInput {
   email?: string | null;
   password?: string | null;
   location?: string | null;
+  _geoloc?: lntLngUserType | null;
 }
 
 export interface GetOrderInput {
@@ -156,6 +158,11 @@ export interface VerifyEmailInput {
 }
 
 export interface lntLngStoreType {
+  lat?: number | null;
+  lng?: number | null;
+}
+
+export interface lntLngUserType {
   lat?: number | null;
   lng?: number | null;
 }
