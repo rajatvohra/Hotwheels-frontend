@@ -46,6 +46,7 @@ export interface searchProduct_searchProduct_products {
   price: number;
   photo: string | null;
   description: string;
+  stocks: number;
   options: searchProduct_searchProduct_products_options[] | null;
   store: searchProduct_searchProduct_products_store;
 }

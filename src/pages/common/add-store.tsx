@@ -1,15 +1,13 @@
 import { gql, useApolloClient, useMutation } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
+import GoogleMapReact from 'google-map-react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { Button } from '../../components/button';
 import { FormError } from '../../components/form-error';
-import { MY_STORES_QUERY } from './my_stores';
-import {
-	createStore,
-	createStoreVariables,
-} from '../../__generated__/createStore';
 import { useHistory } from 'react-router-dom';
+import { MY_STORES_QUERY } from './my_stores';
+import { createStore, createStoreVariables } from '../../__generated__/createStore';
 
 const CREATE_STORE_MUTATION = gql`
 	mutation createStore($input: CreateStoreInput!) {
@@ -27,12 +25,31 @@ interface IFormProps {
 
 	file: FileList;
 }
+interface ICoords {
+	lat: number;
+	lng: number;
+}
 
 export const AddStore = () => {
 	const client = useApolloClient();
 	const history = useHistory();
 	const [imageUrl, setImageUrl] = useState('');
-
+	const [driverCoords, setDriverCoords] = useState<ICoords>({ lng: 0, lat: 0 });
+	const [map, setMap] = useState<google.maps.Map>();
+	const [maps, setMaps] = useState<any>();
+	// @ts-ignore
+	const onSucces = ({ coords: { latitude, longitude } }: Position) => {
+		setDriverCoords({ lat: latitude, lng: longitude });
+	};
+	// @ts-ignore
+	const onError = (error: PositionError) => {
+		console.log(error);
+	};
+	useEffect(() => {
+		navigator.geolocation.watchPosition(onSucces, onError, {
+			enableHighAccuracy: true,
+		});
+	}, []);
 	var notclicked=true;
 	const onCompleted = (data: createStore) => {
 		const {
@@ -97,6 +114,7 @@ export const AddStore = () => {
 						name,
 						address,
 						coverImg,
+						_geoloc:driverCoords,
 					},
 				},
 			});

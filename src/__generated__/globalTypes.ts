@@ -41,6 +41,7 @@ export interface CreateOrderInput {
 
 export interface CreateOrderItemInput {
   productId: number;
+  quantity: number;
 }
 
 export interface CreateProductInput {
@@ -49,6 +50,7 @@ export interface CreateProductInput {
   photo?: string | null;
   description: string;
   options?: ProductOptionInputType[] | null;
+  stocks?: number | null;
   storeId: number;
   categoryName: string;
 }
@@ -57,6 +59,7 @@ export interface CreateStoreInput {
   name: string;
   coverImg: string;
   address: string;
+  _geoloc?: lntLngStoreType | null;
 }
 
 export interface DeleteProductInput {
@@ -70,6 +73,18 @@ export interface DeleteStoreInput {
 export interface EditOrderInput {
   id: number;
   status: OrderStatus;
+}
+
+export interface EditProductInput {
+  name?: string | null;
+  price?: number | null;
+  photo?: string | null;
+  description?: string | null;
+  options?: ProductOptionInputType[] | null;
+  stocks?: number | null;
+  dateNextAvailable?: string | null;
+  productId: number;
+  categoryName?: string | null;
 }
 
 export interface EditProfileInput {
@@ -138,6 +153,11 @@ export interface TakeOrderInput {
 
 export interface VerifyEmailInput {
   code: string;
+}
+
+export interface lntLngStoreType {
+  lat?: number | null;
+  lng?: number | null;
 }
 
 //==============================================================

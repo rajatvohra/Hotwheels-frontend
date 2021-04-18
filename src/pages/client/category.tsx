@@ -2,7 +2,6 @@ import { gql, useQuery } from '@apollo/client';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Product } from '../../components/product';
-import { Store } from '../../components/store';
 import { CATEGORY_FRAGMENT, PRODUCT_FRAGMENT, STORE_FRAGMENT } from '../../fragments';
 import { category, categoryVariables } from '../../__generated__/category';
 

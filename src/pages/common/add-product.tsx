@@ -28,6 +28,7 @@ interface IForm {
 	description: string;
 	[key: string]: string;
 	categoryName:string;
+	stocks:string;
 }
 
 export const AddProduct = () => {
@@ -68,7 +69,7 @@ export const AddProduct = () => {
 	const onSubmit = async () => {
 		notclicked=false;
 		try {
-			const { file, name,price,categoryName,description,...rest} = getValues();
+			const { file, name,price,categoryName,description,stocks,...rest} = getValues();
 			const optionObjects = optionsNumber.map((theId) => ({
 				name: rest[`${theId}-optionName`],
 				extra: +rest[`${theId}-optionExtra`],
@@ -88,7 +89,7 @@ export const AddProduct = () => {
 				price,
 				photo,
 				description,storeId,
-				categoryName);
+				categoryName,stocks);
 			createProductMutation({
 				variables: {
 					input: {
@@ -99,6 +100,7 @@ export const AddProduct = () => {
                         options:optionObjects,
                         storeId:+storeId,
                         categoryName,
+						stocks:+stocks,
 					},
 				},
 			});
@@ -142,6 +144,14 @@ export const AddProduct = () => {
 					min={0}
 					placeholder="Price"
 					ref={register({ required: 'Price is required.' })}
+				/>
+				<input
+					className="input"
+					type="number"
+					name="stocks"
+					min={0}
+					placeholder="stocks"
+					ref={register({ required: 'stock is required.' })}
 				/>
 				<input
 					className="input"

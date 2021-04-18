@@ -9,16 +9,19 @@ import { Category } from '../pages/client/category';
 import { UserRole } from '../__generated__/globalTypes';
 import { Dashboard } from '../pages/delivery/dashboard';
 import { Order } from '../pages/order';
-import { AddProduct } from '../pages/owner/add-product';
-import { AddStore } from '../pages/owner/add-store';
-import { MyStore } from '../pages/owner/my_store';
-import { MyStores } from '../pages/owner/my_stores';
+import { AddProduct } from '../pages/common/add-product';
+import { AddStore } from '../pages/common/add-store';
+import { MyStore } from '../pages/owner/client_my_store';
 import { ConfirmEmail } from '../user/confirm-email';
 import { EditProfile } from '../user/edit-profile';
 import { Store } from '../pages/client/store';
 import { OTP } from '../pages/otp';
 import { Products } from '../pages/client/products';
 import { ProductPage } from '../pages/client/product-page';
+import { RetailerMyStores } from '../pages/Retailer/retailer_my_stores';
+import { MyStores } from '../pages/common/my_stores';
+import { MyOrders } from '../pages/common/my-orders';
+import { EditProduct } from '../pages/common/edit-product';
 
 const clientRoutes = [
 	{
@@ -48,6 +51,8 @@ const commonRoutes = [
 	{ path: '/confirm', component: <ConfirmEmail /> },
 	{ path: '/edit-profile', component: <EditProfile /> },
 	{ path: '/orders/:id', component: <Order /> },
+	{ path: '/my-orders', component: <MyOrders /> },
+	{ path: '/edit-product/:id', component: <EditProduct /> },
 ];
 
 const OwnerRoutes = [
@@ -89,7 +94,7 @@ const RetailerRoutes = [
 	},
 	{
 		path: '/my-stores',
-		component: <MyStores />,
+		component: <RetailerMyStores />,
 	},
 	{
 		path: '/my-stores/:id',

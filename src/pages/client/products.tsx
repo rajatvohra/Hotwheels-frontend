@@ -9,6 +9,9 @@ import { products, productsVariables } from '../../__generated__/products';
 import { Product } from '../../components/product';
 import { UserRole } from '../../__generated__/globalTypes';
 import { useMe } from '../../hooks/useMe';
+import { category } from '../../__generated__/category';
+import { allCategories } from '../../__generated__/allCategories';
+import { index } from '../../algolia/index_algolia';
 
 
 const PRODUCTS_QUERY = gql`
@@ -24,6 +27,19 @@ const PRODUCTS_QUERY = gql`
 		}
 	}
 	${PRODUCT_FRAGMENT}
+`;
+
+const ALL_CATEGORTIES_QUERY = gql`
+	query allCategories {
+		allCategories {
+			ok
+			error
+			categories {
+				...CategoryParts
+			}
+		}
+	}
+	${CATEGORY_FRAGMENT}
 `;
 
 interface IFormProps {
@@ -43,6 +59,14 @@ export const Products = () => {
 			},
 		}
 	);
+	const { data:CategoryData, loading:CategoryLoading } = useQuery<allCategories>(
+		ALL_CATEGORTIES_QUERY,
+
+	);
+	index.search('Owner').then(({ hits }) => {
+		console.log(typeof(hits),"type");
+	});
+
 	const onNextPageClick = () => setPage((current) => current + 1);
 	const onPrevPageClick = () => setPage((current) => current - 1);
 	const { register, handleSubmit, getValues } = useForm<IFormProps>();
@@ -72,11 +96,31 @@ export const Products = () => {
 					placeholder="Search products..."
 				/>
 			</form>
-			{!loading && UserData?.me.role===UserRole.Client && (
-				<div className="max-w-screen-2xl pb-20 mx-auto mt-8">
+			{!CategoryLoading && <div className="max-w-screen-2xl mx-auto mt-8">
+          <div className="flex justify-around max-w-sm mx-auto ">
+		  {CategoryData?.allCategories.categories?.map((category) => (
+              <Link key={category.id} to={`/category/${category.slug}`}>
+                <div className="flex flex-col group items-center cursor-pointer">
+                  <div
+                    className=" w-16 h-16 bg-cover group-hover:bg-gray-100 rounded-full"
+                    style={{ backgroundImage: `url(${category.coverImg})` }}
+                  ></div>
+                  <span className="mt-1 text-sm text-center font-medium">
+                    {category.name}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+		  </div>}
 
+			{!loading  && (
+				<div className="max-w-screen-2xl pb-20 mx-auto mt-8">
+					<Link to='/my-stores' className='link '>
+						Login as the Shop Owner
+					</Link>
 					<div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
-						{data?.products.results?.filter((results)=>results.store.owner.role===UserRole.Retailer).map((product) => (
+						{data?.products.results?.map((product) => (
 							<Product
 								id={product.id}
 								description={product.description}
@@ -115,54 +159,7 @@ export const Products = () => {
 					</div>
 				</div>
 			)}
-			{!loading && UserData?.me.role===UserRole.Retailer && (
-				<div className="max-w-screen-2xl pb-20 mx-auto mt-8">
-					<div>
-						<Link to="/my-stores">
-							log in as a store owner
-						</Link>
-					</div>
 
-					<div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
-						{data?.products.results?.filter((results)=>results.store.owner.role===UserRole.Owner).map((product) => (
-							<Product
-								id={product.id}
-								description={product.description}
-								name={product.name}
-                                photo={product.photo}
-                                Categoryname={product.category?.name}
-                                price={product.price}
-							/>
-
-						))}
-					</div>
-					<div className="grid grid-cols-3 text-center max-w-md items-center mx-auto mt-10">
-						{page > 1 ? (
-							<button
-								onClick={onPrevPageClick}
-								className="focus:outline-none font-medium text-2xl"
-							>
-								&larr;
-							</button>
-						) : (
-							<div></div>
-						)}
-						<span>
-							Page {page} of {data?.products.totalPages}
-						</span>
-						{page !== data?.products.totalPages ? (
-							<button
-								onClick={onNextPageClick}
-								className="focus:outline-none font-medium text-2xl"
-							>
-								&rarr;
-							</button>
-						) : (
-							<div></div>
-						)}
-					</div>
-				</div>
-			)}
 		</div>
 	);
 };

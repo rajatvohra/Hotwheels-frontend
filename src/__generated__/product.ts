@@ -48,6 +48,7 @@ export interface product_product_product {
   price: number;
   photo: string | null;
   description: string;
+  stocks: number;
   options: product_product_product_options[] | null;
   category: product_product_product_category | null;
   store: product_product_product_store;

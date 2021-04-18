@@ -26,6 +26,7 @@ export const PRODUCT_FRAGMENT = gql`
 		price
 		photo
 		description
+		stocks
 		options {
 			name
 			extra

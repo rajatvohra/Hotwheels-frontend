@@ -8,6 +8,8 @@ import { CreateOrderItemInput, UserRole } from '../../__generated__/globalTypes'
 import { createOrder, createOrderVariables } from '../../__generated__/createOrder';
 import { product, productVariables } from '../../__generated__/product';
 import { useMe } from '../../hooks/useMe';
+import { index } from '../../algolia/index_algolia';
+
 
 const PRODUCT_QUERY = gql`
 	query product($input: ProductInput!) {
@@ -16,6 +18,7 @@ const PRODUCT_QUERY = gql`
 			error
 			product {
 				...ProductParts
+				stocks
                 store{
                     ...StoreParts
                 }
@@ -40,11 +43,24 @@ interface IParams {
 	id: string;
 }
 
-export const ProductPage = () => {
+export const  ProductPage =  () => {
     const params=useParams<IParams>();
 	const history=useHistory();
 	const productid=+params.id;
 	const {data:Userdata}=useMe();
+	const [obj,setobj]=useState({});
+	
+
+	const temp = index.search('Owner').then(({ hits }) => {
+		return hits;
+	});
+	let ownerprod=Promise.resolve(temp);
+	ownerprod.then((_)=>{
+		console.log(_);
+	})
+	console.log(temp,"type");
+
+
 	const { data:Productdata, loading } = useQuery<product,productVariables>(
 		PRODUCT_QUERY,
 		{
@@ -55,6 +71,8 @@ export const ProductPage = () => {
 			},
 		}
 	);
+	console.log(Productdata?.product.product?.stocks);
+
 
 
 
@@ -80,13 +98,15 @@ export const ProductPage = () => {
 				variables: {
 				input: {
 					storeId: +Productdata?.product?.product?.store?.id,
-					items: [{productId: productid}],
+					items: [{productId: productid,quantity:1}],
 				},
 				},
 			});}
 
 	  }
-	  const photo=Productdata?.product?.product?.photo+""
+	  const photo=Productdata?.product?.product?.photo+"";
+	  
+
 
 
 
@@ -131,7 +151,7 @@ export const ProductPage = () => {
 
 						</Store>
 					</div>
-					{Userdata?.me.role===UserRole.Client &&
+					{Userdata?.me.role===UserRole.Client && Productdata && Productdata.product && Productdata.product.product && Productdata?.product.product?.stocks>0 &&
 					(<button onClick={triggerAddtoCart} className="btn px-10 float-right">
 						BUY NOW
 					</button>)

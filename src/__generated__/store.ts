@@ -45,6 +45,7 @@ export interface store_store_store_menu {
   price: number;
   photo: string | null;
   description: string;
+  stocks: number;
   options: store_store_store_menu_options[] | null;
   category: store_store_store_menu_category | null;
   store: store_store_store_menu_store;

@@ -45,6 +45,7 @@ export interface ProductParts {
   price: number;
   photo: string | null;
   description: string;
+  stocks: number;
   options: ProductParts_options[] | null;
   category: ProductParts_category | null;
   store: ProductParts_store;

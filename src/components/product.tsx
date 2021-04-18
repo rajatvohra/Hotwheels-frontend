@@ -77,15 +77,15 @@ export const Product: React.FC<IProductProps> = ({
 			}`}
 		>
 			<div className="mb-5">
+
+
 				<div
 					style={{ backgroundImage: `url(${photo})` }}
 					className="bg-cover bg-center mb-3 py-28"
 				></div>
 				<h3 className="text-lg font-medium flex object-right ">
 					{name}{' '}
-					{UserData?.me.role===UserRole.Owner &&(<button onClick={ondelete} className=" ml-8 text-white bg-red-500 py-3 px-10 justify-self-end">
-							Delete This product
-						</button>)}
+
 					{orderStarted && (
 						<button
 							className={`ml-3 py-1 px-3 focus:outline-none text-sm  text-white ${
@@ -103,12 +103,18 @@ export const Product: React.FC<IProductProps> = ({
 				<h4 className="font-medium">{description}</h4>
 			</div>
 			<span>${price}</span>
-			{isCustomer && options && options?.length !== 0 && (
-				<div>
-					<h5 className="mt-8 mb-3 font-medium">Product Options:</h5>
-					<div className="grid gap-2  justify-start">{productOptions}</div>
+			<div><span>
+				{UserData?.me.role===UserRole.Owner &&(<Link to={`/edit-product/${id}`}  className="  text-white bg-gray-500 py-1 px-6 mb-1 ml-64">
+						Edit
+					</Link>)}
+				{UserData?.me.role===UserRole.Owner &&(<button onClick={ondelete} className="  text-white bg-red-500 py-1 px-2 mt-6 ml-4 ">
+							Delete
+						</button>)}
+
+
+					</span>
 				</div>
-			)}
+
 		</div>
 		</Link>
 	);
