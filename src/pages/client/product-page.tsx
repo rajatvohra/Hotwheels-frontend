@@ -8,6 +8,8 @@ import { CreateOrderItemInput, UserRole } from '../../__generated__/globalTypes'
 import { createOrder, createOrderVariables } from '../../__generated__/createOrder';
 import { product, productVariables } from '../../__generated__/product';
 import { useMe } from '../../hooks/useMe';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 const PRODUCT_QUERY = gql`
@@ -80,7 +82,7 @@ export const  ProductPage =  () => {
 	  });
 	  const triggerAddtoCart=()=>{
 
-
+//xyz.com/storeid/productid/quantity
 		  if(Productdata?.product?.product?.store?.id)
 			{createOrderMutation({
 				variables: {
@@ -140,8 +142,8 @@ export const  ProductPage =  () => {
 						</Store>
 					</div>
 					{Userdata?.me.role===UserRole.Client && Productdata && Productdata.product && Productdata.product.product && Productdata?.product.product?.stocks>0 &&
-					(<button onClick={triggerAddtoCart} className="btn px-10 float-right">
-						BUY NOW
+					(<button onClick={triggerAddtoCart} className="  float-right">
+						<FontAwesomeIcon icon={faCartPlus} className=" mr-4 text-6xl" />
 					</button>)
 					}
 

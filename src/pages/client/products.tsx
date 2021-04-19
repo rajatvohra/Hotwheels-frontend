@@ -112,9 +112,7 @@ export const Products = () => {
 
 			{!loading  && (
 				<div className="max-w-screen-2xl pb-20 mx-auto mt-8">
-					<Link to='/my-stores' className='link '>
-						Login as the Shop Owner
-					</Link>
+
 					<div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
 						{data?.products.results?.map((product) => (
 							<Product

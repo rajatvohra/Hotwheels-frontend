@@ -1,4 +1,4 @@
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faAtom, faBook, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -25,8 +25,8 @@ export const Header: React.FC = () => {
 					{data?.me.role===UserRole.Retailer && (
 								<button className=' mx-5 text-base bg-black text-white p-2  ' >Login as the shop owner</button>
 							)}
-						<Link to="/my-orders" className='text-base bg-black text-white w-8 h-6 p-2 mr-4'>
-							My-Orders
+						<Link to="/my-orders" >
+							<FontAwesomeIcon icon={faBook} className=" mr-4 text-3xl" />
 						</Link>
 						<Link to="/edit-profile">
 							<FontAwesomeIcon icon={faUser} className=" mr-4 text-3xl" />
