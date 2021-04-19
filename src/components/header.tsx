@@ -1,13 +1,14 @@
 import { faAddressBook, faAtom, faBook, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useMe } from '../hooks/useMe';
 import nuberLogo from '../images/logo.svg';
 import { UserRole } from '../__generated__/globalTypes';
 
 export const Header: React.FC = () => {
 	const { data } = useMe();
+	const history=useHistory();
 	return (
 		<>
 			{!data?.me.verified && (
@@ -23,7 +24,7 @@ export const Header: React.FC = () => {
 					</Link>
 					<span className="text-xs">
 					{data?.me.role===UserRole.Retailer && (
-								<button className=' mx-5 text-base bg-black text-white p-2  ' >Login as the shop owner</button>
+								<button onClick={()=>history.push('/my-stores')} className=' mx-5 text-base bg-black text-white p-2  ' >Login as the shop owner</button>
 							)}
 						<Link to="/my-orders" >
 							<FontAwesomeIcon icon={faBook} className=" mr-4 text-3xl" />

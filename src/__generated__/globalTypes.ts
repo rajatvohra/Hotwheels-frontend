@@ -37,10 +37,6 @@ export interface CreateAccountInput {
 
 export interface CreateOrderInput {
   storeId: number;
-  items: CreateOrderItemInput[];
-}
-
-export interface CreateOrderItemInput {
   productId: number;
   quantity: number;
 }

@@ -4,12 +4,12 @@ import {  PRODUCT_FRAGMENT, STORE_FRAGMENT } from '../../fragments';
 import {   useHistory, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Store } from '../../components/store';
-import { CreateOrderItemInput, UserRole } from '../../__generated__/globalTypes';
 import { createOrder, createOrderVariables } from '../../__generated__/createOrder';
 import { product, productVariables } from '../../__generated__/product';
 import { useMe } from '../../hooks/useMe';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { UserRole } from '../../__generated__/globalTypes';
 
 
 const PRODUCT_QUERY = gql`
@@ -44,11 +44,34 @@ interface IParams {
 	id: string;
 }
 
+//for multiple orders TODO
+// export const  [cart, setCart] = useState([{}]);
+//export const  [cartTotal, setCart] = useState([{}]);
+//export const [items,setitems]=useState([{}]);
+
+
+// const [orderItems, setOrderItems] = useState<CreateOrderItemInput[]>([]);
+// 	const triggerStartOrder = () => {
+// 		setOrderStarted(true);
+// 	};
+// 	const getItem = (productId: number) => {
+// 		return orderItems.find((order) => order.productId === productId);
+// 	};
+// 	const isSelected = (productId: number) => {
+// 		return Boolean(getItem(productId));
+// 	};
+// 	const addItemToOrder = (productId: number) => {
+// 		if (isSelected(productId)) {
+// 			return;
+// 		}
+// 		setOrderItems((current) => [{ productId, options: [] }, ...current]);
+
 export const  ProductPage =  () => {
     const params=useParams<IParams>();
 	const history=useHistory();
 	const productid=+params.id;
 	const {data:Userdata}=useMe();
+
 
 
 	const { data:Productdata, loading } = useQuery<product,productVariables>(
@@ -88,7 +111,8 @@ export const  ProductPage =  () => {
 				variables: {
 				input: {
 					storeId: +Productdata?.product?.product?.store?.id,
-					items: [{productId: productid,quantity:1}],
+					productId: productid,
+					quantity:1
 				},
 				},
 			});}
@@ -141,7 +165,7 @@ export const  ProductPage =  () => {
 
 						</Store>
 					</div>
-					{Userdata?.me.role===UserRole.Client && Productdata && Productdata.product && Productdata.product.product && Productdata?.product.product?.stocks>0 &&
+					{(Userdata?.me.role===UserRole.Client || Userdata?.me.role===UserRole.Retailer) && Productdata && Productdata.product && Productdata.product.product && Productdata?.product.product?.stocks>0 &&
 					(<button onClick={triggerAddtoCart} className="  float-right">
 						<FontAwesomeIcon icon={faCartPlus} className=" mr-4 text-6xl" />
 					</button>)

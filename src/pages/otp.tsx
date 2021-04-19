@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "../components/button";
 import { authTokenVar, isLoggedInVar } from "../apollo";
 import { LOCALSTORAGE_TOKEN } from "../constants";
+import { FormError } from "../components/form-error";
 
 
 
@@ -42,7 +43,8 @@ export const OTP=()=>{
           },
         },
       });
-      if(data?.otpVerify.ok&&data.otpVerify.token){
+      console.log(data,errors,"testing");
+      if(data?.otpVerify.ok&&data.otpVerify.token ){
         localStorage.setItem(LOCALSTORAGE_TOKEN, data.otpVerify.token);
         authTokenVar(data.otpVerify.token);
         isLoggedInVar(true);
@@ -77,24 +79,15 @@ export const OTP=()=>{
                 name="otp"
                 placeholder="OTP"
                 className=" input text-black ring border-red-800  focus:ring-offset-black focus:ring-indigo-900 focus:ring-inset focus:outline-none"/>
+                {
+                    data?.otpVerify.error  && (<FormError errorMessage={data?.otpVerify.error}/>)
+                }
 
-                <Button canClick={true} loading={false}  actionText={"Verify"}/>
+                <Button canClick={!formState.isSubmitted} loading={loading}  actionText={"Verify"}/>
 
             </form>
 
         </div>
     </div>
 };
-
-function handleSubmit(onSubmit: any): React.FormEventHandler<HTMLFormElement> | undefined {
-  throw new Error("Function not implemented.");
-}
-
-function register(arg0: { required: string; }): React.LegacyRef<HTMLInputElement> | undefined {
-  throw new Error("Function not implemented.");
-}
-
-function useState(arg0: boolean): [any, any] {
-  throw new Error("Function not implemented.");
-}
 
