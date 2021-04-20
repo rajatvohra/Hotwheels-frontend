@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { OrderStatus } from "./globalTypes";
+import { OrderStatus, UserRole } from "./globalTypes";
 
 // ====================================================
 // GraphQL subscription operation: coockedOrders
@@ -17,6 +17,7 @@ export interface coockedOrders_packedOrders_driver {
 export interface coockedOrders_packedOrders_customer {
   __typename: "User";
   email: string;
+  role: UserRole;
 }
 
 export interface coockedOrders_packedOrders_store {

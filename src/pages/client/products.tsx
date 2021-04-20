@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Store } from '../../components/store';
 import { CATEGORY_FRAGMENT, PRODUCT_FRAGMENT, STORE_FRAGMENT } from '../../fragments';
 import { useForm } from 'react-hook-form';
@@ -11,6 +11,7 @@ import { UserRole } from '../../__generated__/globalTypes';
 import { useMe } from '../../hooks/useMe';
 import { category } from '../../__generated__/category';
 import { allCategories } from '../../__generated__/allCategories';
+import { filterProduct, filterProductVariables } from '../../__generated__/filterProduct';
 
 
 const PRODUCTS_QUERY = gql`
@@ -21,6 +22,21 @@ const PRODUCTS_QUERY = gql`
 			totalPages
 			totalResults
 			results {
+				...ProductParts
+			}
+		}
+	}
+	${PRODUCT_FRAGMENT}
+`;
+
+const FILTER_PRODUCT_QUERY = gql`
+	query filterProduct($input: FilterProductInput!){
+		filterProduct(input: $input) {
+			ok
+			error
+			totalPages
+			totalResults
+			products {
 				...ProductParts
 			}
 		}
@@ -47,6 +63,7 @@ interface IFormProps {
 
 export const Products = () => {
 	const [page, setPage] = useState(1);
+	const [filterOn, setfilterOn] = useState(false);
 	const{data:UserData}=useMe();
 	const { data, loading } = useQuery<products,productsVariables>(
 		PRODUCTS_QUERY,
@@ -58,10 +75,21 @@ export const Products = () => {
 			},
 		}
 	);
+	const { data:FilterData, loading:filterloading } = useQuery<filterProduct,filterProductVariables>(
+		FILTER_PRODUCT_QUERY,
+		{
+			variables: {
+				input: {
+					page:1,
+				},
+			},
+		}
+	);
 	const { data:CategoryData, loading:CategoryLoading } = useQuery<allCategories>(
 		ALL_CATEGORTIES_QUERY,
 
 	);
+
 
 	const onNextPageClick = () => setPage((current) => current + 1);
 	const onPrevPageClick = () => setPage((current) => current - 1);
@@ -74,7 +102,13 @@ export const Products = () => {
 			search: `?term=${searchTerm}`,
 		});
 	};
-	console.log(data);
+	const triggerFilter=()=>{
+		
+		setfilterOn(true);
+		console.log(filterOn,"set to ");
+	}
+	console.log(data,"data");
+	console.log(FilterData,"filter");
 	return (
 		<div>
 			<Helmet>
@@ -110,11 +144,56 @@ export const Products = () => {
           </div>
 		  </div>}
 
-			{!loading  && (
+			{!loading &&!filterOn  && (
 				<div className="max-w-screen-2xl pb-20 mx-auto mt-8">
+					<button onClick={triggerFilter}>Filter By location</button>
 
 					<div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
 						{data?.products.results?.map((product) => (
+							<Product
+								id={product.id}
+								description={product.description}
+								name={product.name}
+                                photo={product.photo}
+                                Categoryname={product.category?.name}
+                                price={product.price}
+							/>
+
+						))}
+					</div>
+					<div className="grid grid-cols-3 text-center max-w-md items-center mx-auto mt-10">
+						{page > 1 ? (
+							<button
+								onClick={onPrevPageClick}
+								className="focus:outline-none font-medium text-2xl"
+							>
+								&larr;
+							</button>
+						) : (
+							<div></div>
+						)}
+						<span>
+							Page {page} of {data?.products.totalPages}
+						</span>
+						{page !== data?.products.totalPages ? (
+							<button
+								onClick={onNextPageClick}
+								className="focus:outline-none font-medium text-2xl"
+							>
+								&rarr;
+							</button>
+						) : (
+							<div></div>
+						)}
+					</div>
+				</div>
+			)}
+			{!loading &&filterOn  && (
+				<div className="max-w-screen-2xl pb-20 mx-auto mt-8">
+
+
+					<div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
+						{FilterData?.filterProduct?.products && FilterData?.filterProduct?.products.map((product) => (
 							<Product
 								id={product.id}
 								description={product.description}

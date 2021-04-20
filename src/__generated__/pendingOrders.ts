@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { OrderStatus } from "./globalTypes";
+import { OrderStatus, UserRole } from "./globalTypes";
 
 // ====================================================
 // GraphQL subscription operation: pendingOrders
@@ -17,6 +17,7 @@ export interface pendingOrders_pendingOrders_driver {
 export interface pendingOrders_pendingOrders_customer {
   __typename: "User";
   email: string;
+  role: UserRole;
 }
 
 export interface pendingOrders_pendingOrders_store {

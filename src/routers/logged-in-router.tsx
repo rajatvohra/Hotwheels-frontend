@@ -11,7 +11,7 @@ import { Dashboard } from '../pages/delivery/dashboard';
 import { Order } from '../pages/order';
 import { AddProduct } from '../pages/common/add-product';
 import { AddStore } from '../pages/common/add-store';
-import { MyStore } from '../pages/owner/client_my_store';
+import { MyStore } from '../pages/owner/owner_my_store';
 import { ConfirmEmail } from '../user/confirm-email';
 import { EditProfile } from '../user/edit-profile';
 import { Store } from '../pages/client/store';

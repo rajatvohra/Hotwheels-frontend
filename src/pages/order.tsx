@@ -101,6 +101,7 @@ export const Order = () => {
 			},
 		});
 	};
+	console.log(userData?.me.role,data?.getOrder.order?.customer?.role,"printing")
 	return (
 		<div className="mt-32 container flex justify-center">
 			<Helmet>
@@ -132,12 +133,55 @@ export const Order = () => {
 							{data?.getOrder.order?.driver?.email || 'Not yet.'}
 						</span>
 					</div>
-					{userData?.me.role === 'Client' && (
+					{
+
+					(userData?.me.role === UserRole.Retailer && data?.getOrder.order?.customer?.role===UserRole.Retailer)
+					&& (
 						<span className=" text-center mt-5 mb-3  text-2xl text-lime-600">
 							Status: {data?.getOrder.order?.status}
 						</span>
 					)}
-					{userData?.me.role === UserRole.Owner && (
+					{
+					(userData?.me.role === UserRole.Client && data?.getOrder.order?.customer?.role===UserRole.Client)
+					&& (
+						<span className=" text-center mt-5 mb-3  text-2xl text-lime-600">
+							Status: {data?.getOrder.order?.status}
+						</span>
+					)}
+					{
+
+						(userData?.me.role === UserRole.Owner && data?.getOrder.order?.customer?.role===UserRole.Retailer)
+
+					 && (
+						<>
+							{data?.getOrder.order?.status === OrderStatus.Pending && (
+								<button
+									onClick={() => onButtonClick(OrderStatus.Packing)}
+									className="btn"
+								>
+									Accept Order
+								</button>
+							)}
+							{data?.getOrder.order?.status === OrderStatus.Packing && (
+								<button
+									onClick={() => onButtonClick(OrderStatus.Packed)}
+									className="btn"
+								>
+									Order Packed
+								</button>
+							)}
+							{data?.getOrder.order?.status !== OrderStatus.Packing &&
+								data?.getOrder.order?.status !== OrderStatus.Pending && (
+									<span className=" text-center mt-5 mb-3  text-2xl text-lime-600">
+										Status: {data?.getOrder.order?.status}
+									</span>
+								)}
+						</>
+					)}
+					{
+						(userData?.me.role === UserRole.Retailer && data?.getOrder.order?.customer?.role===UserRole.Client)
+
+					 && (
 						<>
 							{data?.getOrder.order?.status === OrderStatus.Pending && (
 								<button

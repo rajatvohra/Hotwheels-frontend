@@ -8,7 +8,7 @@ import { createOrder, createOrderVariables } from '../../__generated__/createOrd
 import { product, productVariables } from '../../__generated__/product';
 import { useMe } from '../../hooks/useMe';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus, faShoppingBag, faShoppingBasket, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { UserRole } from '../../__generated__/globalTypes';
 
 
@@ -95,6 +95,7 @@ export const  ProductPage =  () => {
 			createOrder: { ok, orderId },
 		  } = data;
 		console.log("added to cart");
+		history.push(`/orders/${orderId}`);
 
 	}
 	  const [createOrderMutation, { loading:loadingtocart }] = useMutation<
@@ -167,7 +168,7 @@ export const  ProductPage =  () => {
 					</div>
 					{(Userdata?.me.role===UserRole.Client || Userdata?.me.role===UserRole.Retailer) && Productdata && Productdata.product && Productdata.product.product && Productdata?.product.product?.stocks>0 &&
 					(<button onClick={triggerAddtoCart} className="  float-right">
-						<FontAwesomeIcon icon={faCartPlus} className=" mr-4 text-6xl" />
+						<FontAwesomeIcon icon={faShoppingCart} className=" mr-4 text-6xl" />
 					</button>)
 					}
 

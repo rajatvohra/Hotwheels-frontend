@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { OrderUpdatesInput, OrderStatus } from "./globalTypes";
+import { OrderUpdatesInput, OrderStatus, UserRole } from "./globalTypes";
 
 // ====================================================
 // GraphQL subscription operation: orderUpdates
@@ -17,6 +17,7 @@ export interface orderUpdates_orderUpdates_driver {
 export interface orderUpdates_orderUpdates_customer {
   __typename: "User";
   email: string;
+  role: UserRole;
 }
 
 export interface orderUpdates_orderUpdates_store {

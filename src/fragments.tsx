@@ -65,7 +65,8 @@ export const FULL_ORDER_FRAGMENT = gql`
 			email
 		}
 		customer {
-			email
+			email,
+			role
 		}
 		store {
 			name

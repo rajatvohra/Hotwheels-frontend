@@ -1,18 +1,29 @@
-import { gql, useApolloClient, useQuery } from '@apollo/client';
+import { gql, useApolloClient, useQuery, useSubscription } from '@apollo/client';
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { RetailerStore } from '../../components/retailer_Store';
 import { Store } from '../../components/store';
-import { STORE_FRAGMENT } from '../../fragments';
+import { FULL_ORDER_FRAGMENT, STORE_FRAGMENT } from '../../fragments';
 import { myStores } from '../../__generated__/myStores';
+import { pendingOrders } from '../../__generated__/pendingOrders';
 import { MY_STORES_QUERY } from '../common/my_stores';
+import { PENDING_ORDERS_SUBSCRIPTION } from '../owner/owner_my_store';
 
 
 
 export const RetailerMyStores = () => {
 	const { data ,refetch} = useQuery<myStores>(MY_STORES_QUERY);
 	const client = useApolloClient();
+	const history=useHistory();
+	const { data: subscriptionData } = useSubscription<pendingOrders>(
+		PENDING_ORDERS_SUBSCRIPTION
+	);
+	useEffect(() => {
+		if (subscriptionData?.pendingOrders.id) {
+			history.push(`/orders/${subscriptionData.pendingOrders.id}`);
+		}
+	}, [subscriptionData]);
 
 
 

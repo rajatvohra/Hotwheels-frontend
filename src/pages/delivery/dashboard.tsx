@@ -156,7 +156,7 @@ export const Dashboard = () => {
 				{coockedOrdersData?.packedOrders.store ? (
 					<>
 						<h1 className="text-center  text-3xl font-medium">
-							New Coocked Order
+							New Cooked Order
 						</h1>
 						<h1 className="text-center my-3 text-2xl font-medium">
 							Pick it up soon @ {coockedOrdersData?.packedOrders.store?.name}

@@ -73,7 +73,7 @@ const DELETE_STORE_MUTATION=gql`
 		}
 	}
 `
-const PENDING_ORDERS_SUBSCRIPTION = gql`
+export const PENDING_ORDERS_SUBSCRIPTION = gql`
 	subscription pendingOrders {
 		pendingOrders {
 			...FullOrderParts
