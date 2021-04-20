@@ -95,6 +95,10 @@ export interface GetOrderInput {
   id: number;
 }
 
+export interface GetOrdersInput {
+  status?: OrderStatus | null;
+}
+
 export interface LoginInput {
   email: string;
   password: string;
