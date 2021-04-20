@@ -1,7 +1,7 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import React, { useState } from 'react';
 import {  PRODUCT_FRAGMENT, STORE_FRAGMENT } from '../../fragments';
-import {   useHistory, useParams } from 'react-router-dom';
+import {   Link, useHistory, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Store } from '../../components/store';
 import { createOrder, createOrderVariables } from '../../__generated__/createOrder';
@@ -133,44 +133,46 @@ export const  ProductPage =  () => {
 
 			{!loading && (
 
-				<div className="max-w-screen-2xl pb-20 mx-auto mt-8 ">
-						<h1 className="mb-10 text-2xl text-blue-800 text-left font-bold">
-					{Productdata?.product.product?.name}
-				</h1>
-					<div>
-					<img src={photo}>
+				<div className="grid grid-cols-10 py-4 gap-4">
 
-					</img>
-					</div>
+						<div className="col-span-5">
+							<img className="w-full"  src={photo}>
+								</img>
+						</div>
+						<div className="col-span-5 pl-10 pr-5 space-y-1">
+							<div className="row-span-1 ">
+							<h1 className="font-bold text-4xl ">{Productdata?.product.product?.name}</h1>
+							</div>
+							<div className="row-span-2 font-medium">
+								<h3>
+									Cost: Rs{Productdata?.product.product?.price}
+								</h3>
+								<h3 >
+									Store: <Link className="text-green-600 hover:underline" to={`/stores/${Productdata?.product.product?.store.id}`}>{Productdata?.product.product?.store.name}</Link>
+								</h3>
 
-					<h2 className="mt-10 text-2xl text-black text-left font-bold">
-						Description:
-					</h2>
-					<h2 className="mt-4 text-xl text-black text-left font-bold">
-						{Productdata?.product.product?.description}
-					</h2>
-					(<div className="mt-4 text-xl text-black text-left font-bold">
-						<button className="mr-6 mt-56 text-xl text-black float-right font-semibold">
-							Rs {Productdata?.product.product?.price}
-						</button>
-					</div>)
-					<div className="grid gap-3 w-1/3 text-xl text-black text-left font-bold">
-						<h6>
-							Check out other products from this store.
-						</h6>
-						<Store
-						id={Productdata?.product.product?.store.id+""}
-						name={Productdata?.product.product?.store.name+" "}
-						coverImg={Productdata?.product.product?.store.coverImg+" "}
-						widthFull={true}>
+							</div>
+							<div className="row-start-3 row-end-7 mt-10  border-black border-2">
+							<h2 className="font-semibold ">
+								Description:
+							</h2>
+							<h2 className="font-semibold">
+								{Productdata?.product.product?.description}
+							</h2>
+							</div>
+							<div className="row-start-8 col-start-10 mt-20">
+									{(Userdata?.me.role===UserRole.Client || Userdata?.me.role===UserRole.Retailer) && Productdata && Productdata.product && Productdata.product.product && Productdata?.product.product?.stocks>0 &&
+							(<button onClick={triggerAddtoCart} className="  float-right">
+								<FontAwesomeIcon icon={faShoppingCart} className=" mr-4 text-4xl" />
+							</button>)
+							}
+							</div>
+						</div>
 
-						</Store>
-					</div>
-					{(Userdata?.me.role===UserRole.Client || Userdata?.me.role===UserRole.Retailer) && Productdata && Productdata.product && Productdata.product.product && Productdata?.product.product?.stocks>0 &&
-					(<button onClick={triggerAddtoCart} className="  float-right">
-						<FontAwesomeIcon icon={faShoppingCart} className=" mr-4 text-6xl" />
-					</button>)
-					}
+
+
+
+
 
 
 

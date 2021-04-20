@@ -103,12 +103,9 @@ export const Products = () => {
 		});
 	};
 	const triggerFilter=()=>{
-		
+
 		setfilterOn(true);
-		console.log(filterOn,"set to ");
 	}
-	console.log(data,"data");
-	console.log(FilterData,"filter");
 	return (
 		<div>
 			<Helmet>
