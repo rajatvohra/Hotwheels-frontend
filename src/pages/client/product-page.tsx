@@ -10,6 +10,7 @@ import { useMe } from '../../hooks/useMe';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus, faShoppingBag, faShoppingBasket, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { UserRole } from '../../__generated__/globalTypes';
+import { feedbacks, feedbacksVariables } from '../../__generated__/feedbacks';
 
 
 const PRODUCT_QUERY = gql`
@@ -20,6 +21,7 @@ const PRODUCT_QUERY = gql`
 			product {
 				...ProductParts
 				stocks
+				dateNextAvailable
                 store{
                     ...StoreParts
                 }
@@ -36,6 +38,20 @@ const CREATE_ORDER_MUTATION = gql`
       ok
       error
       orderId
+    }
+  }
+`;
+
+const FEEDBACK_QUERY = gql`
+  query feedbacks($input: FeedbacksInput!) {
+    feedbacks(input: $input) {
+		error,
+		ok,
+		totalPages,
+		totalResults,
+		results{
+		  complaint
+		}
     }
   }
 `;
@@ -73,7 +89,16 @@ export const  ProductPage =  () => {
 	const {data:Userdata}=useMe();
 
 
-
+	const { data:Feedbackdata, loading:Feedbackloading } = useQuery<feedbacks,feedbacksVariables>(
+		FEEDBACK_QUERY,
+		{
+			variables: {
+				input: {
+					productId:productid,
+				},
+			},
+		}
+	);
 	const { data:Productdata, loading } = useQuery<product,productVariables>(
 		PRODUCT_QUERY,
 		{
@@ -120,6 +145,7 @@ export const  ProductPage =  () => {
 
 	  }
 	  const photo=Productdata?.product?.product?.photo+"";
+	  console.log(Feedbackdata?.feedbacks.totalResults,"res");
 
 
 
@@ -147,6 +173,11 @@ export const  ProductPage =  () => {
 								<h3>
 									Cost: Rs{Productdata?.product.product?.price}
 								</h3>
+								{Productdata?.product.product?.stocks!>0 &&(
+								<h3>
+									Stock: {Productdata?.product.product?.stocks }
+								</h3>)}
+								{Productdata?.product.product?.stocks===0 && (<h3>Next in stock : {Productdata?.product.product?.dateNextAvailable}</h3>)}
 								<h3 >
 									Store: <Link className="text-green-600 hover:underline" to={`/stores/${Productdata?.product.product?.store.id}`}>{Productdata?.product.product?.store.name}</Link>
 								</h3>
@@ -160,13 +191,25 @@ export const  ProductPage =  () => {
 								{Productdata?.product.product?.description}
 							</h2>
 							</div>
-							<div className="row-start-8 col-start-10 mt-20">
+							<div>
+								{}
+							</div>
+							<div className="col-start-9 py-40">
 									{(Userdata?.me.role===UserRole.Client || Userdata?.me.role===UserRole.Retailer) && Productdata && Productdata.product && Productdata.product.product && Productdata?.product.product?.stocks>0 &&
 							(<button onClick={triggerAddtoCart} className="  float-right">
 								<FontAwesomeIcon icon={faShoppingCart} className=" mr-4 text-4xl" />
 							</button>)
 							}
+							{Productdata?.product.product?.stocks!<=0 && (<div className="text-right font-semibold text-2xl">Out of Stock</div>)}
+							<div className="col-span-full">
+								{Feedbackdata?.feedbacks.totalResults && (<div>{Feedbackdata.feedbacks.results?.map((result)=>{
+									<div>
+										{result.complaint}
+									</div>
+								})}</div>)}
 							</div>
+							</div>
+							
 						</div>
 
 

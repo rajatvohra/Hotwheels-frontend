@@ -52,6 +52,7 @@ export interface product_product_product {
   options: product_product_product_options[] | null;
   category: product_product_product_category | null;
   store: product_product_product_store;
+  dateNextAvailable: string;
 }
 
 export interface product_product {
