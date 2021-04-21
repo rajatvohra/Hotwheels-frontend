@@ -111,6 +111,7 @@ export const Products = () => {
 			<Helmet>
 				<title>Home | Nuber Eats</title>
 			</Helmet>
+
 			<form
 				onSubmit={handleSubmit(onSearchSubmit)}
 				className="bg-gray-800 w-full py-40 flex items-center justify-center"
@@ -123,6 +124,9 @@ export const Products = () => {
 					placeholder="Search products..."
 				/>
 			</form>
+			<div>
+					<button className="bg-lime-400 border-2 border-lime-700 mt-1 mr-2 float-right" onClick={triggerFilter}>Filter By location</button>
+					</div>
 			{!CategoryLoading && <div className="max-w-screen-2xl mx-auto mt-8">
           <div className="flex justify-around max-w-sm mx-auto ">
 		  {CategoryData?.allCategories.categories?.map((category) => (
@@ -142,8 +146,10 @@ export const Products = () => {
 		  </div>}
 
 			{!loading &&!filterOn  && (
+				<div className="">
+
 				<div className="max-w-screen-2xl pb-20 mx-auto mt-8">
-					<button className="btn float-right" onClick={triggerFilter}>Filter By location</button>
+
 
 					<div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
 						{data?.products.results?.map((product) => (
@@ -184,6 +190,7 @@ export const Products = () => {
 						)}
 					</div>
 				</div>
+				</div>
 			)}
 			{!loading &&filterOn  && (
 				<div className="max-w-screen-2xl pb-20 mx-auto mt-8">
@@ -214,9 +221,9 @@ export const Products = () => {
 							<div></div>
 						)}
 						<span>
-							Page {page} of {data?.products.totalPages}
+							Page {page} of {FilterData?.filterProduct?.totalPages}
 						</span>
-						{page !== data?.products.totalPages ? (
+						{page !== FilterData?.filterProduct?.totalPages ? (
 							<button
 								onClick={onNextPageClick}
 								className="focus:outline-none font-medium text-2xl"

@@ -69,10 +69,12 @@ export const MyOrders = () => {
 		<div>
 			{  (
 				<div>
-				<div className="max-w-screen-2xl pb-20 mx-auto mt-8 ">
+				<div className="max-w-screen-2xl pb-20 mx-auto mt-8 h-">
 					<div className="">
-						<h1 className="bg-gray-300 text-black text-2xl h-12">
-							Your Orders
+						<div className="bg-gray-500 text-black text-2xl h-20 ">
+							<h1 className="py-8 text-center text-3xl font-bold">
+								Your Orders
+							</h1>
 
 						<form onSubmit={handleSubmit(onSubmit)}
 							className="float-right mr-8 h-12">
@@ -85,13 +87,13 @@ export const MyOrders = () => {
 									<option key={index}>{stat}</option>
 									))}
 								</select>
-					<button className="ml-4">&rarr;</button>
+					<button className="ml-1 p-1  bg-lime-600 text-white text-2xl">&rarr;</button>
 
 				</form>
-				</h1>
+				</div>
 				</div>
 				</div><div>
-					<div className="grid grid-cols-2 gap-2">
+					<div className="grid grid-cols-2 gap-2 mx-4">
 					{data?.getOrders.orders && data?.getOrders.orders.map((order) =>  (
 						<Link to={`/orders/${order.id}`}>
 

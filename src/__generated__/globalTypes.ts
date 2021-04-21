@@ -91,6 +91,11 @@ export interface EditProfileInput {
   _geoloc?: lntLngUserType | null;
 }
 
+export interface FeedbackInput {
+  complaint: string;
+  productId: number;
+}
+
 export interface FeedbacksInput {
   page?: number | null;
   productId: number;

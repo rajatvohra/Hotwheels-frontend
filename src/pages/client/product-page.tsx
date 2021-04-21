@@ -158,17 +158,24 @@ export const  ProductPage =  () => {
 			</Helmet>
 
 			{!loading && (
+				<div>
+					<div className="max-w-screen-2xl pb-4 mx-auto mt-8">
+				<div className="">
+					<div className="bg-gray-600 text-black text-2xl h-20 ">
+						<h1 className="py-8 text-center text-3xl font-bold">
+						{Productdata?.product.product?.name}
+						</h1>
+						</div></div></div>
 
-				<div className="grid grid-cols-10 py-4 gap-4">
 
-						<div className="col-span-5">
+				<div className="grid grid-cols-10 py-4 gap-4 ">
+
+						<div className="col-span-5 ">
 							<img className="w-full"  src={photo}>
 								</img>
 						</div>
-						<div className="col-span-5 pl-10 pr-5 space-y-1">
-							<div className="row-span-1 ">
-							<h1 className="font-bold text-4xl ">{Productdata?.product.product?.name}</h1>
-							</div>
+						<div className="col-span-5 pl-6 pr-5 space-y-1 border-2 border-black border-opacity-25">
+
 							<div className="row-span-2 font-medium">
 								<h3>
 									Cost: Rs{Productdata?.product.product?.price}
@@ -179,7 +186,7 @@ export const  ProductPage =  () => {
 								</h3>)}
 								{Productdata?.product.product?.stocks===0 && (<h3>Next in stock : {Productdata?.product.product?.dateNextAvailable}</h3>)}
 								<h3 >
-									Store: <Link className="text-green-600 hover:underline" to={`/stores/${Productdata?.product.product?.store.id}`}>{Productdata?.product.product?.store.name}</Link>
+								<Link className="text-green-600 hover:underline" to={`/stores/${Productdata?.product.product?.store.id}`}>Visit the  {Productdata?.product.product?.store.name}</Link>
 								</h3>
 
 							</div>
@@ -194,22 +201,38 @@ export const  ProductPage =  () => {
 							<div>
 								{}
 							</div>
-							<div className="col-start-9 py-40">
+
+								<div className="col-start-9 pt-60">
 									{(Userdata?.me.role===UserRole.Client || Userdata?.me.role===UserRole.Retailer) && Productdata && Productdata.product && Productdata.product.product && Productdata?.product.product?.stocks>0 &&
 							(<button onClick={triggerAddtoCart} className="  float-right">
 								<FontAwesomeIcon icon={faShoppingCart} className=" mr-4 text-4xl" />
 							</button>)
 							}
 							{Productdata?.product.product?.stocks!<=0 && (<div className="text-right font-semibold text-2xl">Out of Stock</div>)}
-							<div className="col-span-full">
-								{Feedbackdata?.feedbacks.totalResults && (<div>{Feedbackdata.feedbacks.results?.map((results)=>{
-									<div>
-										{results.complaint}
-									</div>
-								})}</div>)}
-							</div>
-							</div>
 
+							</div>
+						</div>
+
+
+
+						</div>
+
+						<div className="border-2 border-black">
+									<h1>
+										Feedback:
+									</h1>
+						{Feedbackdata?.feedbacks.results && Feedbackdata?.feedbacks.results.map((result,index) => (
+								<div className="font-medium  space-y-2">
+
+									<h1>
+										{index+1}) {result.complaint}
+									</h1>
+									</div>
+
+								))}
+						</div>
+						<div className="max-w-screen-2xl pb-4 mx-auto bg-gray-900 text-white text-right">
+							Footer
 						</div>
 
 
