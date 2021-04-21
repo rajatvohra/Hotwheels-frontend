@@ -145,7 +145,7 @@ export const  ProductPage =  () => {
 
 	  }
 	  const photo=Productdata?.product?.product?.photo+"";
-	  console.log(Feedbackdata?.feedbacks.totalResults,"res");
+	  console.log(Feedbackdata?.feedbacks.results,"res");
 
 
 
@@ -202,9 +202,9 @@ export const  ProductPage =  () => {
 							}
 							{Productdata?.product.product?.stocks!<=0 && (<div className="text-right font-semibold text-2xl">Out of Stock</div>)}
 							<div className="col-span-full">
-								{Feedbackdata?.feedbacks.totalResults && (<div>{Feedbackdata.feedbacks.results?.map((result)=>{
+								{Feedbackdata?.feedbacks.totalResults && (<div>{Feedbackdata.feedbacks.results?.map((results)=>{
 									<div>
-										{result.complaint}
+										{results.complaint}
 									</div>
 								})}</div>)}
 							</div>
