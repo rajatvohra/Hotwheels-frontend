@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useParams } from 'react-router-dom';
 import { Button } from '../../components/button';
@@ -44,22 +44,19 @@ interface IStatusForm{
 }
 
 export const MyOrders = () => {
-	const {register,getValues,handleSubmit,errors,formState,watch}=useForm<IStatusForm>({mode:'onChange',defaultValues: {status: OrderStatus.Pending,},});
-
-	const onSubmit = () => {
-		const {status}=getValues();
-		console.log(status);
-	}
-		const { data, loading } = useQuery<getOrders, getOrdersVariables>(
-			GET_ORDERS_QUERY,
-			{
-				variables: {
-					input: {
-						// status:OrderStatus.Pending
-					},
+	const {register,getValues,handleSubmit,errors,formState,watch}=useForm<IStatusForm>({mode:'onChange'});
+	const { data, loading } = useQuery<getOrders, getOrdersVariables>(
+		GET_ORDERS_QUERY,
+		{
+			variables: {
+				input: {
+					status:OrderStatus.Delivered
 				},
-			}
-		);
+			},
+		}
+	);
+	console.log(getValues());
+
 	console.log(data,"data");
 
 	return (
@@ -70,21 +67,27 @@ export const MyOrders = () => {
 						<h1 className="bg-gray-300 text-black text-2xl">
 							Your Orders
 						</h1>
+						
 					</div>
+
 					<div className="grid grid-cols-2 gap-2">
 					{data?.getOrders.orders && data?.getOrders.orders.map((order) =>  (
 						<Link to={`/orders/${order.id}`}>
-							<div className=" text-black grid grid-rows-2 grid-cols-2 grid-flow-col gap-4 mt-10  border-black border-2  ">
+
+							<div className=" text-black grid grid-rows-3 grid-flow-col gap-4 mt-10  border-black border-2  ">
 
 
-								<div className="row-span-2 text-lg font-semibold my-4 ">
+								<div className="row-span-3 text-lg font-semibold my-4  space-y-4">
+									<div className="font-medium mb-5">
+										OrderId :{order.id}
+									</div>
 									<div className="font-bold">
 										{order.product.name}
 									</div>
-									<div className=" my-4">
+									<div className="">
 										Delivery By: {order.driver?.email|| 'Not Assigned '}
 									</div>
-									<div className=" my-4">
+									<div className="">
 										Store:{order.store?.name}
 									</div>
 
@@ -92,9 +95,10 @@ export const MyOrders = () => {
 										Order Status:{order.status}
 									</div>
 
+
 									</div>
 
-								<div className="row-span-2 col-span-2"><img className="cover " src={order.product.photo+""}></img></div>
+								<div className="row-span-3 row-start-1"><img className="cover " src={order.product.photo+""}></img></div>
 
 
 

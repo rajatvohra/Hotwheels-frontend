@@ -52,8 +52,8 @@ export const Category = () => {
 				<div className="max-w-screen-2xl pb-20 mx-auto mt-8">
 					<div>
 						<h1 className="bg-lime-500 text-gray-700 text-center text-2xl">
-							We found {data?.category.category?.productCount}{' '}
-							{data?.category.category?.productCount === 1
+							We found {data?.category.totalResults}{' '}
+							{data?.category.totalResults === 1
 								? 'product'
 								: 'products'}{' '}
 							for the {data?.category.category?.name} Category .

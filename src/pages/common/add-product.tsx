@@ -47,7 +47,8 @@ export const AddProduct = () => {
 		if (ok) {
 			setUploading(false);
 
-			history.push(`/stores/${storeId}`);
+			history.push(`/my-stores/${storeId}`);
+			window.location.reload();
 
 		}
 	};
@@ -212,7 +213,7 @@ export const AddProduct = () => {
 				</div>
 				<Button
 					loading={loading}
-					canClick={formState.isValid && notclicked}
+					canClick={formState.isValid && !loading }
 
 					actionText="Create Product"
 				/>
