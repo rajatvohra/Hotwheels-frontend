@@ -51,6 +51,7 @@ const FEEDBACK_QUERY = gql`
 		totalResults,
 		results{
 		  complaint
+		  customer{email}
 		}
     }
   }
@@ -217,15 +218,15 @@ export const  ProductPage =  () => {
 
 						</div>
 
-						<div className="border-2 border-black">
+						<div className="border-2 border-black grid-flow-col grid-cols-2">
 									<h1>
 										Feedback:
 									</h1>
 						{Feedbackdata?.feedbacks.results && Feedbackdata?.feedbacks.results.map((result,index) => (
-								<div className="font-medium  space-y-2">
+								<div className="font-medium  space-y-2 col-span-1">
 
 									<h1>
-										{index+1}) {result.complaint}
+										{result.customer.email}:) <p className="italic">{result.complaint}</p>
 									</h1>
 									</div>
 

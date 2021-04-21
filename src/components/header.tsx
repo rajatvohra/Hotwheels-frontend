@@ -2,6 +2,8 @@ import { faAddressBook, faAtom, faBook, faUser } from '@fortawesome/free-solid-s
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { authTokenVar, isLoggedInVar } from '../apollo';
+import { LOCALSTORAGE_TOKEN } from '../constants';
 import { useMe } from '../hooks/useMe';
 import nuberLogo from '../images/logo.svg';
 import { UserRole } from '../__generated__/globalTypes';
@@ -9,6 +11,14 @@ import { UserRole } from '../__generated__/globalTypes';
 export const Header: React.FC = () => {
 	const { data } = useMe();
 	const history=useHistory();
+	const triggerlogout=()=>{
+		localStorage.setItem(LOCALSTORAGE_TOKEN, "");
+        authTokenVar(null);
+        isLoggedInVar(false);
+        console.log("logged out");
+        history.push("/");
+        window.location.reload();
+	}
 	return (
 		<>
 			{!data?.me.verified && (
@@ -32,6 +42,8 @@ export const Header: React.FC = () => {
 						<Link to="/edit-profile">
 							<FontAwesomeIcon icon={faUser} className=" mr-4 text-3xl" />
 						</Link>
+						<button onClick={triggerlogout} >
+						Logout</button>
 
 
 					</span>

@@ -9,9 +9,15 @@ import { FeedbacksInput } from "./globalTypes";
 // GraphQL query operation: feedbacks
 // ====================================================
 
+export interface feedbacks_feedbacks_results_customer {
+  __typename: "User";
+  email: string;
+}
+
 export interface feedbacks_feedbacks_results {
   __typename: "Feedback";
   complaint: string;
+  customer: feedbacks_feedbacks_results_customer;
 }
 
 export interface feedbacks_feedbacks {
