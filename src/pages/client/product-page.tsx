@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus, faShoppingBag, faShoppingBasket, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { UserRole } from '../../__generated__/globalTypes';
 import { feedbacks, feedbacksVariables } from '../../__generated__/feedbacks';
+import { useForm } from 'react-hook-form';
+import { Button } from '../../components/button';
 
 
 const PRODUCT_QUERY = gql`
@@ -88,6 +90,8 @@ export const  ProductPage =  () => {
 	const history=useHistory();
 	const productid=+params.id;
 	const {data:Userdata}=useMe();
+	const {register,getValues,handleSubmit,errors,formState}=useForm<{quantity:string}>({mode:'onChange',});
+
 
 
 	const { data:Feedbackdata, loading:Feedbackloading } = useQuery<feedbacks,feedbacksVariables>(
@@ -132,17 +136,20 @@ export const  ProductPage =  () => {
 	  });
 	  const triggerAddtoCart=()=>{
 
-//xyz.com/storeid/productid/quantity
+		const{quantity}=getValues();
+
+		const ok = window.confirm(`You are about to place an order for Rs ${(+quantity)*(Productdata?.product.product?.price!)}. Click ok to confirm`);
 		  if(Productdata?.product?.product?.store?.id)
-			{createOrderMutation({
-				variables: {
-				input: {
-					storeId: +Productdata?.product?.product?.store?.id,
-					productId: productid,
-					quantity:1
-				},
-				},
-			});}
+		  	if(ok)
+				{createOrderMutation({
+					variables: {
+					input: {
+						storeId: +Productdata?.product?.product?.store?.id,
+						productId: productid,
+						quantity:+quantity
+					},
+					},
+				});}
 
 	  }
 	  const photo=Productdata?.product?.product?.photo+"";
@@ -206,9 +213,24 @@ export const  ProductPage =  () => {
 
 								<div className="col-start-9 pt-60">
 									{(Userdata?.me.role===UserRole.Client || Userdata?.me.role===UserRole.Retailer) && Productdata && Productdata.product && Productdata.product.product && Productdata?.product.product?.stocks>0 &&
-							(<button onClick={triggerAddtoCart} className="  float-right">
-								<FontAwesomeIcon icon={faShoppingCart} className=" mr-4 text-4xl" />
-							</button>)
+							(
+							<div>
+								<form onSubmit={handleSubmit(triggerAddtoCart)}
+								className="float-right">
+
+									<input ref={register({required:"quantity is required",})}
+									required
+									type="number"
+									name="quantity"
+									placeholder="quantity"
+									className="border-2 border-black w-20 text-center"/>
+
+									<button> <FontAwesomeIcon icon={faShoppingCart} className=" mx-2 text-2xl" /></button>
+
+								</form>
+
+
+							</div>)
 							}
 							{Productdata?.product.product?.stocks!<=0 && (<div className="text-right font-semibold text-2xl">Out of Stock</div>)}
 
@@ -221,7 +243,7 @@ export const  ProductPage =  () => {
 						<div><p>
 										Feedback:
 									</p></div>
-						<div className="border-2 border-black  grid grid-rows-8 grid-flow-col">
+						<div className="border-2 border-black  grid grid-rows-2 space-y-2 grid-flow-col">
 
 
 						{Feedbackdata?.feedbacks.results && Feedbackdata?.feedbacks.results.map((result,index) => (
@@ -232,8 +254,6 @@ export const  ProductPage =  () => {
 									</h1>
 									</div>
 
-
-
 								))}
 						</div>
 
@@ -241,17 +261,12 @@ export const  ProductPage =  () => {
 							Footer
 						</div>
 
-
-
-
-
-
-
-
-
-
 				</div>
 			)}
 		</div>
 	);
 };
+function register(arg0: { required: boolean; }): React.LegacyRef<HTMLInputElement> | undefined {
+	throw new Error('Function not implemented.');
+}
+

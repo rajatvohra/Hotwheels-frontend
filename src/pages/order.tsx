@@ -112,7 +112,7 @@ export const Order = () => {
 					Order #{params.id}
 				</h4>
 				<h5 className="p-5 pt-10 text-3xl text-center ">
-					${data?.getOrder.order?.total}
+					Rs {data?.getOrder.order?.total}
 				</h5>
 				<div className="p-5 text-xl grid gap-6">
 					<div className="border-t pt-5 border-gray-700">
