@@ -13,7 +13,31 @@ import { UserRole } from '../../__generated__/globalTypes';
 import { feedbacks, feedbacksVariables } from '../../__generated__/feedbacks';
 import { useForm } from 'react-hook-form';
 import { Button } from '../../components/button';
+import { Card, CardActions, CardContent, CardHeader, makeStyles, Typography } from '@material-ui/core';
+import avatar1 from '../../images/avatar1.svg';
+import avatar2 from '../../images/avatar2.svg';
+import avatar3 from '../../images/avatar3.svg';
+import avatar4 from '../../images/avatar4.svg';
+import avatar5 from '../../images/avatar5.svg';
+import avatar6 from '../../images/avatar6.svg';
+import avatar7 from '../../images/avatar7.svg';
 
+const useStyles = makeStyles({
+	root: {
+	  minWidth: 275,
+	},
+	bullet: {
+	  display: 'inline-block',
+	  margin: '0 2px',
+	  transform: 'scale(0.8)',
+	},
+	title: {
+	  fontSize: 14,
+	},
+	pos: {
+	  marginBottom: 12,
+	},
+  });
 
 const PRODUCT_QUERY = gql`
 	query product($input: ProductInput!) {
@@ -52,8 +76,9 @@ const FEEDBACK_QUERY = gql`
 		totalPages,
 		totalResults,
 		results{
-		  complaint
-		  customer{email}
+		  complaint,
+		  customer{email},
+		  createdAt,
 		}
     }
   }
@@ -91,7 +116,7 @@ export const  ProductPage =  () => {
 	const productid=+params.id;
 	const {data:Userdata}=useMe();
 	const {register,getValues,handleSubmit,errors,formState}=useForm<{quantity:string}>({mode:'onChange',});
-
+	const classes = useStyles();
 
 
 	const { data:Feedbackdata, loading:Feedbackloading } = useQuery<feedbacks,feedbacksVariables>(
@@ -154,6 +179,12 @@ export const  ProductPage =  () => {
 	  }
 	  const photo=Productdata?.product?.product?.photo+"";
 	  console.log(Feedbackdata?.feedbacks.results,"res");
+	  const img_ran=()=>{
+		let imgs=[avatar1,avatar2,avatar3,avatar4,avatar5,avatar6,avatar7];
+		var randColor = imgs[Math.floor(Math.random() * imgs.length)];
+		return randColor;
+	  }
+	  console.log(img_ran());
 
 
 
@@ -240,21 +271,30 @@ export const  ProductPage =  () => {
 
 
 						</div>
-						<div><p>
-										Feedback:
-									</p></div>
-						<div className="border-2 border-black  grid grid-rows-2 space-y-2 grid-flow-col">
+						<div className="shadow-lg rounded-lg  border-2 border-blue-400 border-opacity-75 m-2">
+						<div className="text-center mb-4 mt-2  font-bold text-4xl ">Reviews</div>
+
+
+						<div className="grid grid-cols-3  mb-6" >
 
 
 						{Feedbackdata?.feedbacks.results && Feedbackdata?.feedbacks.results.map((result,index) => (
-								<div className="font-medium  ">
+								<div className="w-72 mx-20 shadow-lg rounded-lg bg-white space-x-2 mt-24 border border-black">
+								<div key ={1} className="flex justify-center md:justify-end -mt-16">
+										<img className="w-20 h-20 object-cover rounded-full " src={img_ran()}></img>
+								</div>
+								<div key={2} >
+									<h2 className="text-gray-800 text-xl font-semibold text-blue-400">{result.customer.email}</h2>
+									<p className="mt-2 text-gray-600 italic">{result.complaint}</p>
+								</div>
+								<div key={3} className="flex justify-end mt-4">
+									 <h4 className="text-md font-medium text-indigo-500 mr-2 mb-1">{(result.createdAt).slice(2,10)}</h4>
+								 </div>
+							</div>
 
-									<h1>
-										{result.customer.email}: <p className="italic">{result.complaint}</p>
-									</h1>
-									</div>
 
 								))}
+						</div>
 						</div>
 
 						<div className="max-w-screen-2xl pb-4 mx-auto bg-gray-900 text-white text-right">
@@ -266,7 +306,4 @@ export const  ProductPage =  () => {
 		</div>
 	);
 };
-function register(arg0: { required: boolean; }): React.LegacyRef<HTMLInputElement> | undefined {
-	throw new Error('Function not implemented.');
-}
 

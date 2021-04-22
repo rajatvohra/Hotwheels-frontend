@@ -23,6 +23,7 @@ import { MyStores } from '../pages/common/my_stores';
 import { MyOrders } from '../pages/common/my-orders';
 import { EditProduct } from '../pages/common/edit-product';
 import { GiveFeedback } from '../pages/common/add-feedback';
+import { Test } from '../pages/test';
 
 const clientRoutes = [
 	{
@@ -55,6 +56,7 @@ const commonRoutes = [
 	{ path: '/my-orders', component: <MyOrders /> },
 	{ path: '/edit-product/:id', component: <EditProduct /> },
 	{ path: '/:id/give-feedback', component: <GiveFeedback /> },
+	{path: '/test',component:<Test/>},
 ];
 
 const OwnerRoutes = [

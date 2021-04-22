@@ -18,6 +18,7 @@ export interface feedbacks_feedbacks_results {
   __typename: "Feedback";
   complaint: string;
   customer: feedbacks_feedbacks_results_customer;
+  createdAt: any;
 }
 
 export interface feedbacks_feedbacks {
