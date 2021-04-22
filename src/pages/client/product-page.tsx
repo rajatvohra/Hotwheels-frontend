@@ -161,16 +161,17 @@ export const  ProductPage =  () => {
 			{!loading && (
 				<div>
 					<div className="max-w-screen-2xl pb-4 mx-auto mt-8">
-				<div className="">
-					<div className="bg-gray-600 text-black text-2xl h-20 ">
-						<h1 className="py-8 text-center text-3xl font-bold">
-						{Productdata?.product.product?.name}
-						</h1>
-						</div></div></div>
+						<div className="">
+							<div className="bg-gray-600 text-black text-2xl h-20 ">
+								<h1 className="py-8 text-center text-3xl font-bold">
+								{Productdata?.product.product?.name}
+								</h1>
+							</div>
+						</div>
+					</div>
 
 
 				<div className="grid grid-cols-10 py-4 gap-4 ">
-
 						<div className="col-span-5 ">
 							<img className="w-full"  src={photo}>
 								</img>
@@ -217,21 +218,25 @@ export const  ProductPage =  () => {
 
 
 						</div>
-
-						<div className="border-2 border-black grid-flow-col grid-cols-2">
-									<h1>
+						<div><p>
 										Feedback:
-									</h1>
+									</p></div>
+						<div className="border-2 border-black  grid grid-rows-8 grid-flow-col">
+
+
 						{Feedbackdata?.feedbacks.results && Feedbackdata?.feedbacks.results.map((result,index) => (
-								<div className="font-medium  space-y-2 col-span-1">
+								<div className="font-medium  ">
 
 									<h1>
-										{result.customer.email}:) <p className="italic">{result.complaint}</p>
+										{result.customer.email}: <p className="italic">{result.complaint}</p>
 									</h1>
 									</div>
 
+
+
 								))}
 						</div>
+
 						<div className="max-w-screen-2xl pb-4 mx-auto bg-gray-900 text-white text-right">
 							Footer
 						</div>

@@ -1,4 +1,4 @@
-import { faAddressBook, faAtom, faBook, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faAtom, faBook, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
@@ -43,7 +43,7 @@ export const Header: React.FC = () => {
 							<FontAwesomeIcon icon={faUser} className=" mr-4 text-3xl" />
 						</Link>
 						<button onClick={triggerlogout} >
-						Logout</button>
+						<FontAwesomeIcon icon={faSignOutAlt} className=" mr-4 text-3xl" /></button>
 
 
 					</span>
