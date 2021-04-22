@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
 				</div>
 			)}
 
-			<header className="py-4">
+			<header className="py-4  mx-4 mb-4">
 				<div className="w-full px-5 xl:px-0 max-w-screen-2xl mx-auto flex justify-between items-center">
 					<Link to="/">
 						<img src={nuberLogo} className="w-44 h-28" alt="Nuber Eats" />
@@ -36,18 +36,21 @@ export const Header: React.FC = () => {
 					{data?.me.role===UserRole.Retailer && (
 								<button onClick={()=>history.push('/my-stores')} className=' mx-5 text-base bg-black text-white p-2  ' >Login as the shop owner</button>
 							)}
-						<Link to="/my-orders" >
+						<Link to="/my-orders"className="mt-16" >
 							<FontAwesomeIcon icon={faBook} className=" mr-4 text-3xl" />
 						</Link>
-						<Link to="/edit-profile">
+						<Link to="/edit-profile"className="mt-16">
 							<FontAwesomeIcon icon={faUser} className=" mr-4 text-3xl" />
 						</Link>
-						<button onClick={triggerlogout} >
+						<button onClick={triggerlogout} className="mt-16">
 						<FontAwesomeIcon icon={faSignOutAlt} className=" mr-4 text-3xl" /></button>
 
 
 					</span>
 
+				</div>
+				<div className="bg-black h-1">
+						<p></p>
 				</div>
 
 			</header>
