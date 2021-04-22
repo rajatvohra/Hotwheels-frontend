@@ -26,6 +26,7 @@ const GET_ORDERS_QUERY = gql`
 		  product{
 			  name,
 			  photo,
+			  id
 		  }
 		  driver{
 			  id,
@@ -117,6 +118,7 @@ export const MyOrders = () => {
 									<div className="text-blue-500 my-4">
 										Order Status:{order.status}
 									</div>
+									{order.status===OrderStatus.Delivered && (<div className="bg-red-400"><Link to={`/${order.product.id}/give-feedback`}>Give Feedback</Link></div>)}
 
 
 									</div>

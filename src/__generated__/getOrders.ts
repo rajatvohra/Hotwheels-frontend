@@ -13,6 +13,7 @@ export interface getOrders_getOrders_orders_product {
   __typename: "Product";
   name: string;
   photo: string | null;
+  id: number;
 }
 
 export interface getOrders_getOrders_orders_driver {
