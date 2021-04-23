@@ -262,7 +262,7 @@ export const  ProductPage =  () => {
 										<p className="mt-2 text-gray-600 italic">{result.complaint}</p>
 									</div>
 									<div key={3} className="flex justify-end mt-4">
-										<h4 className="text-md font-medium text-indigo-500 mr-2 mb-1">{(result.createdAt).slice(2,10)}</h4>
+										<h4 className="text-md font-medium text-indigo-500 mr-2 mb-1 ">{(result.createdAt).slice(2,10)}</h4>
 									</div>
 								</div>
 							))}

@@ -12,6 +12,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Button } from "../components/button";
 import { LOCALSTORAGE_TOKEN } from "../constants";
 import { authTokenVar, isLoggedInVar } from "../apollo";
+import bg1 from '../images/bg1.jpg';
 
 
 const LOGIN_MUTATION = gql`
@@ -32,8 +33,8 @@ interface ILoginForm {
 
 export const Login = () => {
   const history=useHistory();
-  
-	
+
+
   const { register, getValues, errors, handleSubmit,formState } = useForm<ILoginForm>({mode:'onChange'});
   const onCompleted = (data: loginMutation) => {
     const {
@@ -67,23 +68,42 @@ export const Login = () => {
       });
     }
   };
-  return <div className="h-screen flex items-center justify-center bg-cyan-900    ">
-  <Helmet>
-      <title>
-          Login
-      </title>
-  </Helmet>
-  <div className="bg-teal-600  bg-opacity-90 w-full max-w-sm flex flex-col items-center  py-10 rounded-lg text-center">
-  <img src ={logo} className=" w-40" />
-      <form onSubmit={handleSubmit(onSubmit)}
-       className="grid gap-3 mt-6 px-6 w-full">
+
+
+
+
+
+
+
+
+  return <div>
+          <Helmet>
+            <title>
+              Login
+            </title>
+          </Helmet>
+        <body>
+        <div className="min-h-screen flex items-stretch text-white ">
+          <div style={{ backgroundImage: `url(${bg1})` }} className="md:flex w-11/12 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center"  >
+            <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
+          </div>
+          <div className="lg:w-1/2 bg-gray-800 w-full flex items-center justify-center text-center md:px-16 px-0 z-0">
+            <div className="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center" style={{ backgroundImage: `url(${bg1})` }} >
+              <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
+            </div>
+            <div className="w-full py-6 z-20">
+              <h1 className="my-6">
+                <img className ="w-auto sm:h-32 sm:w-32 inline-flex" src={logo}></img>
+              </h1>
+              <form onSubmit={handleSubmit(onSubmit)}
+              className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto space-y-2">
           <input ref={register({required:"email is required",
           pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,})}
           required
           type="email"
           name="email"
           placeholder="Email"
-          className=" input"/>
+          className="block w-full p-4 text-lg rounded-sm bg-black "/>
           {
               errors.email?.message && (<FormError errorMessage={errors.email?.message}/>)
           }
@@ -95,24 +115,28 @@ export const Login = () => {
           type="password"
           name="password"
           placeholder="Password"
-          className=" input"/>
+          className="block w-full p-4 text-lg rounded-sm bg-black"/>
           {
               errors.password?.message && (<FormError errorMessage={errors.password?.message}/>)
           }
           {
               errors.password?.type==="minLength" && (<FormError errorMessage="Atleast 10 char are required" />)
           }
-          <Button canClick={formState.isValid}  loading={loading} actionText={"Login"}/>
+          <div className="px-4 pb-2 pt-4">
+							<button className="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">sign in</button>
+						</div>
           {loginMutationResult?.login.error
               && (<FormError errorMessage ={loginMutationResult?.login.error}/>) }
       </form>
-      <div className="text-lg text-black py-3">
-          New here,<Link className="link" to="/create-account">Create an Account</Link>
+      <div className="text-lg text-white py-3">
+          New here,<Link className="text-indigo-500 hover:text-indigo-600 hover:underline" to="/create-account">Create Account</Link>
       </div>
-  </div>
-</div>
+      </div>
+			</div>
+		</div>
+	</body>
+	</div>
 };
-function token(token: any) {
-  throw new Error("Function not implemented.");
-}
+
+
 
