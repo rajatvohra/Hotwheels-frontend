@@ -6,7 +6,7 @@
 import { OTPInput } from "./globalTypes";
 
 // ====================================================
-// GraphQL query operation: otpVerify
+// GraphQL mutation operation: otpVerify
 // ====================================================
 
 export interface otpVerify_otpVerify {

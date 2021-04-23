@@ -1,9 +1,9 @@
 
 import gql from "graphql-tag";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {  useHistory, useParams } from "react-router-dom";
 import  { Helmet } from "react-helmet";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { otpVerify, otpVerifyVariables } from "../__generated__/otpVerify";
 import logo from "../images//logo.svg";
 import { useForm } from "react-hook-form";
@@ -12,11 +12,12 @@ import { authTokenVar, isLoggedInVar } from "../apollo";
 import { LOCALSTORAGE_TOKEN } from "../constants";
 import { FormError } from "../components/form-error";
 import bg1 from '../images/bg1.jpg';
+import { load } from "dotenv/types";
 
 
 
-const OTPVERIFY_QUERY = gql`
-  query otpVerify($input: OTPInput!) {
+const OTPVERIFY_MUTATION = gql`
+  mutation otpVerify($input: OTPInput!) {
     otpVerify(input: $input) {
       ok
       error
@@ -31,28 +32,38 @@ export const OTP=()=>{
     const history=useHistory();
     const {register,getValues,handleSubmit,errors,formState}=useForm<{otp:string}>({mode:'onChange',});
 
-    const [callQuery, { loading, data }] = useLazyQuery<
-      otpVerify,otpVerifyVariables
-    >(OTPVERIFY_QUERY);
-    const onSubmit =()=>{
-      const {otp} =getValues();
-      callQuery({
-        variables: {
-          input: {
-            otp:+otp ,
-            id:+id
-          },
-        },
-      });
-      console.log(data,errors,"testing");
-      if(data?.otpVerify.ok&&data.otpVerify.token ){
-        localStorage.setItem(LOCALSTORAGE_TOKEN, data.otpVerify.token);
-        authTokenVar(data.otpVerify.token);
+    const onCompleted=(data: otpVerify)=>{
+      const {
+        otpVerify: { ok,
+          error,
+          token },
+      } = data;
+      if(ok&&token ){
+        localStorage.setItem(LOCALSTORAGE_TOKEN, token);
+        authTokenVar(token);
         isLoggedInVar(true);
         console.log("logged in");
         history.push("/");
         window.location.reload();
       }
+    }
+    const  [otpVerify, { loading, data } ]= useMutation<
+      otpVerify,otpVerifyVariables
+    >(OTPVERIFY_MUTATION,{
+      onCompleted,
+    });
+    const onSubmit =  ()=>{
+      const {otp} =  getValues();
+      console.log(otp,"in submit");
+      otpVerify({
+        variables: {
+          input: {
+            id:+id,
+            otp:+otp,
+          },
+        },
+      });
+
 
 
     }
