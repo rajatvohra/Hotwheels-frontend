@@ -20,40 +20,40 @@ export const Header: React.FC = () => {
         window.location.reload();
 	}
 	return (
-		<>
+		<div className="bg-gray-800">
 			{!data?.me.verified && (
 				<div className="bg-red-500 p-3 text-center text-base text-white">
 					<span>Please verify your email.</span>
 				</div>
 			)}
 
-			<header className="py-4  mx-4 mb-4">
+			<header className="py-4  mx-4  ">
 				<div className="w-full px-5 xl:px-0 max-w-screen-2xl mx-auto flex justify-between items-center">
 					<Link to="/">
 						<img src={nuberLogo} className="w-44 h-28" alt="Nuber Eats" />
 					</Link>
 					<span className="text-xs">
 					{data?.me.role===UserRole.Retailer && (
-								<button onClick={()=>history.push('/my-stores')} className=' mx-5 text-base bg-black text-white p-2  ' >Login as the shop owner</button>
+								<Link to='/my-stores' className=' mx-5 text-base text-gray-400  p-2 hover:underline hover:text-gray-300 ' >Login as the shop owner</Link>
 							)}
 						<Link to="/my-orders"className="mt-16" >
-							<FontAwesomeIcon icon={faBook} className=" mr-4 text-3xl" />
+							<FontAwesomeIcon icon={faBook} className=" mr-4 text-3xl text-gray-400" />
 						</Link>
 						<Link to="/edit-profile"className="mt-16">
-							<FontAwesomeIcon icon={faUser} className=" mr-4 text-3xl" />
+							<FontAwesomeIcon icon={faUser} className=" mr-4 text-3xl text-gray-400" />
 						</Link>
 						<button onClick={triggerlogout} className="mt-16">
-						<FontAwesomeIcon icon={faSignOutAlt} className=" mr-4 text-3xl" /></button>
+						<FontAwesomeIcon icon={faSignOutAlt} className=" mr-4 text-3xl text-gray-400" /></button>
 
 
 					</span>
 
 				</div>
-				<div className="bg-black h-1">
+				<div className="bg-gray-500  h-1">
 						<p></p>
 				</div>
 
 			</header>
-		</>
+		</div>
 	);
 };

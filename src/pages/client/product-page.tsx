@@ -191,7 +191,7 @@ export const  ProductPage =  () => {
 
 
 	return (
-		<div>
+		<div className="bg-gray-800" >
 			<Helmet>
 				<title>{Productdata?.product.product?.name||''} | Nuber Eats</title>
 			</Helmet>
@@ -202,7 +202,7 @@ export const  ProductPage =  () => {
 						<div key={1} className="shadow-2xl rounded-lg mx-4 mb-5 ring-2 ring-offset-2 ring-green-400">
 							<img className="rounded-lg" src={Productdata?.product.product?.photo+""} />
 						</div>
-						<div key={2} className="shadow-2xl rounded-lg mx-4 mb-5 ring-2 ring-offset-2 ring-green-400 space-x-4 ">
+						<div key={2} className="shadow-2xl rounded-lg mx-4 mb-5 ring-2 ring-offset-2 ring-green-400 space-x-4 bg-white opacity-90	 ">
 							<div key={1} className=" leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl ml-4 mt-4">{Productdata?.product.product?.name}        <Link className="text-indigo-700 hover:underline text-lg font-medium " to={`/category/${Productdata?.product.product?.category?.name}`}>{Productdata?.product.product?.category?.name}</Link></div>
 							<p className="text-gray-500 text-sm"> <Link className="text-indigo-600 hover:underline" to={`/stores/${Productdata?.product.product?.store.id}`}>Visit the  {Productdata?.product.product?.store.name}</Link></p>
 							<div className="flex items-center space-x-4 my-4">
@@ -245,13 +245,13 @@ export const  ProductPage =  () => {
 
 
 
-
-					<div key={2} className="shadow-lg rounded-lg  border-2 border-blue-400 border-opacity-75 m-2">
-						<div className="text-center mb-4 mt-2  font-bold text-4xl ">Reviews</div>
+					{Feedbackdata?.feedbacks.totalResults!>0 && (
+					<div key={2} className="shadow-lg rounded-lg  border-2 border-blue-400 border-opacity-75 m-2  ">
+						<div className="text-center mb-4 mt-2  font-bold text-4xl text-gray-500">Reviews</div>
 						<div className="bg-blue-300 h-0.5 border-opacity-75">
 							<p></p>
 						</div>
-						<div className="grid grid-cols-3  mb-6" >
+						<div className="grid grid-cols-3  mb-6 opacity-90 " >
 							{Feedbackdata?.feedbacks.results && Feedbackdata?.feedbacks.results.map((result,index) => (
 									<div className="w-72 mx-20 shadow-lg rounded-lg bg-white space-x-2 mt-24 border border-black">
 									<div key ={1} className="flex justify-center md:justify-end -mt-16">
@@ -267,7 +267,7 @@ export const  ProductPage =  () => {
 								</div>
 							))}
 							</div>
-					</div>
+					</div>)}
 				</div>
 			)}
 		</div>
