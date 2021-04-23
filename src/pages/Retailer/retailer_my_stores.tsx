@@ -28,25 +28,25 @@ export const RetailerMyStores = () => {
 
 
 	return (
-		<div>
+		<div className="bg-gray-800 h-max" >
 			<Helmet>
 				<title>My Stores | Nuber Eats</title>
 			</Helmet>
-			<div className="max-w-screen-2xl mx-auto mt-32">
-				<h2 className="text-4xl font-medium mb-10">My Stores</h2>
-				<Link className="text-lime-600 hover:underline text-lg py-5" to="/add-store">
+			<div className="max-w-screen-2xl mx-auto">
+			<h2 className="text-4xl font-medium mb-10 ml-4 text-indigo-500">My Stores</h2>
+				<Link className="text-lime-600 hover:underline text-lg py-5  absolute top-32 right-6" to="/add-store">
 							Add a Store &rarr;
 						</Link>
 				{data?.myStores.ok && data.myStores.stores.length === 0 ? (
 					<>
-						<h4 className="text-xl mb-5">You have no stores.</h4>
+						<h4 className="text-xl mb-5 text-indigo-500">You have no stores.</h4>
 
 					</>
 				) : (
 
 
 
-					<div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
+					<div className="grid md:grid-cols-2 ">
 						{data?.myStores.stores.map((store) => (
 							<RetailerStore
 								key={store.id}
@@ -54,6 +54,7 @@ export const RetailerMyStores = () => {
 								coverImg={store.coverImg}
 								name={store.name}
 								widthFull={true}
+								location={store.address}
 							/>
 						))}
 
@@ -64,7 +65,4 @@ export const RetailerMyStores = () => {
 		</div>
 	);
 };
-function callQuery(arg0: { variables: { input: {}; }; }) {
-	throw new Error('Function not implemented.');
-}
 

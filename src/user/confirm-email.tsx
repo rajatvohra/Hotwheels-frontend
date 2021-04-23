@@ -60,16 +60,20 @@ export const ConfirmEmail = () => {
 
   }, [verifyEmail]);
   return (
-    <div className="mt-52 flex flex-col items-center justify-center">
+    <div className="bg-gray-800 h-screen">
+    <div className=" flex flex-col items-center justify-center">
       <Helmet>
       <title>
         Verify Email
       </title>
     </Helmet>
-      <h2 className="text-lg mb-1 font-medium">Confirming email...</h2>
-      <h4 className="text-gray-700 text-sm">
+    <div className="mt-52">
+      <h2 className="text-2xl mb-1 font-medium text-gray-500">Confirming email...</h2>
+      <h4 className=" text-lg text-gray-500">
         Please wait, don't close this page...
       </h4>
+    </div>
+    </div>
     </div>
   );
 };

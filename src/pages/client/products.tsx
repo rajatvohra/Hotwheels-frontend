@@ -148,7 +148,7 @@ export const Products = () => {
                     className=" w-16 h-16 bg-cover group-hover:bg-gray-100 rounded-full"
                     style={{ backgroundImage: `url(${category.coverImg})` }}
                   ></div>
-                  <span className="mt-1 text-sm text-center font-medium">
+                  <span className="mt-1 text-sm text-center font-medium text-lime-400">
                     {category.name}
                   </span>
                 </div>

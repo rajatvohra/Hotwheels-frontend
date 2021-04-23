@@ -63,13 +63,14 @@ export const GiveFeedback = () => {
     });
   };
   return (
-    <div className="mt-52 flex flex-col justify-center items-center">
+    <div className="bg-gray-800 h-screen">
+    <div className=" flex flex-col justify-center items-center">
       <Helmet>
       <title>
         Nuber |Feedbck Page
       </title>
     </Helmet>
-      <h4 className="font-semibold text-2xl mb-3">Give Feedback</h4>
+      <h4 className="font-semibold text-2xl mb-3 mt-52 text-gray-500 ">Give Feedback</h4>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="grid max-w-screen-sm gap-3 mt-5 w-full mb-5"
@@ -77,7 +78,7 @@ export const GiveFeedback = () => {
         <input
           ref={register}
           name="complaint"
-          className="input"
+          className="input text-white"
           type="complaint"
           placeholder="Feedback"
         />
@@ -88,6 +89,7 @@ export const GiveFeedback = () => {
           actionText="Submit FeedBack"
         />
       </form>
+    </div>
     </div>
   );
 };

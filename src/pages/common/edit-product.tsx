@@ -70,16 +70,17 @@ export const EditProduct = () => {
     });
   };
   return (
-    <div className="mt-52 flex flex-col justify-center items-center">
+    <div className="bg-gray-800 h-screen">
+    <div className=" flex flex-col justify-center items-center">
       <Helmet>
       <title>
         Nuber |Edit Product
       </title>
     </Helmet>
-      <h4 className="font-semibold text-2xl mb-3">Edit Product</h4>
+      <h4 className="font-semibold text-2xl mb-3 mt-52 text-gray-500">Edit Product</h4>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid max-w-screen-sm gap-3 mt-5 w-full mb-5"
+        className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto space-y-4"
       >
 
         <input
@@ -103,6 +104,7 @@ export const EditProduct = () => {
           actionText="Update Product"
         />
       </form>
+    </div>
     </div>
   );
 };

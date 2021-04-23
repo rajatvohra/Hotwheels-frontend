@@ -265,9 +265,7 @@
 
 
 .input {
-  @apply p-3 border-transparent text-lg
-  ring-2 ring-green-500 ring-opacity-50 rounded-lg
-  focus:ring-2 focus:ring-green-500 focus:ring-opacity-50;
+  @apply block w-full p-4 text-lg rounded-lg bg-black text-white;
 }
 
 .container {
@@ -275,14 +273,17 @@
 }
 
 .link {
-  @apply text-lime-600 hover:underline;
+  @apply text-indigo-500 hover:text-indigo-600 hover:underline;
 }
 
 .btn {
-  @apply bg-lime-600 text-lg font-medium focus:outline-none text-black py-4  transition-colors bg-lime-600 hover:bg-lime-700 hover:text-white rounded-lg;
+  @apply uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none;
 }
 
 .hover_cust{
-  @apply transition duration-500 ease-in text-center transform  hover:scale-95;
+  @apply transition duration-500 ease-in text-center transform  hover:scale-105;
+}
+.hover-text-left{
+  @apply transition duration-500 ease-in transform  hover:scale-105;
 }
 @tailwind utilities;

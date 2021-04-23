@@ -83,7 +83,7 @@ export const Product: React.FC<IProductProps> = ({
 					<p className="text-gray-600 text-sm m-1 max-h-6 italic ">{(description.slice(0,150))}...	</p>
 				</div>
 				<img className="h-56 w-full object-cover mt-2" src={photo+""} alt="NIKE AIR"/>
-				<div className="flex items-center justify-between px-4 py-2 bg-gray-900">
+				<div className="flex items-center space-x-4 px-4 py-2 bg-gray-900">
 					<h1 className="text-green-500 font-bold text-xl">₹ {price}</h1>
 					{(UserData?.me.role===UserRole.Owner && Productdata?.product.product?.store.owner.role===UserRole.Owner) &&(<Link to={`/edit-product/${id}`}  className="  text-red-500 hover:text-red-600 hover:underline">
 							Edit
@@ -97,7 +97,7 @@ export const Product: React.FC<IProductProps> = ({
 					{(UserData?.me.role===UserRole.Retailer && Productdata?.product.product?.store.owner.role===UserRole.Retailer) &&(<button onClick={ondelete} className="  text-red-500 hover:text-red-600 hover:underline">
 								Delete
 							</button>)}
-					<Link to={`/product/${id}`} className="absolute bottom-0 right-0 transition duration-500 ease-in-out text-center transform hover:-translate-y-1 hover:scale-105 bg-gray-200 text-xl text-gray-900 font-semibold rounded  w-10 ArrowForwardIosIcon">&rarr;</Link>
+					<Link to={`/product/${id}`} className="absolute bottom-0 right-0 transition duration-500 text-white  text-center transform  hover:bg-blue-500 bg-black  text-3xl  font-semibold rounded h-11  w-14 ArrowForwardIosIcon">&rarr;</Link>
 					<div><span>
 
 

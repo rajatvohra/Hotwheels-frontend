@@ -4,20 +4,25 @@ import bg1 from '../images/bg1.jpg';
 export const Test=()=>{
     return (
 
-		<div>
-			<div className=" ml-44 transition duration-500 ease-in-out text-center transform hover:-translate-y-1 hover:scale-105   ">
-			<div className="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden my-10  ">
-				<div className="px-4 py-2">
-					<h1 className="text-gray-900 font-bold text-3xl uppercase">NIKE AIR</h1>
-					<p className="text-gray-600 text-sm mt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quos quidem sequi illum facere recusandae voluptatibus</p>
-				</div>
-				<img className="h-56 w-full object-cover mt-2" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="NIKE AIR"/>
-				<div className="flex items-center justify-between px-4 py-2 bg-gray-900">
-					<h1 className="text-gray-200 font-bold text-xl">$129</h1>
-					<button className="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">&rarr;</button>
-				</div>
-				</div>
-				</div>
+		<div className="md:flex shadow-lg  mx-6 md:mx-auto my-40 max-w-lg md:max-w-2xl h-64 transition duration-500 ease-in transform  hover:scale-105">
+		<img className="h-full w-full md:w-1/3  object-cover rounded-lg rounded-r-none pb-5/6" src="https://ik.imagekit.io/q5edmtudmz/FB_IMG_15658659197157667_wOd8n5yFyXI.jpg" />
+		<div className="w-full md:w-2/3 px-4 py-4 bg-white rounded-lg">
+			<div className="flex items-center">
+				<h2 className="text-xl text-gray-800 font-medium mr-auto">Your Travel Buddy</h2>
+			</div>
+			<p className="text-sm text-gray-700 mt-4">
+				Lorem, ipsum dolor sit </p>
+			<p className="text-sm text-gray-700 mt-4">
+				Lorem, ipsum dolor sit </p>
+			<p className="text-sm text-gray-700 mt-4">
+				Lorem, ipsum dolor sit </p>
+			<p className="text-sm text-gray-700 mt-4">
+				Lorem, ipsum dolor sit </p>
+
+			<div className="flex items-center justify-end mt-4 top-auto">
+				<button className=" bg-blue-600 text-gray-200 px-2 py-2 rounded-md ">View Order #3</button>
+			</div>
+		</div>
 		</div>
 
     )

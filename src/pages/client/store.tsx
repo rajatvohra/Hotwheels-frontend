@@ -41,7 +41,7 @@ export const Store = () => {
 		},
 	});
 	return (
-		<div>
+		<div className="bg-gray-800">
 			<Helmet>
 				<title>{data?.store.store?.name || ''} | Nuber Eats</title>
 			</Helmet>
@@ -51,7 +51,7 @@ export const Store = () => {
 					backgroundImage: `url(${data?.store.store?.coverImg})`,
 				}}
 			>
-				<div className="bg-white w-3/12 py-8 pl-48">
+				<div className="bg-white w-3/12 py-8 pl-48 opacity-75">
 					<h4 className="text-4xl mb-3">{data?.store.store?.name}</h4>
 
 					<h6 className="text-sm font-light">{data?.store.store?.address}</h6>

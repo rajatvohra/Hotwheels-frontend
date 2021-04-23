@@ -122,7 +122,7 @@ export const MyStore = () => {
 	}
 
 	return (
-		<div>
+		<div className="bg-gray-800 h-max" >
 			<Helmet>
 				<title>{data?.myStore.store?.name || 'Loading...'} | Nuber Eats</title>
 			</Helmet>
@@ -156,7 +156,7 @@ export const MyStore = () => {
 					{data?.myStore.store?.menu.length === 0 ? (
 						<h4 className="text-xl mb-5">Please upload a product!</h4>
 					) : (
-						<div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
+						<div className="grid mt-16 md:grid-cols-2">
 							{data?.myStore.store?.menu.map((product, index) => (
 								<Product
 									id={product.id}

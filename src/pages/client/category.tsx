@@ -47,16 +47,16 @@ export const Category = () => {
 	);
 	console.log(data);
 	return (
-		<div>
+		<div className="bg-gray-800 h-screen ">
 			{!loading && (
-				<div className="max-w-screen-2xl pb-20 mx-auto mt-8">
+				<div className="max-w-screen-2xl pb-20 mx-auto ">
 					<div>
-						<h1 className="bg-lime-500 text-gray-700 text-center text-2xl">
+						<h1 className=" text-indigo-600 text-center text-2xl">
 							We found {data?.category.totalResults}{' '}
 							{data?.category.totalResults === 1
 								? 'product'
 								: 'products'}{' '}
-							for the {data?.category.category?.name} Category .
+							for the {data?.category.category?.name} Category
 						</h1>
 					</div>
 					<div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">

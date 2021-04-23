@@ -191,7 +191,7 @@ export const  ProductPage =  () => {
 
 
 	return (
-		<div className="bg-gray-800" >
+		<div className="bg-gray-800 h-screen" >
 			<Helmet>
 				<title>{Productdata?.product.product?.name||''} | Nuber Eats</title>
 			</Helmet>

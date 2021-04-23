@@ -122,7 +122,7 @@ export const AddProduct = () => {
 		setValue(`${idToDelete}-optionExtra`, '');
 	};
 	return (
-		<div className="h-screen bg-gray-800">
+		<div className="h-max bg-gray-800">
 		<div className="grid grid-cols-6 bg-gray-800  ">
 			<div className="col-span-4">
 							<div className="store-container">
