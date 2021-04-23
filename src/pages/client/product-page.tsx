@@ -39,7 +39,7 @@ const useStyles = makeStyles({
 	},
   });
 
-const PRODUCT_QUERY = gql`
+export const PRODUCT_QUERY = gql`
 	query product($input: ProductInput!) {
 		product(input: $input) {
 			ok

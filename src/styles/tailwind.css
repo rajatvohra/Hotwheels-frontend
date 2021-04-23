@@ -282,4 +282,7 @@
   @apply bg-lime-600 text-lg font-medium focus:outline-none text-black py-4  transition-colors bg-lime-600 hover:bg-lime-700 hover:text-white rounded-lg;
 }
 
+.hover_cust{
+  @apply transition duration-500 ease-in text-center transform  hover:scale-95;
+}
 @tailwind utilities;

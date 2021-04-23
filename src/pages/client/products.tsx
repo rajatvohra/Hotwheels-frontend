@@ -14,7 +14,7 @@ import { allCategories } from '../../__generated__/allCategories';
 import { filterProduct, filterProductVariables } from '../../__generated__/filterProduct';
 
 
-const PRODUCTS_QUERY = gql`
+export const PRODUCTS_QUERY = gql`
 	query products($input: ProductsInput!) {
 		products(input: $input) {
 			ok
@@ -107,30 +107,42 @@ export const Products = () => {
 		setfilterOn(true);
 	}
 	return (
+		<div className="bg-gray-800">
 		<div>
 			<Helmet>
 				<title>Home | Nuber Eats</title>
 			</Helmet>
-
+			<div>
 			<form
 				onSubmit={handleSubmit(onSearchSubmit)}
-				className="bg-gray-800 w-full py-40 flex items-center justify-center"
+				className="bg-gray-800 w-full py-12  items-center justify-center grid grid-rows-2 space-y-2"
 			>
+				<div>
 				<input
 					ref={register({ required: true, min: 3 })}
 					name="searchTerm"
 					type="Search"
-					className="input rounded-md border-0 w-3/4 md:w-3/12"
+					className="input rounded-md border-0 w-full"
 					placeholder="Search products..."
 				/>
+				</div>
+				<div>
+				<p>
+				<button className=" text-lime-400 mt-1 mr-2 items-center justify-center ml-10 hover:underline hover:text-lime-500 transition duration-500 ease-in text-center transform  hover:scale-95 " onClick={triggerFilter}>Filter By location</button>
+				</p>
+				</div>
+
+
 			</form>
-			<div>
-					<button className="bg-lime-400 border-2 border-lime-700 mt-1 mr-2 float-right" onClick={triggerFilter}>Filter By location</button>
-					</div>
+			</div>
+			<div className="bg-gray-500  h-1 mx-4">
+						<p></p>
+				</div>
+
 			{!CategoryLoading && <div className="max-w-screen-2xl mx-auto mt-8">
           <div className="flex justify-around max-w-sm mx-auto ">
 		  {CategoryData?.allCategories.categories?.map((category) => (
-              <Link key={category.id} to={`/category/${category.slug}`}>
+              <Link key={category.id} to={`/category/${category.slug}`} className="hover_cust">
                 <div className="flex flex-col group items-center cursor-pointer">
                   <div
                     className=" w-16 h-16 bg-cover group-hover:bg-gray-100 rounded-full"
@@ -164,7 +176,7 @@ export const Products = () => {
 
 						))}
 					</div>
-					<div className="grid grid-cols-3 text-center max-w-md items-center mx-auto mt-10">
+					<div className="grid grid-cols-3 text-center max-w-md items-center mx-auto mt-10 text-white">
 						{page > 1 ? (
 							<button
 								onClick={onPrevPageClick}
@@ -237,6 +249,7 @@ export const Products = () => {
 				</div>
 			)}
 
+		</div>
 		</div>
 	);
 };
