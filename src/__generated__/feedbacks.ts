@@ -12,6 +12,7 @@ import { FeedbacksInput } from "./globalTypes";
 export interface feedbacks_feedbacks_results_customer {
   __typename: "User";
   email: string;
+  id: number;
 }
 
 export interface feedbacks_feedbacks_results {

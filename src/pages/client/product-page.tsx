@@ -22,6 +22,7 @@ import avatar5 from '../../images/avatar5.svg';
 import avatar6 from '../../images/avatar6.svg';
 import avatar7 from '../../images/avatar7.svg';
 import { FormError } from '../../components/form-error';
+import { createOrderOffline, createOrderOfflineVariables } from '../../__generated__/createOrderOffline';
 
 const useStyles = makeStyles({
 	root: {
@@ -68,6 +69,15 @@ const CREATE_ORDER_MUTATION = gql`
     }
   }
 `;
+const CREATE_ORDER_OFFLINE_MUTATION = gql`
+  mutation createOrderOffline($input: CreateOrderOfflineInput!) {
+    createOrderOffline(input: $input) {
+      ok
+      error
+      orderId
+    }
+  }
+`;
 
 const FEEDBACK_QUERY = gql`
   query feedbacks($input: FeedbacksInput!) {
@@ -78,7 +88,7 @@ const FEEDBACK_QUERY = gql`
 		totalResults,
 		results{
 		  complaint,
-		  customer{email},
+		  customer{email,id},
 		  createdAt,
 		}
     }
@@ -160,11 +170,15 @@ export const  ProductPage =  () => {
 	  >(CREATE_ORDER_MUTATION, {
 		onCompleted,
 	  });
-	  const triggerAddtoCart=()=>{
+	  const [createOrderOfflineMutation, { loading:loadingtocartOffline }] = useMutation<
+		createOrderOffline,
+		createOrderOfflineVariables
+	  >(CREATE_ORDER_OFFLINE_MUTATION);
+	  const triggerBuyOnline=()=>{
 
 		const{quantity}=getValues();
 		console.log(quantity,"quantity")
-		const ok = window.confirm(`You are about to place an order for Rs ${(+quantity)*(Productdata?.product.product?.price!)}. Click ok to confirm`);
+		const ok = window.confirm(`You are about to place an online order for Rs ${(+quantity)*(Productdata?.product.product?.price!)}. Click ok to confirm`);
 		  if(Productdata?.product?.product?.store?.id)
 		  	if(ok)
 				{createOrderMutation({
@@ -178,14 +192,33 @@ export const  ProductPage =  () => {
 				});}
 
 	  }
+	  const triggerBuyOffline=()=>{
+
+		const{quantity}=getValues();
+		console.log(quantity,"quantity")
+		const ok = window.confirm(`You are about to place an offline order for Rs ${(+quantity)*(Productdata?.product.product?.price!)}. Click ok to confirm`);
+		  if(Productdata?.product?.product?.store?.id)
+		  	if(ok)
+				{createOrderOfflineMutation({
+					variables: {
+					input: {
+						storeId: +Productdata?.product?.product?.store?.id,
+						productId: productid,
+						quantity:+quantity
+					},
+					},
+				});}
+
+	  }
 	  const photo=Productdata?.product?.product?.photo+"";
 	  console.log(Feedbackdata?.feedbacks.results,"res");
-	  const img_ran=()=>{
+	  const img_ran=(x:number)=>{
 		let imgs=[avatar1,avatar2,avatar3,avatar4,avatar5,avatar6,avatar7];
-		var randColor = imgs[Math.floor(Math.random() * imgs.length)];
+		x=x%7;
+		var randColor = imgs[x];
+
 		return randColor;
 	  }
-	  console.log(img_ran());
 	  //scroll to the top
 	  window.scrollTo(0, 0);
 
@@ -240,10 +273,10 @@ export const  ProductPage =  () => {
 									errors.quantity?.message  && (<FormError errorMessage={errors.quantity?.message}/>)
 								}
 								</div>
-								<button disabled={!formState.isValid} onClick={triggerAddtoCart} className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
+								<button disabled={!formState.isValid} onClick={triggerBuyOnline} className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
 								  Buy Now
 								</button>
-								<button disabled={!formState.isValid} onClick={triggerAddtoCart} className="h-14 px-6 py-2 font-semibold rounded-xl bg-red-600 hover:bg-red-500  opacity-70 text-white">
+								<button disabled={!formState.isValid} onClick={triggerBuyOffline} className="h-14 px-6 py-2 font-semibold rounded-xl bg-red-600 hover:bg-red-500  opacity-70 text-white">
 								  Buy Offline
 								</button>
 							  </div>
@@ -269,7 +302,7 @@ export const  ProductPage =  () => {
 							{Feedbackdata?.feedbacks.results && Feedbackdata?.feedbacks.results.map((result,index) => (
 									<div className="w-72 mx-20 shadow-lg rounded-lg bg-white space-x-2 mt-24 border border-black">
 									<div key ={1} className="flex justify-center md:justify-end -mt-16">
-											<img className="w-20 h-20 object-cover rounded-full " src={img_ran()}></img>
+											<img className="w-20 h-20 object-cover rounded-full " src={img_ran(result.customer.id)}></img>
 									</div>
 									<div key={2} >
 										<h2 className="text-gray-800 text-xl font-semibold text-blue-400">{result.customer.email}</h2>

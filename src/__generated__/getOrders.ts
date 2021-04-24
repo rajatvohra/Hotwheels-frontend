@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { GetOrdersInput, OrderStatus } from "./globalTypes";
+import { GetOrdersInput, OrderMode, OrderStatus } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: getOrders
@@ -31,6 +31,7 @@ export interface getOrders_getOrders_orders_store {
 export interface getOrders_getOrders_orders {
   __typename: "Order";
   id: number;
+  mode: OrderMode;
   quantity: number;
   status: OrderStatus;
   FeedbackExists: boolean;

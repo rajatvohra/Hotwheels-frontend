@@ -140,7 +140,7 @@ export const MyStore = () => {
 	return (
 		<div className="bg-gray-800 min-h-screen h-max" >
 			<Helmet>
-				<title>{data?.myStore.store?.name || 'Loading...'} | Nuber Eats</title>
+				<title>{data?.myStore.store?.name+"xy" || 'Loading...'} | Nuber Eats</title>
 			</Helmet>
 			<div className="checkout-container"></div>
 			<div
@@ -155,7 +155,7 @@ export const MyStore = () => {
 				</h2>
 				{userData?.me.role===UserRole.Retailer ?(<Link
 					to={`/my-stores/${id}/add-product`}
-					className=" text-lg mt-6 text-lime-600 hover:underline   py-3 px-10 absolute top-96 right-12"
+					className=" text-lg mt-6 text-lime-600 hover:underline   py-3 px-10 absolute top-96 right-52"
 				>
 					Add Product
 				</Link>):(<Link
@@ -170,9 +170,9 @@ export const MyStore = () => {
 				</button>
 				<div className="mt-10">
 					{data?.myStore.store?.menu.length === 0 ? (
-						<h4 className="text-xl mb-5">Please upload a product!</h4>
+						<h4 className="text-xl mb-5 text-gray-500 ml-10">Please upload a product!</h4>
 					) : (
-						<div className="grid mt-16 md:grid-cols-2">
+						<div className="grid mt-16 md:grid-cols-3">
 							{data?.myStore.store?.menu.map((product, index) => (
 								<Product
 									id={product.id}

@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { OrderStatus, UserRole } from "./globalTypes";
+import { OrderStatus, UserRole, OrderMode } from "./globalTypes";
 
 // ====================================================
 // GraphQL fragment: FullOrderParts
@@ -33,4 +33,5 @@ export interface FullOrderParts {
   driver: FullOrderParts_driver | null;
   customer: FullOrderParts_customer | null;
   store: FullOrderParts_store | null;
+  mode: OrderMode;
 }

@@ -19,7 +19,7 @@ const GET_ORDERS_QUERY = gql`
       error
       orders{
 		  id,
-
+		  mode,
 		  quantity,
 		  status,
 		  FeedbackExists,
@@ -60,7 +60,9 @@ export const MyOrders = () => {
 	);
 	const onSubmit = () => {
 		const{status}=getValues();
+		console.log(status);
         setstat(status);
+
     };
 
 
@@ -110,9 +112,12 @@ export const MyOrders = () => {
 								Store:{order.store?.name} </p>
 							<p className="text-sm text-gray-700 mt-2">
 								Order Status:{order.status} </p>
+							<p className="text-sm text-gray-700 mt-2">
+								Mode: {order.mode}
+							</p>
 							{order.status===OrderStatus.Delivered && (<div className="text-indigo-500 font-semibold text-lg mt-6"><Link to={`/${order.product.id}/give-feedback`}>Give Feedback</Link></div>)}
 
-							<div className="flex items-center justify-end  top-auto">
+							<div className="flex items-center justify-end  top-auto absolute bottom-2 right-3">
 								<Link to={`/orders/${order.id}`} className=" p-2 text-base rounded-full bg-indigo-500 hover:bg-indigo-700 focus:outline-none ">View Order</Link>
 							</div>
 						</div>

@@ -4,10 +4,12 @@ import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button } from '../../components/button';
+import { useMe } from '../../hooks/useMe';
 import {
 	createProduct,
 	createProductVariables,
 } from '../../__generated__/createProduct';
+import { UserRole } from '../../__generated__/globalTypes';
 
 const CREATE_PRODUCT_MUTATION = gql`
 	mutation createProduct($input: CreateProductInput!) {
@@ -36,6 +38,7 @@ export const AddProduct = () => {
 	const history = useHistory();
 	const [imageUrl, setImageUrl] = useState('');
 	const [uploading, setUploading] = useState(false);
+	const{data:UserData}=useMe();
 
 
 
@@ -46,9 +49,13 @@ export const AddProduct = () => {
 		} = data;
 		if (ok) {
 			setUploading(false);
-
-			history.push(`/my-stores/${storeId}`);
-			window.location.reload();
+			if(UserData?.me.role===UserRole.Retailer)
+				{history.push(`/my-stores/${storeId}`);
+				window.location.reload();}
+			else{
+				history.push(`/stores/${storeId}`);
+				window.location.reload();
+			}
 
 		}
 	};

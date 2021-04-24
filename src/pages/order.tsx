@@ -5,8 +5,9 @@ import { useParams } from 'react-router-dom';
 import { FULL_ORDER_FRAGMENT } from '../fragments';
 import { useMe } from '../hooks/useMe';
 import { editOrder, editOrderVariables } from '../__generated__/editOrder';
+import { editOrderOffline, editOrderOfflineVariables } from '../__generated__/editOrderOffline';
 import { getOrder, getOrderVariables } from '../__generated__/getOrder';
-import { OrderStatus, UserRole } from '../__generated__/globalTypes';
+import { OrderMode, OrderStatus, UserRole } from '../__generated__/globalTypes';
 import {
 	orderUpdates,
 	orderUpdatesVariables,
@@ -43,6 +44,16 @@ const EDIT_ORDER = gql`
 	}
 `;
 
+const EDIT_OFFLINE_ORDER = gql`
+	mutation editOrderOffline($input: EditOrderInput!) {
+		editOrderOffline(input: $input) {
+			ok
+			error
+		}
+	}
+`;
+
+
 interface IParams {
 	id: string;
 }
@@ -52,6 +63,9 @@ export const Order = () => {
 	const { data: userData } = useMe();
 	const [editOrderMutation] = useMutation<editOrder, editOrderVariables>(
 		EDIT_ORDER
+	);
+	const [editOrderOfflineMutation] = useMutation<editOrderOffline, editOrderOfflineVariables>(
+		EDIT_OFFLINE_ORDER
 	);
 	const { data, subscribeToMore } = useQuery<getOrder, getOrderVariables>(
 		GET_ORDER,
@@ -92,7 +106,17 @@ export const Order = () => {
 		}
 	}, [data]);
 	const onButtonClick = (newStatus: OrderStatus) => {
+		if(data?.getOrder.order?.mode===OrderMode.Online)
 		editOrderMutation({
+			variables: {
+				input: {
+					id: +params.id,
+					status: newStatus,
+				},
+			},
+		});
+		if(data?.getOrder.order?.mode===OrderMode.Offline)
+		editOrderOfflineMutation({
 			variables: {
 				input: {
 					id: +params.id,
@@ -171,6 +195,14 @@ export const Order = () => {
 									Order Packed
 								</button>
 							)}
+							{((data?.getOrder.order?.status === OrderStatus.Packed) && (data?.getOrder.order?.mode===OrderMode.Offline)) && (
+								<button
+									onClick={() => onButtonClick(OrderStatus.Delivered)}
+									className="btn"
+								>
+									Picked Up
+								</button>
+							)}
 							{data?.getOrder.order?.status !== OrderStatus.Packing &&
 								data?.getOrder.order?.status !== OrderStatus.Pending && (
 									<span className=" text-center mt-5 mb-3  text-2xl text-lime-600">
@@ -198,6 +230,14 @@ export const Order = () => {
 									className="btn"
 								>
 									Order Packed
+								</button>
+							)}
+							{((data?.getOrder.order?.status === OrderStatus.Packed) && (data?.getOrder.order?.mode===OrderMode.Offline)) && (
+								<button
+									onClick={() => onButtonClick(OrderStatus.Delivered)}
+									className="btn"
+								>
+									Picked Up
 								</button>
 							)}
 							{data?.getOrder.order?.status !== OrderStatus.Packing &&

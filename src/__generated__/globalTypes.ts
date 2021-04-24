@@ -7,6 +7,11 @@
 // START Enums and Input Objects
 //==============================================================
 
+export enum OrderMode {
+  Offline = "Offline",
+  Online = "Online",
+}
+
 export enum OrderStatus {
   Delivered = "Delivered",
   Packed = "Packed",
@@ -36,6 +41,12 @@ export interface CreateAccountInput {
 }
 
 export interface CreateOrderInput {
+  storeId: number;
+  productId: number;
+  quantity: number;
+}
+
+export interface CreateOrderOfflineInput {
   storeId: number;
   productId: number;
   quantity: number;
@@ -117,6 +128,7 @@ export interface GetOrdersInput {
 export interface LoginInput {
   email: string;
   password: string;
+  _geoloc?: lntLngUserType | null;
 }
 
 export interface MyStoreInput {

@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { OrderUpdatesInput, OrderStatus, UserRole } from "./globalTypes";
+import { OrderUpdatesInput, OrderStatus, UserRole, OrderMode } from "./globalTypes";
 
 // ====================================================
 // GraphQL subscription operation: orderUpdates
@@ -33,6 +33,7 @@ export interface orderUpdates_orderUpdates {
   driver: orderUpdates_orderUpdates_driver | null;
   customer: orderUpdates_orderUpdates_customer | null;
   store: orderUpdates_orderUpdates_store | null;
+  mode: OrderMode;
 }
 
 export interface orderUpdates {
