@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom';
 import { Header } from '../components/header';
 import { useMe } from '../hooks/useMe';
 import { NotFound } from '../pages/404';
@@ -24,6 +24,14 @@ import { MyOrders } from '../pages/common/my-orders';
 import { EditProduct } from '../pages/common/edit-product';
 import { GiveFeedback } from '../pages/common/add-feedback';
 import { Test } from '../pages/test';
+
+function _ScrollToTop(props: { children: any; }) {
+    const { pathname } = useLocation();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+    return props.children
+}
 
 const clientRoutes = [
 	{

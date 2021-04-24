@@ -21,6 +21,7 @@ import avatar4 from '../../images/avatar4.svg';
 import avatar5 from '../../images/avatar5.svg';
 import avatar6 from '../../images/avatar6.svg';
 import avatar7 from '../../images/avatar7.svg';
+import { FormError } from '../../components/form-error';
 
 const useStyles = makeStyles({
 	root: {
@@ -115,7 +116,7 @@ export const  ProductPage =  () => {
 	const history=useHistory();
 	const productid=+params.id;
 	const {data:Userdata}=useMe();
-	const {register,getValues,handleSubmit,errors,formState}=useForm<{quantity:string}>({mode:'onChange',});
+	const {register,getValues,handleSubmit,errors,formState}=useForm<{quantity:number}>({mode:'onChange',});
 	const classes = useStyles();
 
 
@@ -185,13 +186,15 @@ export const  ProductPage =  () => {
 		return randColor;
 	  }
 	  console.log(img_ran());
+	  //scroll to the top
+	  window.scrollTo(0, 0);
 
 
 
 
 
 	return (
-		<div className="bg-gray-800 h-screen" >
+		<div className="bg-gray-800 min-h-screen h-max" >
 			<Helmet>
 				<title>{Productdata?.product.product?.name||''} | Nuber Eats</title>
 			</Helmet>
@@ -223,14 +226,25 @@ export const  ProductPage =  () => {
 								<div className="flex py-4 space-x-4">
 								<div className="relative">
 								  <div className="text-center left-0 pt-2 right-0 absolute block text-xs uppercase text-gray-400 tracking-wide font-semibold">Qty</div>
-								  <input ref={register({required:"quantity is required",})}
+								  <input ref={register({
+												validate: value =>
+												value <=Productdata?.product.product?.stocks! || "The amount exceeds stock"
+											})}
 									required
-									type="string"
+									type="number"
 									name="quantity" className=" mt-2 cursor-pointer appearance-none rounded-xl border border-gray-200 pl-4 w-24 pr-8 h-14 flex items-end pb-1">
 								  </input>
 								</div>
-								<button onClick={triggerAddtoCart} className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
+								<div>
+								{
+									errors.quantity?.message  && (<FormError errorMessage={errors.quantity?.message}/>)
+								}
+								</div>
+								<button disabled={!formState.isValid} onClick={triggerAddtoCart} className="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
 								  Buy Now
+								</button>
+								<button disabled={!formState.isValid} onClick={triggerAddtoCart} className="h-14 px-6 py-2 font-semibold rounded-xl bg-red-600 hover:bg-red-500  opacity-70 text-white">
+								  Buy Offline
 								</button>
 							  </div>
 
@@ -245,7 +259,7 @@ export const  ProductPage =  () => {
 
 
 
-					{Feedbackdata?.feedbacks.totalResults!>0 && (
+					{Feedbackdata?.feedbacks.totalResults!>0 ? (
 					<div key={2} className="shadow-lg rounded-lg  border-2 border-blue-400 border-opacity-75 m-2  ">
 						<div className="text-center mb-4 mt-2  font-bold text-4xl text-gray-500">Reviews</div>
 						<div className="bg-blue-300 h-0.5 border-opacity-75">
@@ -267,7 +281,7 @@ export const  ProductPage =  () => {
 								</div>
 							))}
 							</div>
-					</div>)}
+					</div>):(<div className="text-center  mt-2  font-bold text-4xl text-gray-500">NO Reviews yet </div> )}
 				</div>
 			)}
 		</div>

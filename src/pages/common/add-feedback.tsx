@@ -63,7 +63,7 @@ export const GiveFeedback = () => {
     });
   };
   return (
-    <div className="bg-gray-800 h-screen">
+    <div className="bg-gray-800  min-h-screen h-max">
     <div className=" flex flex-col justify-center items-center">
       <Helmet>
       <title>

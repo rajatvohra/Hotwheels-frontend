@@ -26,7 +26,7 @@ export const MyStores = () => {
 
 
 	return (
-		<div className="bg-gray-800 h-max">
+		<div className="bg-gray-800  min-h-screen h-max">
 			<Helmet>
 				<title>My Stores | Nuber Eats</title>
 			</Helmet>

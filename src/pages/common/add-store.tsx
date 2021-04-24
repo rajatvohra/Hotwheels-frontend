@@ -121,7 +121,7 @@ export const AddStore = () => {
 		} catch (e) {}
 	};
 	return (
-		<div className="bg-gray-800 h-screen">
+		<div className="bg-gray-800  min-h-screen h-max">
 		<div className="grid grid-cols-6 bg-gray-800">
 			<div className="col-span-4  ">
 							<div className="store-container">

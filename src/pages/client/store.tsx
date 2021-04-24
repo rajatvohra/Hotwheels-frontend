@@ -46,7 +46,7 @@ export const Store = () => {
 				<title>{data?.store.store?.name || ''} | Nuber Eats</title>
 			</Helmet>
 			<div
-				className=" bg-gray-800 bg-center bg-cover py-48"
+				className=" bg-gray-800 bg-center bg-cover py-48  min-h-screen h-max"
 				style={{
 					backgroundImage: `url(${data?.store.store?.coverImg})`,
 				}}

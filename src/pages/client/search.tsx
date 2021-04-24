@@ -47,7 +47,7 @@ export const Search = () => {
 	}, [history, location]);
 	console.log(loading, data, called);
 	return (
-		<div className="bg-gray-800">
+		<div className="bg-gray-800  min-h-screen h-max">
 			{!loading && (
 				<div className="max-w-screen-2xl pb-20 mx-auto ">
 					<div>

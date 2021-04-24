@@ -103,14 +103,15 @@ export const Order = () => {
 	};
 	console.log(userData?.me.role,data?.getOrder.order?.customer?.role,"printing")
 	return (
-		<div className="mt-32 container flex justify-center">
+		<div className=" min-h-screen h-max bg-gray-800">
+		<div className=" flex justify-evenly  ">
 			<Helmet>
 				<title>Order #{params.id} | Nuber Eats</title>
 			</Helmet>
-			<div className="border border-gray-800 w-full max-w-screen-sm flex flex-col justify-center">
-				<h4 className="bg-gray-800 w-full py-5 text-white text-center text-xl">
+			<div className="border border-gray-800 w-full max-w-screen-sm   bg-white rounded-xl justify-center">
+				<div className="bg-black w-full py-5 text-white text-center text-xl rounded-lg justify-center max-w-screen-sm">
 					Order #{params.id}
-				</h4>
+				</div>
 				<h5 className="p-5 pt-10 text-3xl text-center ">
 					Rs {data?.getOrder.order?.total}
 				</h5>
@@ -234,6 +235,7 @@ export const Order = () => {
 					)}
 				</div>
 			</div>
+		</div>
 		</div>
 	);
 };

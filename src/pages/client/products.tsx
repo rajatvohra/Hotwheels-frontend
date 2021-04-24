@@ -107,7 +107,7 @@ export const Products = () => {
 		setfilterOn(true);
 	}
 	return (
-		<div className="bg-gray-800">
+		<div className="bg-gray-800  min-h-screen h-max">
 		<div>
 			<Helmet>
 				<title>Home | Nuber Eats</title>

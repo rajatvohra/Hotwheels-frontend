@@ -10,6 +10,7 @@ import {
 	VictoryLabel,
 	VictoryLine,
 	VictoryPie,
+	VictoryStack,
 	VictoryTheme,
 	VictoryTooltip,
 	VictoryVoronoiContainer,
@@ -87,6 +88,7 @@ interface IParams {
 }
 
 export const MyStore = () => {
+	var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 	const { id } = useParams<IParams>();
 	console.log("id=",id);
 	const {data:userData}=useMe();
@@ -120,9 +122,23 @@ export const MyStore = () => {
 		history.push('/');
 		window.location.reload();
 	}
+	let orderArr=data?.myStore.store?.orders;
+	let ordertotalarr=[0,0]
+	//1:0,2:0,31:0
+	for(let i=0;i<32;i++){
+		ordertotalarr[i]=0;
+	}
+	if(orderArr)
+		orderArr.forEach(element => {
+			let x=ordertotalarr[new Date(element.createdAt).getDate()];
+			ordertotalarr[new Date(element.createdAt).getDate()]=element.total!+x;
+			//console.log(element.createdAt,new Date(element.createdAt).getDate());
+		});
+	console.log(ordertotalarr)
+
 
 	return (
-		<div className="bg-gray-800 h-max" >
+		<div className="bg-gray-800 min-h-screen h-max" >
 			<Helmet>
 				<title>{data?.myStore.store?.name || 'Loading...'} | Nuber Eats</title>
 			</Helmet>
@@ -134,22 +150,22 @@ export const MyStore = () => {
 				}}
 			></div>
 			<div className="container mt-10">
-				<h2 className="text-4xl font-medium mb-10">
+				<h2 className="text-4xl font-medium mb-10 text-indigo-600 ml-10">
 					{data?.myStore.store?.name || 'Loading...'}
 				</h2>
 				{userData?.me.role===UserRole.Retailer ?(<Link
 					to={`/my-stores/${id}/add-product`}
-					className=" mr-8 text-white bg-gray-800 py-3 px-10"
+					className=" text-lg mt-6 text-lime-600 hover:underline   py-3 px-10 absolute top-96 right-12"
 				>
-					Add Product &rarr;
+					Add Product
 				</Link>):(<Link
 					to={`/stores/${id}/add-product`}
-					className=" mr-8 text-white bg-gray-800 py-3 px-10"
+					className="text-lg mt-6 text-lime-600 hover:underline   py-3 px-10 absolute top-96 right-52"
 				>
-					Add Product &rarr;
+					Add Product
 				</Link>)}
 
-				<button onClick={ondelete} className=" ml-8 text-white bg-red-500 py-3 px-10 justify-self-end">
+				<button onClick={ondelete} className=" text-lg mt-6 text-red-600 hover:underline   py-3 px-10 absolute top-96 right-6">
 					Delete This Store
 				</button>
 				<div className="mt-10">
@@ -170,18 +186,27 @@ export const MyStore = () => {
 						</div>
 					)}
 				</div>
-				<div className="mt-20 mb-10">
-					<h4 className="text-center text-2xl font-medium">Sales</h4>
-					<div className="  mt-10">
+				<div className="mt-20">
+					<div className="">
+						<p className="h-1 bg-gray-500"></p>
+					</div>
+					<h4 className="text-center text-4xl mt-4 text-indigo-600 font-semibold">Sales</h4>
+
+					<div className="  mt-10 ">
 						<VictoryChart
 							height={500}
 							theme={VictoryTheme.material}
 							width={window.innerWidth}
 							domainPadding={50}
-							containerComponent={<VictoryVoronoiContainer />}
+							containerComponent={<VictoryVoronoiContainer labels={({ datum }) => `$${datum.y}`}
+							labelComponent={
+							  <VictoryTooltip  dy={0} constrainToVisibleArea />
+							}   />}
+
 						>
 							<VictoryLine
-								labels={({ datum }) => `$${datum.y}`}
+
+
 								labelComponent={
 									<VictoryLabel
 										style={{ fontSize: 18 } as any}
@@ -189,26 +214,39 @@ export const MyStore = () => {
 										dy={-20}
 									/>
 								}
-								data={data?.myStore.store?.orders.map((order) => ({
-									x: order.createdAt,
-									y: order.total,
+								data={ordertotalarr.map((index,value) => ({
+									x: (value),
+									y: index,
 								}))}
-								interpolation="natural"
 								style={{
 									data: {
 										strokeWidth: 5,
+										stroke:'tomato'
 									},
 								}}
+
 							/>
 							<VictoryAxis
 								tickLabelComponent={<VictoryLabel renderInPortal />}
+
 								style={{
+									grid: { stroke: "#818e99", strokeWidth: 0 },
 									tickLabels: {
 										fontSize: 20,
+										fill: 'white',
 									} as any,
 								}}
-								tickFormat={(tick) => new Date(tick).toLocaleDateString('ko')}
+								tickFormat={(tick) => tick}
+								fixLabelOverlap={true}
 							/>
+							<VictoryAxis dependentAxis
+							style={{
+									grid: { stroke: "#818e99", strokeWidth: 0 },
+									tickLabels: {
+										fontSize: 20,
+										fill: 'white',
+									} as any,
+								}}  />
 						</VictoryChart>
 					</div>
 				</div>

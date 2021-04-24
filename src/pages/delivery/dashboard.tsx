@@ -135,7 +135,7 @@ export const Dashboard = () => {
 		});
 	};
 	return (
-		<div>
+		<div className="min-h-screen h-max">
 			<div
 				className="overflow-hidden"
 				style={{ width: window.innerWidth, height: '50vh' }}

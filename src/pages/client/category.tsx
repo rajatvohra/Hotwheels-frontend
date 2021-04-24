@@ -47,7 +47,7 @@ export const Category = () => {
 	);
 	console.log(data);
 	return (
-		<div className="bg-gray-800 h-screen ">
+		<div className="bg-gray-800  min-h-screen h-max ">
 			{!loading && (
 				<div className="max-w-screen-2xl pb-20 mx-auto ">
 					<div>

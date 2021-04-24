@@ -67,7 +67,7 @@ export const MyOrders = () => {
 	console.log(data,"data");
 
 	return (
-		<div className="bg-gray-800 h-max">
+		<div className="bg-gray-800  min-h-screen h-max">
 			{  (
 				<div>
 				<div className="max-w-screen-2xl pb-20 mx-auto ">
@@ -102,17 +102,17 @@ export const MyOrders = () => {
 							<div className="flex items-center">
 								<h2 className="text-xl text-gray-800 font-bold  mr-auto">{order.product.name}</h2>
 							</div>
-							<p className="text-sm text-gray-700 mt-4">
+							<p className="text-sm text-gray-700 mt-2">
 								OrderId :{order.id} </p>
-							<p className="text-sm text-gray-700 mt-4">
+							<p className="text-sm text-gray-700 mt-2">
 								Delivery By: {order.driver?.email|| 'Not Assigned '} </p>
-							<p className="text-sm text-gray-700 mt-4">
+							<p className="text-sm text-gray-700 mt-2">
 								Store:{order.store?.name} </p>
-							<p className="text-sm text-gray-700 mt-4">
+							<p className="text-sm text-gray-700 mt-2">
 								Order Status:{order.status} </p>
-							{order.status===OrderStatus.Delivered && (<div className="bg-red-400"><Link to={`/${order.product.id}/give-feedback`}>Give Feedback</Link></div>)}
+							{order.status===OrderStatus.Delivered && (<div className="text-indigo-500 font-semibold text-lg mt-6"><Link to={`/${order.product.id}/give-feedback`}>Give Feedback</Link></div>)}
 
-							<div className="flex items-center justify-end mt-4 top-auto">
+							<div className="flex items-center justify-end  top-auto">
 								<Link to={`/orders/${order.id}`} className=" p-2 text-base rounded-full bg-indigo-500 hover:bg-indigo-700 focus:outline-none ">View Order</Link>
 							</div>
 						</div>
@@ -128,38 +128,3 @@ export const MyOrders = () => {
 	);
 };
 
-
-// <Link to={`/orders/${order.id}`}>
-
-// <div className=" text-black grid grid-rows-3 grid-flow-col gap-4 mt-10  border-black border-2  ">
-
-
-// 	<div className="row-span-3 text-lg font-semibold my-4  space-y-4 space-x-2">
-// 		<div className="font-medium mb-5 ml-2 ">
-// 			OrderId :{order.id}
-// 		</div>
-// 		<div className="font-bold">
-// 			{order.product.name}
-// 		</div>
-// 		<div className="">
-// 			Delivery By: {order.driver?.email|| 'Not Assigned '}
-// 		</div>
-// 		<div className="">
-// 			Store:{order.store?.name}
-// 		</div>
-
-// 		<div className="text-blue-500 my-4">
-// 			Order Status:{order.status}
-// 		</div>
-// 		{order.status===OrderStatus.Delivered && (<div className="bg-red-400"><Link to={`/${order.product.id}/give-feedback`}>Give Feedback</Link></div>)}
-
-
-// 		</div>
-
-// 	<div className="row-span-3 row-start-1"><img className="cover " src={order.product.photo+""}></img></div>
-
-
-
-
-// </div>
-// </Link>

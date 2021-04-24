@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 export const NotFound = () => (
-  <div className="bg-gray-800 h-screen">
+  <div className="bg-gray-800  min-h-screen h-max">
   <div className="h-screen flex flex-col items-center justify-center">
     <Helmet>
       <title>
