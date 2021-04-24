@@ -7,7 +7,7 @@ export const NotFound = () => (
   <div className="h-screen flex flex-col items-center justify-center">
     <Helmet>
       <title>
-        Nuber | Not Found
+        Hotwheels | Not Found
       </title>
     </Helmet>
     <h2 className="font-semibold text-2xl mb-3 text-gray-500">Page Not Found.</h2>

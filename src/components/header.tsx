@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { authTokenVar, isLoggedInVar } from '../apollo';
 import { LOCALSTORAGE_TOKEN } from '../constants';
 import { useMe } from '../hooks/useMe';
-import nuberLogo from '../images/logo.svg';
+import HotwheelsLogo from '../images/logo.svg';
 import { UserRole } from '../__generated__/globalTypes';
 
 export const Header: React.FC = () => {
@@ -30,7 +30,7 @@ export const Header: React.FC = () => {
 			<header className="py-4  mx-4  ">
 				<div className="w-full px-5 xl:px-0 max-w-screen-2xl mx-auto flex justify-between items-center">
 					<Link to="/">
-						<img src={nuberLogo} className="w-44 h-28" alt="Nuber Eats" />
+						<img src={HotwheelsLogo} className="w-44 h-28" alt="Hotwheels" />
 					</Link>
 					<span className="text-xs">
 					{data?.me.role===UserRole.Retailer && (

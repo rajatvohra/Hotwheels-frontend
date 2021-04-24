@@ -110,7 +110,7 @@ export const Products = () => {
 		<div className="bg-gray-800  min-h-screen h-max">
 		<div>
 			<Helmet>
-				<title>Home | Nuber Eats</title>
+				<title>Home | Hotwheels</title>
 			</Helmet>
 			<div>
 			<form
@@ -140,12 +140,12 @@ export const Products = () => {
 				</div>
 
 			{!CategoryLoading && <div className="max-w-screen-2xl mx-auto mt-8">
-          <div className="flex justify-around max-w-sm mx-auto ">
+          <div className="flex justify-around max-w-lg mx-auto ">
 		  {CategoryData?.allCategories.categories?.map((category) => (
-              <Link key={category.id} to={`/category/${category.slug}`} className="hover_cust">
+              <Link key={category.id} to={`/category/${category.slug}`} className="transition duration-400 ease-in text-center transform  hover:scale-125">
                 <div className="flex flex-col group items-center cursor-pointer">
                   <div
-                    className=" w-16 h-16 bg-cover group-hover:bg-gray-100 rounded-full"
+                    className=" w-24 h-24 bg-cover group-hover:bg-gray-100 rounded-full"
                     style={{ backgroundImage: `url(${category.coverImg})` }}
                   ></div>
                   <span className="mt-1 text-sm text-center font-medium text-lime-400">

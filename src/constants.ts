@@ -1,1 +1,1 @@
-export const LOCALSTORAGE_TOKEN = "nuber-token";
+export const LOCALSTORAGE_TOKEN = "Hotwheels-token";

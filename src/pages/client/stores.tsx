@@ -52,7 +52,7 @@ export const Stores = () => {
 	return (
 		<div>
 			<Helmet>
-				<title>Home | Nuber Eats</title>
+				<title>Home | Hotwheels</title>
 			</Helmet>
 			<form
 				onSubmit={handleSubmit(onSearchSubmit)}

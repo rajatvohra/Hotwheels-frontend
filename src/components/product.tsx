@@ -80,7 +80,7 @@ export const Product: React.FC<IProductProps> = ({
 			<div className="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden my-10 ring-2 ring-gray-400 transition duration-500 ease-in text-center transform hover:-translate-y-1  hover:scale-110  ">
 				<div className="px-4 py-2">
 					<h1 className="text-indigo-900 font-bold text-3xl uppercase">{name}</h1>
-					<p className="text-gray-600 text-sm m-1 max-h-6 italic ">{(description.slice(0,150))}...	</p>
+					<p className="text-gray-600 text-sm m-1 max-h-6 italic ">{(description.slice(0,70))}...	</p>
 				</div>
 				<img className="h-56 w-full object-cover mt-2" src={photo+""} alt="NIKE AIR"/>
 				<div className="flex items-center space-x-4 px-4 py-2 bg-gray-900">

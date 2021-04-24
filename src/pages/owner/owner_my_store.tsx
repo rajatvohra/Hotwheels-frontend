@@ -140,7 +140,7 @@ export const MyStore = () => {
 	return (
 		<div className="bg-gray-800 min-h-screen h-max" >
 			<Helmet>
-				<title>{data?.myStore.store?.name+"xy" || 'Loading...'} | Nuber Eats</title>
+				<title>{data?.myStore.store?.name+"xy" || 'Loading...'} | Hotwheels</title>
 			</Helmet>
 			<div className="checkout-container"></div>
 			<div
@@ -198,7 +198,7 @@ export const MyStore = () => {
 							theme={VictoryTheme.material}
 							width={window.innerWidth}
 							domainPadding={50}
-							containerComponent={<VictoryVoronoiContainer labels={({ datum }) => `$${datum.y}`}
+							containerComponent={<VictoryVoronoiContainer labels={({ datum }) => `₹${datum.y}`}
 							labelComponent={
 							  <VictoryTooltip  dy={0} constrainToVisibleArea />
 							}   />}

@@ -67,7 +67,7 @@ export const GiveFeedback = () => {
     <div className=" flex flex-col justify-center items-center">
       <Helmet>
       <title>
-        Nuber |Feedbck Page
+        Hotwheels |Feedbck Page
       </title>
     </Helmet>
       <h4 className="font-semibold text-2xl mb-3 mt-52 text-gray-500 ">Give Feedback</h4>

@@ -130,7 +130,7 @@ export const Order = () => {
 		<div className=" min-h-screen h-max bg-gray-800">
 		<div className=" flex justify-evenly  ">
 			<Helmet>
-				<title>Order #{params.id} | Nuber Eats</title>
+				<title>Order #{params.id} | Hotwheels</title>
 			</Helmet>
 			<div className="border border-gray-800 w-full max-w-screen-sm   bg-white rounded-xl justify-center">
 				<div className="bg-black w-full py-5 text-white text-center text-xl rounded-lg justify-center max-w-screen-sm">
@@ -270,7 +270,7 @@ export const Order = () => {
 					)}
 					{data?.getOrder.order?.status === OrderStatus.Delivered && (
 						<span className=" text-center mt-5 mb-3  text-2xl text-lime-600">
-							Thank you for using Nuber Eats
+							Thank you for using Hotwheels
 						</span>
 					)}
 				</div>

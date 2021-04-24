@@ -74,7 +74,7 @@ export const EditProduct = () => {
     <div className=" flex flex-col justify-center items-center">
       <Helmet>
       <title>
-        Nuber |Edit Product
+        Hotwheels |Edit Product
       </title>
     </Helmet>
       <h4 className="font-semibold text-2xl mb-3 mt-52 text-gray-500">Edit Product</h4>

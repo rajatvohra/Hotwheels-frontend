@@ -3,7 +3,7 @@ module.exports = {
     includes: ["./src/**/*.{tsx,ts}"],
     tagName: "gql",
     service: {
-      name: "nuber-eats-backend",
+      name: "Hotwheels-backend",
       url: "http://localhost:3000/graphql",
     },
   },

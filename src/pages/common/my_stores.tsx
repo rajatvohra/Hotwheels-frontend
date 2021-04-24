@@ -28,7 +28,7 @@ export const MyStores = () => {
 	return (
 		<div className="bg-gray-800  min-h-screen h-max">
 			<Helmet>
-				<title>My Stores | Nuber Eats</title>
+				<title>My Stores | Hotwheels</title>
 			</Helmet>
 			<div className="max-w-screen-2xl mx-auto">
 				<h2 className="text-4xl font-medium mb-10 ml-4 text-indigo-500">My Stores</h2>

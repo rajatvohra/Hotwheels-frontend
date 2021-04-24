@@ -306,7 +306,7 @@ export const AddProduct = () => {
 			</div>
 			<div className="col-span-2 ">
 			<Helmet>
-				<title>Add Product | Nuber Eats</title>
+				<title>Add Product | Hotwheels</title>
 			</Helmet>
 			<h4 className="font-semibold text-2xl mb-3 mt-8 text-gray-500">Add Product</h4>
 				<form

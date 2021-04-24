@@ -229,7 +229,7 @@ export const  ProductPage =  () => {
 	return (
 		<div className="bg-gray-800 min-h-screen h-max" >
 			<Helmet>
-				<title>{Productdata?.product.product?.name||''} | Nuber Eats</title>
+				<title>{Productdata?.product.product?.name||''} | Hotwheels</title>
 			</Helmet>
 
 			{!loading && (
@@ -255,7 +255,7 @@ export const  ProductPage =  () => {
 							</div>
 							<p className="text-gray-500">{Productdata?.product.product?.description}</p>
 							<div>
-							{(Userdata?.me.role===UserRole.Client || Userdata?.me.role===UserRole.Retailer) && Productdata && Productdata.product && Productdata.product.product && Productdata?.product.product?.stocks>0 &&(
+							{(Userdata?.me.role===UserRole.Client || (Userdata?.me.role===UserRole.Retailer && Productdata?.product.product?.store.owner.role!==UserRole.Retailer)) && Productdata && Productdata.product && Productdata.product.product && Productdata?.product.product?.stocks>0 &&(
 								<div className="flex py-4 space-x-4">
 								<div className="relative">
 								  <div className="text-center left-0 pt-2 right-0 absolute block text-xs uppercase text-gray-400 tracking-wide font-semibold">Qty</div>

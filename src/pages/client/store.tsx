@@ -43,7 +43,7 @@ export const Store = () => {
 	return (
 		<div className="bg-gray-800">
 			<Helmet>
-				<title>{data?.store.store?.name || ''} | Nuber Eats</title>
+				<title>{data?.store.store?.name || ''} | Hotwheels</title>
 			</Helmet>
 			<div
 				className=" bg-gray-800 bg-center bg-cover py-48  min-h-screen h-max"

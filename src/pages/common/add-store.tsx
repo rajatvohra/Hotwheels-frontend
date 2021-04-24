@@ -299,7 +299,7 @@ export const AddStore = () => {
 			<div className="col-span-2">
 			<div className="flex flex-col mt-12 ">
 			<Helmet>
-				<title>Add Store | Nuber Eats</title>
+				<title>Add Store | Hotwheels</title>
 			</Helmet>
 			<h4 className="font-semibold text-2xl mb-3 text-gray-500 ">Add Store</h4>
 			<form
