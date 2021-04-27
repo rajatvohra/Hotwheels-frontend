@@ -40,4 +40,29 @@
     <p align="center" class="h-40 w-40">
         <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/productpage.jpeg" alt="Logo"/>
     </p>
+<h1>Add Product Page</h1>
+    <p align="center" class="h-40 w-40">
+        <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/addproduct.jpeg" alt="Logo"/>
+    </p>
+<h1>Order Id Page</h1>
+    <p align="center" class="h-40 w-40">
+        <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/orderid.jpeg" alt="Logo"/>
+    </p>
+<h1>My Stores Page</h1>
+    <p align="center" class="h-40 w-40">
+        <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/mystores.jpeg" alt="Logo"/>
+    </p>
+<h1>Sales Graph</h1>
+    <p align="center" class="h-40 w-40">
+        <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/salesgraph.jpeg" alt="Logo"/>
+    </p>
+<h1>Your orders Graph</h1>
+    <p align="center" class="h-40 w-40">
+        <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/your orders.jpeg" alt="Logo"/>
+    </p>
+
+<h1>Driver Orders Page</h1>
+    <p align="center" class="h-40 w-40">
+        <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/route.jpeg" alt="Logo"/>
+    </p>
 </p>
