@@ -81,6 +81,7 @@ export const Products = () => {
 			variables: {
 				input: {
 					page:1,
+					radiusInKm:1000,
 				},
 			},
 		}

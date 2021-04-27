@@ -20,9 +20,16 @@ export interface pendingOrders_pendingOrders_customer {
   role: UserRole;
 }
 
+export interface pendingOrders_pendingOrders_store__geoloc {
+  __typename: "latLngStore";
+  lat: number;
+  lng: number;
+}
+
 export interface pendingOrders_pendingOrders_store {
   __typename: "Store";
   name: string;
+  _geoloc: pendingOrders_pendingOrders_store__geoloc;
 }
 
 export interface pendingOrders_pendingOrders {

@@ -37,7 +37,7 @@ export const MyStores = () => {
 						</Link>
 				{data?.myStores.ok && data.myStores.stores.length === 0 ? (
 					<>
-						<h4 className="text-xl mb-5">You have no stores.</h4>
+						<h4 className="text-xl mb-5 text-gray-500">You have no stores.</h4>
 
 					</>
 				) : (

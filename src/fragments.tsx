@@ -69,7 +69,11 @@ export const FULL_ORDER_FRAGMENT = gql`
 			role
 		}
 		store {
-			name
+			name,
+			_geoloc{
+				lat,
+				lng
+			}
 		}
 		mode
 	}

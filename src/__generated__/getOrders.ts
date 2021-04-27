@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { GetOrdersInput, OrderMode, OrderStatus } from "./globalTypes";
+import { GetOrdersInput, OrderMode, OrderStatus, UserRole } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: getOrders
@@ -22,10 +22,16 @@ export interface getOrders_getOrders_orders_driver {
   email: string;
 }
 
+export interface getOrders_getOrders_orders_store_owner {
+  __typename: "User";
+  role: UserRole;
+}
+
 export interface getOrders_getOrders_orders_store {
   __typename: "Store";
   id: number;
   name: string;
+  owner: getOrders_getOrders_orders_store_owner;
 }
 
 export interface getOrders_getOrders_orders {

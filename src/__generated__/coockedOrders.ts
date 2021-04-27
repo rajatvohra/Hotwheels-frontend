@@ -20,9 +20,16 @@ export interface coockedOrders_packedOrders_customer {
   role: UserRole;
 }
 
+export interface coockedOrders_packedOrders_store__geoloc {
+  __typename: "latLngStore";
+  lat: number;
+  lng: number;
+}
+
 export interface coockedOrders_packedOrders_store {
   __typename: "Store";
   name: string;
+  _geoloc: coockedOrders_packedOrders_store__geoloc;
 }
 
 export interface coockedOrders_packedOrders {

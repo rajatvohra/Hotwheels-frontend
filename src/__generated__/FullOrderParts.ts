@@ -20,9 +20,16 @@ export interface FullOrderParts_customer {
   role: UserRole;
 }
 
+export interface FullOrderParts_store__geoloc {
+  __typename: "latLngStore";
+  lat: number;
+  lng: number;
+}
+
 export interface FullOrderParts_store {
   __typename: "Store";
   name: string;
+  _geoloc: FullOrderParts_store__geoloc;
 }
 
 export interface FullOrderParts {

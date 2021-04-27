@@ -57,7 +57,8 @@ export const CreateAccount=()=>{
         const { email, password, role,location,password_repeat } = getValues();
         createAccountMutation({
             variables: {
-            createAccountInput: { email, password, role,location },
+            createAccountInput: { email, password, role,location,_geoloc:{"lat":28.640427,"lng":77.185898}
+        },
             },
         });
         }

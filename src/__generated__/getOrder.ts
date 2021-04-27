@@ -20,9 +20,16 @@ export interface getOrder_getOrder_order_customer {
   role: UserRole;
 }
 
+export interface getOrder_getOrder_order_store__geoloc {
+  __typename: "latLngStore";
+  lat: number;
+  lng: number;
+}
+
 export interface getOrder_getOrder_order_store {
   __typename: "Store";
   name: string;
+  _geoloc: getOrder_getOrder_order_store__geoloc;
 }
 
 export interface getOrder_getOrder_order {

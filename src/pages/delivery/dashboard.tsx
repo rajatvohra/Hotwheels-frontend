@@ -40,13 +40,15 @@ export const Dashboard = () => {
 	const [driverCoords, setDriverCoords] = useState<ICoords>({ lng: 0, lat: 0 });
 	const [map, setMap] = useState<google.maps.Map>();
 	const [maps, setMaps] = useState<any>();
+	//const x=0.15; //for display purposes/
+	const x=0;
 	// @ts-ignore
 	const onSucces = ({ coords: { latitude, longitude } }: Position) => {
 		setDriverCoords({ lat: latitude, lng: longitude });
 	};
 	// @ts-ignore
 	const onError = (error: PositionError) => {
-		console.log(error);
+		console.log(error,"this ????");
 	};
 	useEffect(() => {
 		navigator.geolocation.watchPosition(onSucces, onError, {
@@ -72,6 +74,12 @@ export const Dashboard = () => {
 		setMap(map);
 		setMaps(maps);
 	};
+
+	const { data: coockedOrdersData } = useSubscription<coockedOrders>(
+		COOCKED_ORDERS_SUBSCRIPTION
+	);
+	console.log(coockedOrdersData?.packedOrders.store?._geoloc.lat!,
+		coockedOrdersData?.packedOrders.store?._geoloc.lng!,"store loc");
 	const makeRoute = () => {
 		if (map) {
 			const directionsService = new google.maps.DirectionsService();
@@ -87,14 +95,14 @@ export const Dashboard = () => {
 				{
 					origin: {
 						location: new google.maps.LatLng(
-							driverCoords.lat,
-							driverCoords.lng
+							driverCoords.lat+x,
+							driverCoords.lng+x
 						),
 					},
 					destination: {
 						location: new google.maps.LatLng(
-							driverCoords.lat + 0.05,
-							driverCoords.lng + 0.05
+							coockedOrdersData?.packedOrders.store?._geoloc.lat!,
+							coockedOrdersData?.packedOrders.store?._geoloc.lng!
 						),
 					},
 					travelMode: google.maps.TravelMode.DRIVING,
@@ -105,9 +113,6 @@ export const Dashboard = () => {
 			);
 		}
 	};
-	const { data: coockedOrdersData } = useSubscription<coockedOrders>(
-		COOCKED_ORDERS_SUBSCRIPTION
-	);
 	useEffect(() => {
 		if (coockedOrdersData?.packedOrders.id) {
 			makeRoute();
@@ -134,6 +139,7 @@ export const Dashboard = () => {
 			},
 		});
 	};
+	console.log(driverCoords,"driver cords");
 	return (
 		<div className="min-h-screen h-max">
 			<div
@@ -146,8 +152,8 @@ export const Dashboard = () => {
 					defaultZoom={16}
 					draggable={true}
 					defaultCenter={{
-						lat: 36.58,
-						lng: 125.95,
+						lat: 28.643410,
+						lng: 77.189360,
 					}}
 					bootstrapURLKeys={{ key: `${process.env.REACT_APP_GOOGLE_API_KEY}` }}
 				></GoogleMapReact>

@@ -6,6 +6,7 @@ import { Button } from '../../components/button';
 import { FormError } from '../../components/form-error';
 import { Product } from '../../components/product';
 import { CATEGORY_FRAGMENT, PRODUCT_FRAGMENT, STORE_FRAGMENT } from '../../fragments';
+import { useMe } from '../../hooks/useMe';
 import { category, categoryVariables } from '../../__generated__/category';
 import { getOrders, getOrdersVariables } from '../../__generated__/getOrders';
 import { OrderStatus, UserRole } from '../../__generated__/globalTypes';
@@ -34,7 +35,10 @@ const GET_ORDERS_QUERY = gql`
 		  },
 		  store{
 			  id,
-			  name
+			  name,
+			  owner{
+				  role
+			  }
 		  },
 	  }
     }
@@ -48,6 +52,7 @@ interface IStatusForm{
 export const MyOrders = () => {
 	const {register,getValues,handleSubmit,errors,formState,watch}=useForm<IStatusForm>({mode:'onChange'});
 	const [stat,setstat]=useState(OrderStatus.Pending);
+	const {data:UserData}=useMe();
 	const { data, loading } = useQuery<getOrders, getOrdersVariables>(
 		GET_ORDERS_QUERY,
 		{
@@ -115,7 +120,7 @@ export const MyOrders = () => {
 							<p className="text-sm text-gray-700 mt-2">
 								Mode: {order.mode}
 							</p>
-							{order.status===OrderStatus.Delivered && (<div className="text-indigo-500 font-semibold text-lg mt-6"><Link to={`/${order.product.id}/give-feedback`}>Give Feedback</Link></div>)}
+							{((order.status===OrderStatus.Delivered) && (order?.store?.owner?.role!==UserData?.me?.role) ) && (<div className="text-indigo-500 font-semibold text-lg mt-6"><Link to={`/${order.product.id}/give-feedback`}>Give Feedback</Link></div>)}
 
 							<div className="flex items-center justify-end  top-auto absolute bottom-2 right-3">
 								<Link to={`/orders/${order.id}`} className=" p-2 text-base rounded-full bg-indigo-500 hover:bg-indigo-700 focus:outline-none ">View Order</Link>
