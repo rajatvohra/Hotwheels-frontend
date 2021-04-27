@@ -1,4 +1,4 @@
 # Hotwheels
 
-![Logo](C:\Users\rajat vohra\Desktop\projects\hotwheels\hotwheels-frontend-Exp-Renaming\src\images\logo.svg?raw=true "Logo")
+![Logo](https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/logo.svg)
 The Frontend of Hotwheels
