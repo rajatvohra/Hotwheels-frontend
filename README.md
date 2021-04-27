@@ -21,4 +21,23 @@
 <br>
 <p>How the website looks like .
 <h1>Login Page</h1>
+    <p align="center" class="h-40 w-40">
+        <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/login.jpeg" alt="Logo"/>
+    </p>
+<h1>Home Page</h1>
+    <p align="center" class="h-40 w-40">
+        <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/home.jpeg" alt="Logo"/>
+    </p>
+<h1>Category Search Results Page</h1>
+    <p align="center" class="h-40 w-40">
+        <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/category.jpeg"alt="Logo"/>
+    </p>
+<h1>Search Results Page</h1>
+    <p align="center" class="h-40 w-40">
+        <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/search.jpeg"alt="Logo"/>
+    </p>
+<h1>Product Page</h1>
+    <p align="center" class="h-40 w-40">
+        <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/productpage.jpeg" alt="Logo"/>
+    </p>
 </p>
