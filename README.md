@@ -58,7 +58,7 @@
     </p>
 <h1>Your orders Graph</h1>
     <p align="center" class="h-40 w-40">
-        <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/your orders.jpeg" alt="Logo"/>
+        <img src="https://github.com/rajatvohra/Hotwheels-frontend/blob/master/src/images/ss/yourorders.jpeg" alt="Logo"/>
     </p>
 
 <h1>Driver Orders Page</h1>
