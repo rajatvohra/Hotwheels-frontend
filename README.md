@@ -6,16 +6,17 @@
 
 <h1>The Frontend of Hotwheels</h1>
 <p>Hotwheels is an e-commerce platform built with React js,Node js and GraphQL written with react and typescript </p>
-<br>
-##	TECHNOLOGIES/TOOLS USED
-* TYPESCRIPT
-* REACT
-* GRAPHQL
-* APOLLO
-* NEST.JS
-* POSTGRESQL
-* HTML/CSS
-* TYPEORM
+
+## TECHNOLOGIES/TOOLS USED
+
+- TYPESCRIPT
+- REACT
+- GRAPHQL
+- APOLLO
+- NEST.JS
+- POSTGRESQL
+- HTML/CSS
+- TYPEORM
 
 <br>
 <p>How the website looks like .
