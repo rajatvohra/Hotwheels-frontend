@@ -8,6 +8,7 @@
 <p>Hotwheels is an e-commerce platform built with React js,Node js and GraphQL written with react and typescript </p>
 
 ## Team Members :
+
 Rajat Vohra (rajatvohra), Abhyudaya Prakash Rai (BetterThanBlank), Rishabh Varshney (Rishabh Varshney)
 
 ## TECHNOLOGIES/TOOLS USED
