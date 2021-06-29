@@ -7,7 +7,8 @@
 <h1>The Frontend of Hotwheels</h1>
 <p>Hotwheels is an e-commerce platform built with React js,Node js and GraphQL written with react and typescript </p>
 
-## Team : Rajat Vohra (rajatvohra), Abhyudaya Prakash Rai (BetterThanBlank), Rishabh Varshney (Rishabh Varshney)
+## Team Members :
+Rajat Vohra (rajatvohra), Abhyudaya Prakash Rai (BetterThanBlank), Rishabh Varshney (Rishabh Varshney)
 
 ## TECHNOLOGIES/TOOLS USED
 
