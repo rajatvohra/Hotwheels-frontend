@@ -22,6 +22,7 @@
     "apollo": "^2.31.1",
     "autoprefixer": "^10.0.2",
     "bootstrap": "^4.6.0",
+    "chokidar": "^3.5.3",
     "dotenv": "^8.2.0",
     "google-map-react": "^2.1.9",
     "graphql": "^15.4.0",
@@ -42,10 +43,12 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
+    "tailwind:probuild": "NODE_ENV=production npm run tailwind:build",
     "tailwind:build": "tailwind build ./src/styles/tailwind.css -o ./src/styles/styles.css",
     "start": "set PORT=3001 && npm run apollo:codegen & npm run tailwind:build & react-scripts start",
     "apollo:codegen": " rimraf src/__generated__ && apollo client:codegen src/__generated__ --target=typescript --outputFlat",
-    "build": "react-scripts build",
+    "build": "CI=false react-scripts build",
+    "prebuild": "npm run tailwind:probuild",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
