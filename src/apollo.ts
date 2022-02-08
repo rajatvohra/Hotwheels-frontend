@@ -13,7 +13,7 @@ export const authTokenVar = makeVar(token);
 // console.log("default value of authTokenVar is:", authTokenVar());
 
 const wsLink = new WebSocketLink({
-  uri: process.env.NODE_ENV === "production" ? "ws://hotwheels-backend.herokuapp.com/graphql" : `ws://localhost:3000/graphql`,
+  uri: process.env.NODE_ENV === "production" ? "wss://hotwheels-backend.herokuapp.com/graphql" : `ws://localhost:3000/graphql`,
   options: {
     reconnect: true,
     connectionParams: {
