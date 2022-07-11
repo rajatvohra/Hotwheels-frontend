@@ -9,7 +9,7 @@
 
 ## Team Members :
 
-Rajat Vohra (rajatvohra), Abhyudaya Prakash Rai (BetterThanBlank), Rishabh Varshney (Rishabh Varshney)
+Rajat Vohra (rajatvohra), Abhyudaya Prakash Rai (BetterThanBlank), Rishabh Varshney (Rishabh Varshney), Vrinda Kakkar (Vrinda-Kakkar)
 
 ## TECHNOLOGIES/TOOLS USED
 
